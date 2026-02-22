@@ -1466,7 +1466,7 @@
         <audio id="audioPlayer" preload="auto" style="display: none;"></audio>
     </div>
 
-    <script>
+       <script>
         // Smooth scroll and active nav
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1542,7 +1542,9 @@
 
         updateTotal();
 
-        // Player de Áudio
+        // =============================================
+        // PLAYER DE ÁUDIO COM AUTOPLAY REFORÇADO
+        // =============================================
         const audioPlayer = document.getElementById('audioPlayer');
         const audioButton = document.getElementById('audioButton');
         let isPlaying = false;
@@ -1566,7 +1568,7 @@
             if (index >= 0 && index < playlist.length) {
                 audioPlayer.src = playlist[index];
                 if (isPlaying) {
-                    audioPlayer.play().catch(e => console.log('Autoplay bloqueado:', e));
+                    audioPlayer.play().catch(e => console.log('Playback falhou:', e));
                 }
             }
         }
@@ -1577,26 +1579,66 @@
             loadTrack(currentTrack);
         });
 
-        // Tentar autoplay ao carregar a página
-        window.addEventListener('load', function() {
-            // Começar com a primeira música
+        // =============================================
+        // AUTOPLAY - MÚLTIPLAS TENTATIVAS
+        // =============================================
+
+        // Função para tentar tocar
+        function tryPlay() {
+            audioPlayer.volume = 0.3; // Volume baixo inicial ajuda no autoplay
+            
+            let playPromise = audioPlayer.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Sucesso!
+                    isPlaying = true;
+                    audioButton.innerHTML = '⏸️';
+                    audioButton.classList.add('playing');
+                    console.log('✅ Autoplay funcionou!');
+                }).catch(() => {
+                    // Falhou - tenta de novo em 1 segundo
+                    setTimeout(() => {
+                        audioPlayer.play().then(() => {
+                            isPlaying = true;
+                            audioButton.innerHTML = '⏸️';
+                            audioButton.classList.add('playing');
+                        }).catch(() => {
+                            // Falhou de novo - aguarda interação do usuário
+                            console.log('❌ Autoplay bloqueado. Clique no botão para tocar.');
+                        });
+                    }, 1000);
+                });
+            }
+        }
+
+        // TENTATIVA 1: Assim que o HTML estiver pronto
+        document.addEventListener('DOMContentLoaded', function() {
             currentTrack = 0;
             audioPlayer.src = playlist[0];
-            
-            // Tentar tocar automaticamente (pode ser bloqueado pelo navegador)
-            audioPlayer.play().then(() => {
-                isPlaying = true;
-                audioButton.innerHTML = '⏸️';
-                audioButton.classList.add('playing');
-            }).catch(e => {
-                console.log('Autoplay bloqueado pelo navegador. Clique no botão para tocar.');
-                isPlaying = false;
-                audioButton.innerHTML = '▶️';
-                audioButton.classList.remove('playing');
-            });
+            tryPlay();
         });
 
-        // Função para tocar/pausar
+        // TENTATIVA 2: Quando a página estiver totalmente carregada
+        window.addEventListener('load', function() {
+            if (!isPlaying) {
+                tryPlay();
+            }
+        });
+
+        // TENTATIVA 3: Na primeira interação do usuário com a página (se as anteriores falharem)
+        document.body.addEventListener('click', function once() {
+            if (!isPlaying) {
+                audioPlayer.play().then(() => {
+                    isPlaying = true;
+                    audioButton.innerHTML = '⏸️';
+                    audioButton.classList.add('playing');
+                }).catch(e => {});
+            }
+            document.body.removeEventListener('click', once);
+        }, { once: true });
+
+        // Função manual para tocar/pausar
         function toggleAudio() {
             if (isPlaying) {
                 audioPlayer.pause();
