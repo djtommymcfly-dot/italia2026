@@ -53,7 +53,7 @@ document.querySelectorAll('.activity').forEach((el) => {
 });
 
 // =============================================
-// FUNÇÃO PARA ATUALIZAR ORÇAMENTO A PARTIR DAS ATIVIDADES
+// FUNÇÃO PARA ATUALIZAR ORÇAMENTO
 // =============================================
 function updateBudgetFromActivities() {
     const categories = {
@@ -97,13 +97,12 @@ document.querySelectorAll('.cost-input').forEach(input => {
 updateBudgetFromActivities();
 
 // =============================================
-// PLAYER DE ÁUDIO COM AUTOPLAY REFORÇADO
+// PLAYER DE ÁUDIO
 // =============================================
 const audioPlayer = document.getElementById('audioPlayer');
 const audioButton = document.getElementById('audioButton');
 let isPlaying = false;
 let currentTrack = 0;
-let playAttempts = 0;
 
 const playlist = [
     'assets/1.mp3',
@@ -121,7 +120,6 @@ function loadTrack(index) {
     if (index >= 0 && index < playlist.length) {
         audioPlayer.src = playlist[index];
         audioPlayer.load();
-        console.log('🎵 Carregando:', playlist[index]);
         if (isPlaying) {
             playWithRetry();
         }
@@ -133,7 +131,6 @@ audioPlayer.addEventListener('ended', function() {
     loadTrack(currentTrack);
 });
 
-// Função para tocar com múltiplas tentativas
 function playWithRetry() {
     if (!audioPlayer.src) {
         audioPlayer.src = playlist[0];
@@ -149,61 +146,14 @@ function playWithRetry() {
             isPlaying = true;
             audioButton.innerHTML = '⏸️';
             audioButton.classList.add('playing');
-            playAttempts = 0;
-            console.log('✅ Áudio tocando:', audioPlayer.src);
         }).catch(error => {
-            console.log('❌ Erro no autoplay:', error);
-            console.log('   Motivo: Navegador bloqueou autoplay. Clique no botão play.');
+            console.log('Autoplay bloqueado. Toque no botão ▶️ para iniciar.');
             isPlaying = false;
             audioButton.innerHTML = '▶️';
             audioButton.classList.remove('playing');
         });
     }
 }
-
-// ESTRATÉGIAS DE AUTOPLAY
-function initAudio() {
-    currentTrack = 0;
-    audioPlayer.src = playlist[0];
-    audioPlayer.load();
-    console.log('🎵 Inicializando áudio com:', playlist[0]);
-    
-    // Tentativa 1: Imediata
-    setTimeout(() => {
-        playWithRetry();
-    }, 500);
-    
-    // Tentativa 2: Após 2 segundos
-    setTimeout(() => {
-        if (!isPlaying) {
-            playWithRetry();
-        }
-    }, 2000);
-    
-    // Tentativa 3: Após 5 segundos
-    setTimeout(() => {
-        if (!isPlaying) {
-            playWithRetry();
-        }
-    }, 5000);
-}
-
-// Iniciar quando o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', initAudio);
-
-// Tentar novamente quando a página carregar completamente
-window.addEventListener('load', function() {
-    if (!isPlaying) {
-        playWithRetry();
-    }
-});
-
-// Se o usuário clicar em qualquer lugar, tentar tocar (último recurso)
-document.body.addEventListener('click', function once() {
-    if (!isPlaying) {
-        playWithRetry();
-    }
-}, { once: true });
 
 function toggleAudio() {
     if (isPlaying) {
@@ -216,6 +166,26 @@ function toggleAudio() {
     }
 }
 
+function prevTrack() {
+    if (playlist.length > 0) {
+        currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+        loadTrack(currentTrack);
+        if (isPlaying) {
+            playWithRetry();
+        }
+    }
+}
+
+function nextTrack() {
+    if (playlist.length > 0) {
+        currentTrack = (currentTrack + 1) % playlist.length;
+        loadTrack(currentTrack);
+        if (isPlaying) {
+            playWithRetry();
+        }
+    }
+}
+
 // =============================================
 // FUNÇÕES DE TRADUÇÃO
 // =============================================
@@ -224,6 +194,7 @@ let currentLang = 'pt-pt';
 function translatePage(lang) {
     if (!translations[lang]) return;
     
+    // Hero
     document.getElementById('hero-title').textContent = translations[lang]['hero.title'];
     document.getElementById('hero-subtitle').textContent = translations[lang]['hero.subtitle'];
     document.getElementById('hero-chegada').textContent = translations[lang]['hero.chegada'];
@@ -231,41 +202,18 @@ function translatePage(lang) {
     document.getElementById('hero-duracao').textContent = translations[lang]['hero.duracao'];
     document.getElementById('hero-dias').textContent = translations[lang]['hero.dias'];
     
+    // Navigation
     document.querySelectorAll('.nav-dia').forEach(el => {
         el.textContent = translations[lang]['nav.dia'];
     });
     
-    document.getElementById('dia1-title').textContent = translations[lang]['dia1.title'];
-    document.getElementById('dia2-title').textContent = translations[lang]['dia2.title'];
-    document.getElementById('dia3-title').textContent = translations[lang]['dia3.title'];
-    document.getElementById('dia4-title').textContent = translations[lang]['dia4.title'];
-    document.getElementById('dia5-title').textContent = translations[lang]['dia5.title'];
-    document.getElementById('dia6-title').textContent = translations[lang]['dia6.title'];
-    document.getElementById('dia7-title').textContent = translations[lang]['dia7.title'];
+    // Dias títulos
+    for (let i = 1; i <= 7; i++) {
+        const title = document.getElementById(`dia${i}-title`);
+        if (title) title.textContent = translations[lang][`dia${i}.title`];
+    }
     
-    // Atualizar dias da semana
-    const weekdays = {
-        'dia1-date': 'week.segunda',
-        'dia2-date': 'week.terca',
-        'dia3-date': 'week.quarta',
-        'dia4-date': 'week.quinta',
-        'dia5-date': 'week.sexta',
-        'dia6-date': 'week.sabado',
-        'dia7-date': 'week.domingo'
-    };
-    
-    Object.keys(weekdays).forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-            let text = el.innerHTML;
-            const parts = text.split(',');
-            if (parts.length > 1) {
-                parts[0] = translations[lang][weekdays[id]];
-                el.innerHTML = parts.join(',');
-            }
-        }
-    });
-    
+    // Cidades
     document.getElementById('dia1-city').textContent = translations[lang]['city.milao'];
     document.getElementById('dia2-city').textContent = translations[lang]['city.veneza'];
     document.getElementById('dia3-city').textContent = translations[lang]['city.roma'];
@@ -283,81 +231,17 @@ function translatePage(lang) {
         el.placeholder = translations[lang]['hotel.placeholder'];
     });
     
-    // Atividades Dia 1
-    for (let i = 1; i <= 7; i++) {
-        const actTitle = document.getElementById(`dia1-act${i}-title`);
-        const actLocation = document.getElementById(`dia1-act${i}-location`);
-        const actNote = document.getElementById(`dia1-act${i}-note`);
-        
-        if (actTitle) actTitle.textContent = translations[lang][`dia1.act${i}.title`];
-        if (actLocation) actLocation.textContent = translations[lang][`dia1.act${i}.location`];
-        if (actNote) actNote.textContent = translations[lang][`dia1.act${i}.note`];
-    }
-    
-    // Atividades Dia 2
-    for (let i = 1; i <= 8; i++) {
-        const actTitle = document.getElementById(`dia2-act${i}-title`);
-        const actLocation = document.getElementById(`dia2-act${i}-location`);
-        const actNote = document.getElementById(`dia2-act${i}-note`);
-        
-        if (actTitle) actTitle.textContent = translations[lang][`dia2.act${i}.title`];
-        if (actLocation) actLocation.textContent = translations[lang][`dia2.act${i}.location`];
-        if (actNote) actNote.textContent = translations[lang][`dia2.act${i}.note`];
-    }
-    
-    // Atividades Dia 3
-    for (let i = 1; i <= 8; i++) {
-        const actTitle = document.getElementById(`dia3-act${i}-title`);
-        const actLocation = document.getElementById(`dia3-act${i}-location`);
-        const actNote = document.getElementById(`dia3-act${i}-note`);
-        
-        if (actTitle) actTitle.textContent = translations[lang][`dia3.act${i}.title`];
-        if (actLocation) actLocation.textContent = translations[lang][`dia3.act${i}.location`];
-        if (actNote) actNote.textContent = translations[lang][`dia3.act${i}.note`];
-    }
-    
-    // Atividades Dia 4
-    for (let i = 1; i <= 8; i++) {
-        const actTitle = document.getElementById(`dia4-act${i}-title`);
-        const actLocation = document.getElementById(`dia4-act${i}-location`);
-        const actNote = document.getElementById(`dia4-act${i}-note`);
-        
-        if (actTitle) actTitle.textContent = translations[lang][`dia4.act${i}.title`];
-        if (actLocation) actLocation.textContent = translations[lang][`dia4.act${i}.location`];
-        if (actNote) actNote.textContent = translations[lang][`dia4.act${i}.note`];
-    }
-    
-    // Atividades Dia 5
-    for (let i = 1; i <= 8; i++) {
-        const actTitle = document.getElementById(`dia5-act${i}-title`);
-        const actLocation = document.getElementById(`dia5-act${i}-location`);
-        const actNote = document.getElementById(`dia5-act${i}-note`);
-        
-        if (actTitle) actTitle.textContent = translations[lang][`dia5.act${i}.title`];
-        if (actLocation) actLocation.textContent = translations[lang][`dia5.act${i}.location`];
-        if (actNote) actNote.textContent = translations[lang][`dia5.act${i}.note`];
-    }
-    
-    // Atividades Dia 6
-    for (let i = 1; i <= 8; i++) {
-        const actTitle = document.getElementById(`dia6-act${i}-title`);
-        const actLocation = document.getElementById(`dia6-act${i}-location`);
-        const actNote = document.getElementById(`dia6-act${i}-note`);
-        
-        if (actTitle) actTitle.textContent = translations[lang][`dia6.act${i}.title`];
-        if (actLocation) actLocation.textContent = translations[lang][`dia6.act${i}.location`];
-        if (actNote) actNote.textContent = translations[lang][`dia6.act${i}.note`];
-    }
-    
-    // Atividades Dia 7
-    for (let i = 1; i <= 9; i++) {
-        const actTitle = document.getElementById(`dia7-act${i}-title`);
-        const actLocation = document.getElementById(`dia7-act${i}-location`);
-        const actNote = document.getElementById(`dia7-act${i}-note`);
-        
-        if (actTitle) actTitle.textContent = translations[lang][`dia7.act${i}.title`];
-        if (actLocation) actLocation.textContent = translations[lang][`dia7.act${i}.location`];
-        if (actNote) actNote.textContent = translations[lang][`dia7.act${i}.note`];
+    // Atividades - todas
+    for (let dia = 1; dia <= 7; dia++) {
+        for (let act = 1; act <= 9; act++) {
+            const title = document.getElementById(`dia${dia}-act${act}-title`);
+            const location = document.getElementById(`dia${dia}-act${act}-location`);
+            const note = document.getElementById(`dia${dia}-act${act}-note`);
+            
+            if (title) title.textContent = translations[lang][`dia${dia}.act${act}.title`];
+            if (location) location.textContent = translations[lang][`dia${dia}.act${act}.location`];
+            if (note) note.textContent = translations[lang][`dia${dia}.act${act}.note`];
+        }
     }
     
     // Transport
@@ -388,7 +272,7 @@ function translatePage(lang) {
     }
     
     // Footer
-    document.getElementById('footer-text').innerHTML = translations[lang]['footer.text'] + '<br>30 Março - 5 Abril 2025';
+    document.getElementById('footer-text').innerHTML = translations[lang]['footer.text'] + '<br>30 Março - 5 Abril 2026';
     
     // Cost labels
     document.querySelectorAll('.cost-label').forEach(el => {
@@ -414,20 +298,17 @@ function setLanguage(lang, event) {
 const STORAGE_KEY = 'italia_user_data';
 let currentUser = null;
 
-// Carregar dados do usuário atual
 function loadUserData(username) {
     const allData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
     return allData[username] || {};
 }
 
-// Salvar dados do usuário atual
 function saveUserData(username, data) {
     const allData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
     allData[username] = data;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(allData));
 }
 
-// Carregar todos os dados salvos para o usuário atual
 function loadSavedData() {
     if (!currentUser) return;
     
@@ -443,7 +324,6 @@ function loadSavedData() {
     
     // Preencher campos de custo
     document.querySelectorAll('.cost-input').forEach(input => {
-        // Criar um identificador único para cada campo
         const parent = input.closest('.activity');
         const timeElem = parent?.querySelector('.time');
         const titleElem = parent?.querySelector('.activity-title');
@@ -454,11 +334,9 @@ function loadSavedData() {
         }
     });
     
-    // Atualizar calculadora
     updateBudgetFromActivities();
 }
 
-// Salvar todos os dados do usuário atual
 function saveAllData() {
     if (!currentUser) return;
     
@@ -479,10 +357,8 @@ function saveAllData() {
     });
     
     saveUserData(currentUser, userData);
-    console.log('✅ Dados salvos para:', currentUser);
 }
 
-// Atualizar interface de login
 function updateLoginUI() {
     const loginBox = document.getElementById('loginBox');
     const userBox = document.getElementById('userBox');
@@ -498,35 +374,30 @@ function updateLoginUI() {
     }
 }
 
-// Handler de login
 function handleLogin() {
     const username = document.getElementById('usernameInput').value.trim();
-    if (username) {
-        currentUser = username;
-        updateLoginUI();
-        loadSavedData();
-        
-        // Salvar usuário atual para recarregar depois
-        sessionStorage.setItem('currentUser', username);
+    if (!username) {
+        alert(currentLang === 'pt-pt' ? 'Por favor, digite seu nome!' : '¡Por favor, escriba su nombre!');
+        return;
     }
+    currentUser = username;
+    updateLoginUI();
+    loadSavedData();
+    sessionStorage.setItem('currentUser', username);
 }
 
-// Handler de logout
 function handleLogout() {
     currentUser = null;
     updateLoginUI();
     sessionStorage.removeItem('currentUser');
     
-    // Limpar todos os campos
     document.querySelectorAll('.hotel-input, .cost-input').forEach(input => {
         input.value = '';
     });
     
-    // Resetar calculadora
     updateBudgetFromActivities();
 }
 
-// Verificar se já estava logado
 function checkSavedLogin() {
     const savedUser = sessionStorage.getItem('currentUser');
     if (savedUser) {
@@ -536,11 +407,10 @@ function checkSavedLogin() {
     }
 }
 
-// Adicionar autosave a cada alteração
+// Autosave
 document.addEventListener('input', function(e) {
     if (e.target.classList.contains('hotel-input') || e.target.classList.contains('cost-input')) {
         if (currentUser) {
-            // Debounce para não salvar a cada tecla
             clearTimeout(window.saveTimeout);
             window.saveTimeout = setTimeout(() => {
                 saveAllData();
@@ -549,8 +419,26 @@ document.addEventListener('input', function(e) {
     }
 });
 
+// Sincronizar hotel de Milão entre dia 1 e dia 6
+document.addEventListener('DOMContentLoaded', function() {
+    const hotelMilao = document.getElementById('hotel-milao');
+    const hotelMilao2 = document.getElementById('hotel-milao2');
+    
+    if (hotelMilao && hotelMilao2) {
+        hotelMilao.addEventListener('input', function() {
+            hotelMilao2.value = this.value;
+            if (currentUser) saveAllData();
+        });
+        
+        hotelMilao2.addEventListener('input', function() {
+            hotelMilao.value = this.value;
+            if (currentUser) saveAllData();
+        });
+    }
+});
+
 // =============================================
-// FUNÇÕES PARA NAVEGAÇÃO ENTRE DIAS
+// FUNÇÕES DE NAVEGAÇÃO ENTRE DIAS
 // =============================================
 function goToPrevDay() {
     const sections = document.querySelectorAll('.day-section');
@@ -569,7 +457,6 @@ function goToPrevDay() {
         window.location.hash = prevSection.id;
         prevSection.scrollIntoView({ behavior: 'smooth' });
     } else {
-        // Se estiver no dia 1, vai para o último dia (loop)
         const lastSection = sections[sections.length - 1];
         window.location.hash = lastSection.id;
         lastSection.scrollIntoView({ behavior: 'smooth' });
@@ -585,35 +472,21 @@ function goToHome() {
 }
 
 // =============================================
-// FUNÇÕES PARA O PLAYER DE MÚSICA
+// INICIALIZAÇÃO
 // =============================================
-function prevTrack() {
-    if (playlist.length > 0) {
-        currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
-        loadTrack(currentTrack);
-        if (isPlaying) {
-            playWithRetry();
-        }
-    }
-}
-
-function nextTrack() {
-    if (playlist.length > 0) {
-        currentTrack = (currentTrack + 1) % playlist.length;
-        loadTrack(currentTrack);
-        if (isPlaying) {
-            playWithRetry();
-        }
-    }
-}
-
-// Inicialização
 document.addEventListener('DOMContentLoaded', function() {
     translatePage('pt-pt');
     checkSavedLogin();
+    
+    // Iniciar áudio
+    setTimeout(() => {
+        if (!isPlaying) {
+            playWithRetry();
+        }
+    }, 1000);
 });
 
-// Garantir que as funções estão disponíveis globalmente
+// Tornar funções globais
 window.goToPrevDay = goToPrevDay;
 window.goToHome = goToHome;
 window.prevTrack = prevTrack;
