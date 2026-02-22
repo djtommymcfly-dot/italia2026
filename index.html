@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Roteiro Itália 2026 - Milão, Veneza, Roma & Nápoles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="lang-btn active" onclick="setLanguage('pt-pt')">🇵🇹 PT</button>
+        <button class="lang-btn" onclick="setLanguage('es-es')">🇪🇸 ES</button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 id="hero-title">Itália 2026</h1>
+            <p class="hero-subtitle" id="hero-subtitle">Milão • Veneza • Roma • Nápoles</p>
+            <div class="hero-dates">
+                <div class="date-box">
+                    <div class="label" id="hero-chegada">Chegada</div>
+                    <div class="value">30 Mar</div>
+                </div>
+                <div class="date-box">
+                    <div class="label" id="hero-saida">Saída</div>
+                    <div class="value">05 Abr</div>
+                </div>
+                <div class="date-box">
+                    <div class="label" id="hero-duracao">Duração</div>
+                    <div class="value">7 <span id="hero-dias">Dias</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="nav-days">
+        <ul>
+            <li><a href="#dia1" class="active"><span class="nav-dia">Dia</span> 1</a></li>
+            <li><a href="#dia2"><span class="nav-dia">Dia</span> 2</a></li>
+            <li><a href="#dia3"><span class="nav-dia">Dia</span> 3</a></li>
+            <li><a href="#dia4"><span class="nav-dia">Dia</span> 4</a></li>
+            <li><a href="#dia5"><span class="nav-dia">Dia</span> 5</a></li>
+            <li><a href="#dia6"><span class="nav-dia">Dia</span> 6</a></li>
+            <li><a href="#dia7"><span class="nav-dia">Dia</span> 7</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <!-- DIA 1 - Milão -->
+        <section class="day-section" id="dia1">
+            <div class="day-header">
+                <div class="day-number">01</div>
+                <h2 class="day-title" id="dia1-title">Chegada em Milão</h2>
+                <div class="day-date">
+                    <span id="dia1-date">Segunda-feira, 30 de Março</span>
+                    <span class="city-tag" id="dia1-city">Milão</span>
+                </div>
+            </div>
+            <div class="timeline">
+                <!-- Hotel field logo no início -->
+                <div class="activity">
+                    <div class="time">14:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act3-title">🏨 Check-in Hotel</div>
+                        <div class="activity-location" id="dia1-act3-location">Centro de Milão</div>
+                        <div class="activity-note" id="dia1-act3-note">Fazer check-in e deixar malas.</div>
+                        <div class="hotel-field">
+                            <label for="hotel-milao" id="hotel-label">🏨 Hotel:</label>
+                            <input type="text" id="hotel-milao" class="hotel-input" placeholder="Nome do hotel">
+                        </div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="hoteis" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">12:40</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act1-title">✈️ Chegada BGY</div>
+                        <div class="activity-location" id="dia1-act1-location">Aeroporto de Bergamo</div>
+                        <div class="activity-note" id="dia1-act1-note">Voo chega no aeroporto de Bergamo (BGY). Pegar mala e seguir para o ônibus.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="voo" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">13:40</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act2-title">🚌 Ônibus para Milão</div>
+                        <div class="activity-location" id="dia1-act2-location">BGY → Estação Centrale</div>
+                        <div class="activity-note" id="dia1-act2-note">Orio Shuttle ou Terravision. Duração: ~50 minutos.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="onibus" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">15:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act4-title">⛪ Duomo di Milano</div>
+                        <div class="activity-location" id="dia1-act4-location">Piazza del Duomo</div>
+                        <div class="activity-note" id="dia1-act4-note">Subir ao terraço (escadas são mais rápidas e baratas). Vista panorâmica incrível!</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">17:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act5-title">🛍️ Galleria Vittorio Emanuele II</div>
+                        <div class="activity-location" id="dia1-act5-location">Centro Histórico</div>
+                        <div class="activity-note" id="dia1-act5-note">Gire no calcanhar sobre o touro para boa sorte! Arquitetura deslumbrante.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">20:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act6-title">🍕 Jantar</div>
+                        <div class="activity-location" id="dia1-act6-location">Panzerotto Luini ou próximo ao Duomo</div>
+                        <div class="activity-note" id="dia1-act6-note">Experimente o famoso panzerotto! Sempre tem fila mas vale a pena.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">21:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act7-title">🌃 Passeio Noturno</div>
+                        <div class="activity-location" id="dia1-act7-location">Corso Buenos Aires ou Navigli</div>
+                        <div class="activity-note" id="dia1-act7-note">Conhecer o bairro Navigli (sem mercado hoje, apenas passeio).</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIA 2 - Veneza -->
+        <section class="day-section" id="dia2">
+            <div class="day-header">
+                <div class="day-number">02</div>
+                <h2 class="day-title" id="dia2-title">Veneza dos Canais</h2>
+                <div class="day-date">
+                    <span id="dia2-date">Terça-feira, 31 de Março</span>
+                    <span class="city-tag" id="dia2-city">Veneza</span>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="activity">
+                    <div class="time">06:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia2-act1-title">☕ Café da Manhã</div>
+                        <div class="activity-location" id="dia2-act1-location">Hotel</div>
+                        <div class="activity-note" id="dia2-act1-note">Rápido para pegar o trem cedo.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity highlight">
+                    <div class="time">07:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia2-act2-title">🚂 Trem Milão → Veneza</div>
+                        <div class="activity-location" id="dia2-act2-location">Estação Centrale → Santa Lucia</div>
+                        <div class="activity-note" id="dia2-act2-note">Duração: 2h15min. Chegada no coração de Veneza!</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hotel field ao chegar -->
+                <div class="activity">
+                    <div class="time">09:15</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia2-act3-title">🏨 Check-in Hotel</div>
+                        <div class="activity-location" id="dia2-act3-location">Veneza</div>
+                        <div class="activity-note" id="dia2-act3-note">Fazer check-in e deixar malas.</div>
+                        <div class="hotel-field">
+                            <label for="hotel-veneza" id="hotel-label2">🏨 Hotel:</label>
+                            <input type="text" id="hotel-veneza" class="hotel-input" placeholder="Nome do hotel">
+                        </div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="hoteis" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">09:45</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia2-act4-title">🏛️ Basílica de São Marcos</div>
+                        <div class="activity-location" id="dia2-act4-location">Piazza San Marco</div>
+                        <div class="activity-note" id="dia2-act4-note">Entrada gratuita. Arquitetura bizantina deslumbrante.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">11:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia2-act5-title">🏰 Palazzo Ducale</div>
+                        <div class="activity-location" id="dia2-act5-location">Piazza San Marco</div>
+                        <div class="activity-note" id="dia2-act5-note">Opcional. Veja também a Ponte dos Suspiros por fora.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">14:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia2-act6-title">🌉 Ponte Rialto</div>
+                        <div class="activity-location" id="dia2-act6-location">Rialto</div>
+                        <div class="activity-note" id="dia2-act6-note">Vista icônica e mercado nas proximidades.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">15:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia2-act7-title">🛥️ Grand Canal</div>
+                        <div class="activity-location" id="dia2-act7-location">Vaporetto Linha 1</div>
+                        <div class="activity-note" id="dia2-act7-note">Passeio de barco pelo canal principal. Compre bilhete de 75min.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">18:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia2-act8-title">🌅 Ponte da Academia</div>
+                        <div class="activity-location" id="dia2-act8-location">Canal Grande</div>
+                        <div class="activity-note" id="dia2-act8-note">Pôr do sol incrível com vista para a basílica.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIA 3 - Roma -->
+        <section class="day-section" id="dia3">
+            <div class="day-header">
+                <div class="day-number">03</div>
+                <h2 class="day-title" id="dia3-title">Roma Imperial</h2>
+                <div class="day-date">
+                    <span id="dia3-date">Quarta-feira, 1º de Abril</span>
+                    <span class="city-tag" id="dia3-city">Roma</span>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="activity">
+                    <div class="time">08:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia3-act1-title">☕ Café da Manhã</div>
+                        <div class="activity-location" id="dia3-act1-location">Hotel Veneza</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity highlight">
+                    <div class="time">10:26</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia3-act2-title">🚂 TREM VENEZA → ROMA</div>
+                        <div class="activity-location" id="dia3-act2-location">Santa Lucia → Termini</div>
+                        <div class="activity-note" id="dia3-act2-note">Duração: ~4 horas. Chegada prevista: 14:20.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hotel field ao chegar -->
+                <div class="activity">
+                    <div class="time">14:20</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia3-act3-title">🏨 Check-in Hotel</div>
+                        <div class="activity-location" id="dia3-act3-location">Roma</div>
+                        <div class="activity-note" id="dia3-act3-note">Fazer check-in e deixar malas.</div>
+                        <div class="hotel-field">
+                            <label for="hotel-roma" id="hotel-label3">🏨 Hotel:</label>
+                            <input type="text" id="hotel-roma" class="hotel-input" placeholder="Nome do hotel">
+                        </div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="hoteis" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">15:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia3-act4-title">🏟️ Coliseu</div>
+                        <div class="activity-location" id="dia3-act4-location">Centro Histórico</div>
+                        <div class="activity-note" id="dia3-act4-note">Compre ingresso antecipado para evitar filas enormes!</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">16:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia3-act5-title">🏛️ Fórum Romano & Palatino</div>
+                        <div class="activity-location" id="dia3-act5-location">Via dei Fori Imperiali</div>
+                        <div class="activity-note" id="dia3-act5-note">Mesmo bilhete do Coliseu. Ruínas antigas impressionantes.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">18:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia3-act6-title">🎠 Piazza Venezia</div>
+                        <div class="activity-location" id="dia3-act6-location">Centro</div>
+                        <div class="activity-note" id="dia3-act6-note">Monumento a Vittorio Emanuele II (o "bolo de casamento").</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">19:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia3-act7-title">⛲ Fontana di Trevi</div>
+                        <div class="activity-location" id="dia3-act7-location">Trevi</div>
+                        <div class="activity-note" id="dia3-act7-note">Jogue uma moeda para garantir seu retorno a Roma!</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">20:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia3-act8-title">🍝 Jantar</div>
+                        <div class="activity-location" id="dia3-act8-location">Bairro Monti ou Trastevere</div>
+                        <div class="activity-note" id="dia3-act8-note">Trastevere é mais autêntico e boêmio.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIA 4 - Nápoles -->
+        <section class="day-section" id="dia4">
+            <div class="day-header">
+                <div class="day-number">04</div>
+                <h2 class="day-title" id="dia4-title">Nápoles Autêntica</h2>
+                <div class="day-date">
+                    <span id="dia4-date">Quinta-feira, 2 de Abril</span>
+                    <span class="city-tag" id="dia4-city">Roma → Nápoles</span>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="activity">
+                    <div class="time">07:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia4-act1-title">☕ Café da Manhã</div>
+                        <div class="activity-location" id="dia4-act1-location">Hotel Roma</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">08:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia4-act2-title">🏛️ Panteão</div>
+                        <div class="activity-location" id="dia4-act2-location">Centro</div>
+                        <div class="activity-note" id="dia4-act2-note">Entrada gratuita. Arquitetura romana perfeita.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">09:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia4-act3-title">🎨 Piazza Navona</div>
+                        <div class="activity-location" id="dia4-act3-location">Centro</div>
+                        <div class="activity-note" id="dia4-act3-note">Três fontes barrocas incríveis.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">10:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia4-act4-title">🌸 Piazza di Spagna</div>
+                        <div class="activity-location" id="dia4-act4-location">Centro</div>
+                        <div class="activity-note" id="dia4-act4-note">Escadarias da Trinità dei Monti.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">12:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia4-act5-title">🍽️ Almoço Rápido</div>
+                        <div class="activity-location" id="dia4-act5-location">Centro</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">13:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia4-act6-title">🧳 Pegar Malas</div>
+                        <div class="activity-location" id="dia4-act6-location">Hotel</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity highlight">
+                    <div class="time">19:35</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia4-act7-title">🚂 TREM ROMA → NÁPOLES</div>
+                        <div class="activity-location" id="dia4-act7-location">Termini → Centrale</div>
+                        <div class="activity-note" id="dia4-act7-note">Duração: 1h13min. Chegada: ~20:50.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hotel field ao chegar -->
+                <div class="activity">
+                    <div class="time">21:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia4-act8-title">🏨 Check-in & Jantar Leve</div>
+                        <div class="activity-location" id="dia4-act8-location">Nápoles</div>
+                        <div class="activity-note" id="dia4-act8-note">Fazer check-in e jantar rápido.</div>
+                        <div class="hotel-field">
+                            <label for="hotel-napoles" id="hotel-label4">🏨 Hotel:</label>
+                            <input type="text" id="hotel-napoles" class="hotel-input" placeholder="Nome do hotel">
+                        </div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="hoteis" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIA 5 - Nápoles & Retorno -->
+        <section class="day-section" id="dia5">
+            <div class="day-header">
+                <div class="day-number">05</div>
+                <h2 class="day-title" id="dia5-title">Nápoles & Retorno</h2>
+                <div class="day-date">
+                    <span id="dia5-date">Sexta-feira, 3 de Abril</span>
+                    <span class="city-tag" id="dia5-city">Nápoles → Milão</span>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="activity">
+                    <div class="time">08:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia5-act1-title">☕ Café da Manhã</div>
+                        <div class="activity-location" id="dia5-act1-location">Hotel Nápoles</div>
+                        <div class="activity-note" id="dia5-act1-note">Experimente sfogliatella!</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">09:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia5-act2-title">🏛️ Museu Arqueológico Nacional</div>
+                        <div class="activity-location" id="dia5-act2-location">Centro</div>
+                        <div class="activity-note" id="dia5-act2-note">Melhor museu da cidade. Achados de Pompeia.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">11:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia5-act3-title">⛪ Duomo di San Gennaro</div>
+                        <div class="activity-location" id="dia5-act3-location">Centro</div>
+                        <div class="activity-note" id="dia5-act3-note">Catedral com o "milagre do sangue".</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">12:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia5-act4-title">🍕 Almoço</div>
+                        <div class="activity-location" id="dia5-act4-location">Pizzaria Da Michele ou Sorbillo</div>
+                        <div class="activity-note" id="dia5-act4-note">Pizza napolitana autêntica!</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">14:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia5-act5-title">🎭 Via San Gregorio Armeno</div>
+                        <div class="activity-location" id="dia5-act5-location">Centro Histórico</div>
+                        <div class="activity-note" id="dia5-act5-note">Rua dos presépios. Artesanato único.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">15:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia5-act6-title">🚶 Spaccanapoli</div>
+                        <div class="activity-location" id="dia5-act6-location">Centro</div>
+                        <div class="activity-note" id="dia5-act6-note">Caminhada pela rua que "divide" o centro histórico.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">16:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia5-act7-title">🧳 Pegar Malas</div>
+                        <div class="activity-location" id="dia5-act7-location">Hotel</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity highlight">
+                    <div class="time">17:25</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia5-act8-title">🚂 TREM NÁPOLES → MILÃO</div>
+                        <div class="activity-location" id="dia5-act8-location">Centrale → Centrale</div>
+                        <div class="activity-note" id="dia5-act8-note">Duração: 4h30min. Chegada: ~22:00.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIA 6 - Milão (Mercado) -->
+        <section class="day-section" id="dia6">
+            <div class="day-header">
+                <div class="day-number">06</div>
+                <h2 class="day-title" id="dia6-title">Mercado de Navigli & Arte</h2>
+                <div class="day-date">
+                    <span id="dia6-date">Sábado, 4 de Abril</span>
+                    <span class="city-tag" id="dia6-city">Milão</span>
+                </div>
+            </div>
+            <div class="timeline">
+                <!-- Hotel field no início (já está em Milão) -->
+                <div class="activity">
+                    <div class="time">08:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia6-act1-title">☕ Café Rápido</div>
+                        <div class="activity-location" id="dia6-act1-location">Hotel Milão</div>
+                        <div class="hotel-field">
+                            <label for="hotel-milao2" id="hotel-label6">🏨 Hotel:</label>
+                            <input type="text" id="hotel-milao2" class="hotel-input" placeholder="Nome do hotel" value="">
+                        </div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity market-day">
+                    <div class="time">08:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia6-act2-title">🛍️ MERCADO DE NAVIGLI</div>
+                        <div class="activity-location" id="dia6-act2-location">Ripa di Porta Ticinese</div>
+                        <div class="activity-note" id="dia6-act2-note">Fiera di Sinigaglia! Funciona 8h-18h. Antiguidades, vintage, vinil, móveis. Chegue cedo para melhores achados!</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">12:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia6-act3-title">🍽️ Almoço Rápido</div>
+                        <div class="activity-location" id="dia6-act3-location">Navigli</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">14:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia6-act4-title">🎨 Cenacolo Vinciano</div>
+                        <div class="activity-location" id="dia6-act4-location">Santa Maria delle Grazie</div>
+                        <div class="activity-note" id="dia6-act4-note">RESERVA OBRIGATÓRIA! A Última Ceia de Leonardo da Vinci.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">15:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia6-act5-title">⛪ Santa Maria delle Grazie</div>
+                        <div class="activity-location" id="dia6-act5-location">Externa</div>
+                        <div class="activity-note" id="dia6-act5-note">Fotos da arquitetura renascentista.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">16:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia6-act6-title">🦴 San Bernardino alle Ossa</div>
+                        <div class="activity-location" id="dia6-act6-location">Centro</div>
+                        <div class="activity-note" id="dia6-act6-note">Capela decorada com ossos humanos. Macabro mas fascinante!</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">18:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia6-act7-title">💎 Quadrilatero della Moda</div>
+                        <div class="activity-location" id="dia6-act7-location">Via Montenapoleone</div>
+                        <div class="activity-note" id="dia6-act7-note">Rua das grifes de luxo. Window shopping!</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">20:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia6-act8-title">🍷 Jantar de Despedida</div>
+                        <div class="activity-location" id="dia6-act8-location">Milão</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIA 7 - Saída -->
+        <section class="day-section" id="dia7">
+            <div class="day-header">
+                <div class="day-number">07</div>
+                <h2 class="day-title" id="dia7-title">Saída</h2>
+                <div class="day-date">
+                    <span id="dia7-date">Domingo, 5 de Abril</span>
+                    <span class="city-tag" id="dia7-city">Milão → Bergamo</span>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="activity">
+                    <div class="time">08:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia7-act1-title">☕ Café & Check-out</div>
+                        <div class="activity-location" id="dia7-act1-location">Hotel</div>
+                        <div class="activity-note" id="dia7-act1-note">Deixar malas no hotel.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">09:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia7-act2-title">🏬 Galleria Rinascente</div>
+                        <div class="activity-location" id="dia7-act2-location">Centro</div>
+                        <div class="activity-note" id="dia7-act2-note">Terraço gratuito com vista para o Duomo.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">10:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia7-act3-title">🏰 Castello Sforzesco</div>
+                        <div class="activity-location" id="dia7-act3-location">Castello</div>
+                        <div class="activity-note" id="dia7-act3-note">Última visita cultural.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">12:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia7-act4-title">🍽️ Almoço Rápido</div>
+                        <div class="activity-location" id="dia7-act4-location">Centro</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">13:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia7-act5-title">🧳 Pegar Malas</div>
+                        <div class="activity-location" id="dia7-act5-location">Hotel</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">13:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia7-act6-title">🚌 Ponto de Ônibus</div>
+                        <div class="activity-location" id="dia7-act6-location">Piazza Luigi di Savoia</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity highlight">
+                    <div class="time">14:20</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia7-act7-title">🚌 ÔNIBUS MILÃO → BGY</div>
+                        <div class="activity-location" id="dia7-act7-location">Centrale → Aeroporto</div>
+                        <div class="activity-note" id="dia7-act7-note">Duração: ~50min. Não perca o horário!</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="onibus" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">15:20</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia7-act8-title">✈️ Aeroporto BGY</div>
+                        <div class="activity-location" id="dia7-act8-location">Bergamo</div>
+                        <div class="activity-note" id="dia7-act8-note">Check-in, segurança, duty-free.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity highlight">
+                    <div class="time">17:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia7-act9-title">✈️ VOO DE SAÍDA</div>
+                        <div class="activity-location" id="dia7-act9-location">Aeroporto Bergamo</div>
+                        <div class="activity-note" id="dia7-act9-note">Fim da viagem. Até a próxima, Itália! 🇮🇹</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="voo" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transport Section -->
+        <section class="transport-section">
+            <h2 id="transport-title">🚂 Horários de Trem</h2>
+            <div class="transport-grid">
+                <div class="transport-card">
+                    <div class="transport-icon">🚄</div>
+                    <div class="transport-time">07:00</div>
+                    <div class="transport-route" id="transport-1">Milão → Veneza<br><small>31 março • 2h15min</small></div>
+                </div>
+                <div class="transport-card">
+                    <div class="transport-icon">🚄</div>
+                    <div class="transport-time">10:26</div>
+                    <div class="transport-route" id="transport-2">Veneza → Roma<br><small>1 abril • ~4h</small></div>
+                </div>
+                <div class="transport-card">
+                    <div class="transport-icon">🚄</div>
+                    <div class="transport-time">19:35</div>
+                    <div class="transport-route" id="transport-3">Roma → Nápoles<br><small>2 abril • 1h13min</small></div>
+                </div>
+                <div class="transport-card">
+                    <div class="transport-icon">🚄</div>
+                    <div class="transport-time">17:25</div>
+                    <div class="transport-route" id="transport-4">Nápoles → Milão<br><small>3 abril • 4h30min</small></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Budget Section -->
+        <section class="budget-section">
+            <h2 id="budget-title">💰 Calculadora de Orçamento</h2>
+            <div class="budget-grid">
+                <div class="budget-items">
+                    <div class="budget-item">
+                        <label id="budget-voo">✈️ Voo (ida/volta)</label>
+                        <input type="number" id="voo" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                    </div>
+                    <div class="budget-item">
+                        <label id="budget-hoteis">🏨 Hotéis</label>
+                        <input type="number" id="hoteis" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                    </div>
+                    <div class="budget-item">
+                        <label id="budget-trens">🚂 Trens (4 trajetos)</label>
+                        <input type="number" id="trens" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                    </div>
+                    <div class="budget-item">
+                        <label id="budget-alimentacao">🍝 Alimentação</label>
+                        <input type="number" id="alimentacao" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                    </div>
+                    <div class="budget-item">
+                        <label id="budget-passeios">🎟️ Passeios/Museus</label>
+                        <input type="number" id="passeios" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                    </div>
+                    <div class="budget-item">
+                        <label id="budget-compras">🛍️ Compras/Mercado</label>
+                        <input type="number" id="compras" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                    </div>
+                    <div class="budget-item">
+                        <label id="budget-onibus">🚌 Ônibus BGY</label>
+                        <input type="number" id="onibus" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                    </div>
+                    <div class="budget-item">
+                        <label id="budget-extras">💶 Extras (imprevistos)</label>
+                        <input type="number" id="extras" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                    </div>
+                </div>
+                <div class="budget-total-card">
+                    <h3 id="budget-total-title">Total Estimado</h3>
+                    <div class="total-value" id="totalValue">0.00</div>
+                    <div class="total-currency">Euros (€)</div>
+                    <p id="budget-auto">Preços preenchidos automaticamente pelas atividades</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checklist -->
+        <section class="checklist-section">
+            <h2 id="checklist-title">✅ Checklist Importante</h2>
+            <div class="checklist-grid">
+                <div class="check-item">
+                    <div class="check-box">✓</div>
+                    <div id="checklist-1">Reservar <strong>A Última Ceia</strong> (Cenacolo Vinciano) - 2-3 meses antes!</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box">✓</div>
+                    <div id="checklist-2">Comprar bilhetes de <strong>trem antecipados</strong> (Trenitalia/Italo)</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box">✓</div>
+                    <div id="checklist-3">Reservar <strong>Capela de San Severo</strong> em Nápoles (se der tempo)</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box">✓</div>
+                    <div id="checklist-4">Baixar apps <strong>Trenitalia</strong> e <strong>Italo</strong></div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box">✓</div>
+                    <div id="checklist-5">Levar <strong>sacolas reutilizáveis</strong> para o Mercado de Navigli</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box">✓</div>
+                    <div id="checklist-6">Confirmar ônibus <strong>BGY-Milão</strong> e <strong>Milão-BGY</strong></div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box">✓</div>
+                    <div id="checklist-7">Comprar ingresso <strong>Coliseu</strong> com antecedência</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-box">✓</div>
+                    <div id="checklist-8">Levar <strong>adaptador de tomada</strong> europeu</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-icon">🇮🇹</div>
+            <h3>Buon Viaggio!</h3>
+            <p id="footer-text">Milão • Veneza • Roma • Nápoles<br>30 Março - 5 Abril 2025</p>
+        </div>
+    </footer>
+
+    <!-- Player de Áudio Flutuante -->
+    <div class="audio-player">
+        <div class="player-button" id="audioButton" onclick="toggleAudio()">
+            ▶️
+        </div>
+        <audio id="audioPlayer" preload="auto" style="display: none;"></audio>
+    </div>
+
+    <!-- Scripts -->
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
