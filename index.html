@@ -956,13 +956,19 @@
         </div>
     </footer>
 
-    <!-- Player de Áudio Flutuante -->
-    <div class="audio-player">
-        <div class="player-button" id="audioButton" onclick="toggleAudio()">
-            ▶️
-        </div>
-        <audio id="audioPlayer" preload="auto" style="display: none;"></audio>
-    </div>
+    <!-- Player de Áudio Melhorado -->
+<div class="audio-player-enhanced">
+    <button class="player-nav-btn" id="prevTrack" onclick="prevTrack()" title="Música anterior">⏮️</button>
+    <button class="player-main-btn" id="audioButton" onclick="toggleAudio()">▶️</button>
+    <button class="player-nav-btn" id="nextTrack" onclick="nextTrack()" title="Próxima música">⏭️</button>
+</div>
+
+<!-- Botões de Navegação -->
+<button class="nav-btn nav-prev" id="prevDayBtn" onclick="goToPrevDay()" title="Dia anterior">◀</button>
+<button class="nav-btn nav-home" id="homeBtn" onclick="goToHome()" title="Voltar ao início">⬆</button>
+
+<!-- Player de Áudio oculto (mantido para compatibilidade) -->
+<audio id="audioPlayer" preload="auto" style="display: none;"></audio>
 
     <!-- Scripts -->
     <script src="translations.js"></script>
