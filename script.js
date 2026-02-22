@@ -213,14 +213,15 @@ function toggleAudio() {
         audioPlayer.pause();
         audioButton.innerHTML = '▶️';
         audioButton.classList.remove('playing');
+        isPlaying = false;
     } else {
         playWithRetry();
+        // playWithRetry vai setar isPlaying = true se conseguir
     }
-    isPlaying = !isPlaying;
 }
 
 // =============================================
-// FUNÇÕES DE TRADUÇÃO (já existentes)
+// FUNÇÕES DE TRADUÇÃO
 // =============================================
 let currentLang = 'pt-pt';
 
@@ -270,6 +271,7 @@ function translatePage(lang) {
         el.placeholder = translations[lang]['hotel.placeholder'];
     });
     
+    // Atividades Dia 1
     document.getElementById('dia1-act1-title').textContent = translations[lang]['dia1.act1.title'];
     document.getElementById('dia1-act1-location').textContent = translations[lang]['dia1.act1.location'];
     document.getElementById('dia1-act1-note').textContent = translations[lang]['dia1.act1.note'];
@@ -292,6 +294,7 @@ function translatePage(lang) {
     document.getElementById('dia1-act7-location').textContent = translations[lang]['dia1.act7.location'];
     document.getElementById('dia1-act7-note').textContent = translations[lang]['dia1.act7.note'];
     
+    // Dia 2
     document.getElementById('dia2-act1-title').textContent = translations[lang]['dia2.act1.title'];
     document.getElementById('dia2-act1-location').textContent = translations[lang]['dia2.act1.location'];
     document.getElementById('dia2-act1-note').textContent = translations[lang]['dia2.act1.note'];
@@ -317,6 +320,7 @@ function translatePage(lang) {
     document.getElementById('dia2-act8-location').textContent = translations[lang]['dia2.act8.location'];
     document.getElementById('dia2-act8-note').textContent = translations[lang]['dia2.act8.note'];
     
+    // Dia 3
     document.getElementById('dia3-act1-title').textContent = translations[lang]['dia3.act1.title'];
     document.getElementById('dia3-act1-location').textContent = translations[lang]['dia3.act1.location'];
     document.getElementById('dia3-act2-title').textContent = translations[lang]['dia3.act2.title'];
@@ -341,6 +345,7 @@ function translatePage(lang) {
     document.getElementById('dia3-act8-location').textContent = translations[lang]['dia3.act8.location'];
     document.getElementById('dia3-act8-note').textContent = translations[lang]['dia3.act8.note'];
     
+    // Dia 4
     document.getElementById('dia4-act1-title').textContent = translations[lang]['dia4.act1.title'];
     document.getElementById('dia4-act1-location').textContent = translations[lang]['dia4.act1.location'];
     document.getElementById('dia4-act2-title').textContent = translations[lang]['dia4.act2.title'];
@@ -363,6 +368,7 @@ function translatePage(lang) {
     document.getElementById('dia4-act8-location').textContent = translations[lang]['dia4.act8.location'];
     document.getElementById('dia4-act8-note').textContent = translations[lang]['dia4.act8.note'];
     
+    // Dia 5
     document.getElementById('dia5-act1-title').textContent = translations[lang]['dia5.act1.title'];
     document.getElementById('dia5-act1-location').textContent = translations[lang]['dia5.act1.location'];
     document.getElementById('dia5-act1-note').textContent = translations[lang]['dia5.act1.note'];
@@ -387,6 +393,7 @@ function translatePage(lang) {
     document.getElementById('dia5-act8-location').textContent = translations[lang]['dia5.act8.location'];
     document.getElementById('dia5-act8-note').textContent = translations[lang]['dia5.act8.note'];
     
+    // Dia 6
     document.getElementById('dia6-act1-title').textContent = translations[lang]['dia6.act1.title'];
     document.getElementById('dia6-act1-location').textContent = translations[lang]['dia6.act1.location'];
     document.getElementById('dia6-act2-title').textContent = translations[lang]['dia6.act2.title'];
@@ -409,6 +416,7 @@ function translatePage(lang) {
     document.getElementById('dia6-act8-title').textContent = translations[lang]['dia6.act8.title'];
     document.getElementById('dia6-act8-location').textContent = translations[lang]['dia6.act8.location'];
     
+    // Dia 7
     document.getElementById('dia7-act1-title').textContent = translations[lang]['dia7.act1.title'];
     document.getElementById('dia7-act1-location').textContent = translations[lang]['dia7.act1.location'];
     document.getElementById('dia7-act1-note').textContent = translations[lang]['dia7.act1.note'];
@@ -434,12 +442,14 @@ function translatePage(lang) {
     document.getElementById('dia7-act9-location').textContent = translations[lang]['dia7.act9.location'];
     document.getElementById('dia7-act9-note').textContent = translations[lang]['dia7.act9.note'];
     
+    // Transport
     document.getElementById('transport-title').textContent = translations[lang]['transport.title'];
     document.getElementById('transport-1').innerHTML = translations[lang]['transport.milao_veneza'] + '<br><small>31 março • 2h15min</small>';
     document.getElementById('transport-2').innerHTML = translations[lang]['transport.veneza_roma'] + '<br><small>1 abril • ~4h</small>';
     document.getElementById('transport-3').innerHTML = translations[lang]['transport.roma_napoles'] + '<br><small>2 abril • 1h13min</small>';
     document.getElementById('transport-4').innerHTML = translations[lang]['transport.napoles_milao'] + '<br><small>3 abril • 4h30min</small>';
     
+    // Budget
     document.getElementById('budget-title').textContent = translations[lang]['budget.title'];
     document.getElementById('budget-voo').textContent = translations[lang]['budget.voo'];
     document.getElementById('budget-hoteis').textContent = translations[lang]['budget.hoteis'];
@@ -452,6 +462,7 @@ function translatePage(lang) {
     document.getElementById('budget-total-title').textContent = translations[lang]['budget.total'];
     document.getElementById('budget-auto').textContent = translations[lang]['budget.auto'];
     
+    // Checklist
     document.getElementById('checklist-title').textContent = translations[lang]['checklist.title'];
     document.getElementById('checklist-1').innerHTML = translations[lang]['checklist.1'];
     document.getElementById('checklist-2').innerHTML = translations[lang]['checklist.2'];
@@ -462,14 +473,16 @@ function translatePage(lang) {
     document.getElementById('checklist-7').innerHTML = translations[lang]['checklist.7'];
     document.getElementById('checklist-8').innerHTML = translations[lang]['checklist.8'];
     
+    // Footer
     document.getElementById('footer-text').innerHTML = translations[lang]['footer.text'] + '<br>30 Março - 5 Abril 2025';
     
+    // Cost labels
     document.querySelectorAll('.cost-label').forEach(el => {
         el.textContent = translations[lang]['cost.label'];
     });
 }
 
-function setLanguage(lang) {
+function setLanguage(lang, event) {
     currentLang = lang;
     translatePage(lang);
     
@@ -539,10 +552,9 @@ function nextTrack() {
     }
 }
 
-// Inicialização única quando o DOM estiver pronto
+// Inicialização da tradução
 document.addEventListener('DOMContentLoaded', function() {
     translatePage('pt-pt');
-    // O initAudio já é chamado no script principal
 });
 
 // Garantir que as funções estão disponíveis globalmente
