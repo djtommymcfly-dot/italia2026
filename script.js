@@ -409,6 +409,147 @@ function setLanguage(lang, event) {
 }
 
 // =============================================
+// SISTEMA DE LOGIN COM LOCALSTORAGE
+// =============================================
+const STORAGE_KEY = 'italia_user_data';
+let currentUser = null;
+
+// Carregar dados do usuário atual
+function loadUserData(username) {
+    const allData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    return allData[username] || {};
+}
+
+// Salvar dados do usuário atual
+function saveUserData(username, data) {
+    const allData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    allData[username] = data;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(allData));
+}
+
+// Carregar todos os dados salvos para o usuário atual
+function loadSavedData() {
+    if (!currentUser) return;
+    
+    const userData = loadUserData(currentUser);
+    
+    // Preencher campos de hotel
+    document.querySelectorAll('.hotel-input').forEach(input => {
+        const id = input.id;
+        if (userData[id]) {
+            input.value = userData[id];
+        }
+    });
+    
+    // Preencher campos de custo
+    document.querySelectorAll('.cost-input').forEach(input => {
+        // Criar um identificador único para cada campo
+        const parent = input.closest('.activity');
+        const timeElem = parent?.querySelector('.time');
+        const titleElem = parent?.querySelector('.activity-title');
+        const key = `cost_${timeElem?.textContent?.trim()}_${titleElem?.textContent?.trim()}`.replace(/\s+/g, '_');
+        
+        if (userData[key]) {
+            input.value = userData[key];
+        }
+    });
+    
+    // Atualizar calculadora
+    updateBudgetFromActivities();
+}
+
+// Salvar todos os dados do usuário atual
+function saveAllData() {
+    if (!currentUser) return;
+    
+    const userData = {};
+    
+    // Salvar campos de hotel
+    document.querySelectorAll('.hotel-input').forEach(input => {
+        userData[input.id] = input.value;
+    });
+    
+    // Salvar campos de custo
+    document.querySelectorAll('.cost-input').forEach(input => {
+        const parent = input.closest('.activity');
+        const timeElem = parent?.querySelector('.time');
+        const titleElem = parent?.querySelector('.activity-title');
+        const key = `cost_${timeElem?.textContent?.trim()}_${titleElem?.textContent?.trim()}`.replace(/\s+/g, '_');
+        userData[key] = input.value;
+    });
+    
+    saveUserData(currentUser, userData);
+    console.log('✅ Dados salvos para:', currentUser);
+}
+
+// Atualizar interface de login
+function updateLoginUI() {
+    const loginBox = document.getElementById('loginBox');
+    const userBox = document.getElementById('userBox');
+    const usernameDisplay = document.getElementById('usernameDisplay');
+    
+    if (currentUser) {
+        loginBox.style.display = 'none';
+        userBox.style.display = 'flex';
+        usernameDisplay.textContent = currentUser;
+    } else {
+        loginBox.style.display = 'flex';
+        userBox.style.display = 'none';
+    }
+}
+
+// Handler de login
+function handleLogin() {
+    const username = document.getElementById('usernameInput').value.trim();
+    if (username) {
+        currentUser = username;
+        updateLoginUI();
+        loadSavedData();
+        
+        // Salvar usuário atual para recarregar depois
+        sessionStorage.setItem('currentUser', username);
+    }
+}
+
+// Handler de logout
+function handleLogout() {
+    currentUser = null;
+    updateLoginUI();
+    sessionStorage.removeItem('currentUser');
+    
+    // Limpar todos os campos
+    document.querySelectorAll('.hotel-input, .cost-input').forEach(input => {
+        input.value = '';
+    });
+    
+    // Resetar calculadora
+    updateBudgetFromActivities();
+}
+
+// Verificar se já estava logado
+function checkSavedLogin() {
+    const savedUser = sessionStorage.getItem('currentUser');
+    if (savedUser) {
+        currentUser = savedUser;
+        updateLoginUI();
+        loadSavedData();
+    }
+}
+
+// Adicionar autosave a cada alteração
+document.addEventListener('input', function(e) {
+    if (e.target.classList.contains('hotel-input') || e.target.classList.contains('cost-input')) {
+        if (currentUser) {
+            // Debounce para não salvar a cada tecla
+            clearTimeout(window.saveTimeout);
+            window.saveTimeout = setTimeout(() => {
+                saveAllData();
+            }, 500);
+        }
+    }
+});
+
+// =============================================
 // FUNÇÕES PARA NAVEGAÇÃO ENTRE DIAS
 // =============================================
 function goToPrevDay() {
@@ -466,9 +607,10 @@ function nextTrack() {
     }
 }
 
-// Inicialização da tradução
+// Inicialização
 document.addEventListener('DOMContentLoaded', function() {
     translatePage('pt-pt');
+    checkSavedLogin();
 });
 
 // Garantir que as funções estão disponíveis globalmente
@@ -478,3 +620,5 @@ window.prevTrack = prevTrack;
 window.nextTrack = nextTrack;
 window.toggleAudio = toggleAudio;
 window.setLanguage = setLanguage;
+window.handleLogin = handleLogin;
+window.handleLogout = handleLogout;
