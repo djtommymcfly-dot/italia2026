@@ -117,27 +117,6 @@ const playlist = [
     'assets/9.mp3'
 ];
 
-// DIAGNÓSTICO: Verificar se os arquivos existem
-function checkAudioFiles() {
-    console.log('🔍 Verificando arquivos de áudio...');
-    playlist.forEach((file, index) => {
-        fetch(file, { method: 'HEAD' })
-            .then(response => {
-                if (response.ok) {
-                    console.log(`✅ ${file} encontrado`);
-                } else {
-                    console.log(`❌ ${file} NÃO encontrado (404) - Verifique se o arquivo existe na pasta assets/`);
-                }
-            })
-            .catch(() => {
-                console.log(`❌ ${file} NÃO encontrado (erro de rede) - Caminho: ${window.location.href}${file}`);
-            });
-    });
-}
-
-// Executar diagnóstico
-setTimeout(checkAudioFiles, 1000);
-
 function loadTrack(index) {
     if (index >= 0 && index < playlist.length) {
         audioPlayer.src = playlist[index];
@@ -264,7 +243,7 @@ function translatePage(lang) {
     document.getElementById('dia6-title').textContent = translations[lang]['dia6.title'];
     document.getElementById('dia7-title').textContent = translations[lang]['dia7.title'];
     
-    // Atualizar dias da semana (simplificado - você pode expandir)
+    // Atualizar dias da semana
     const weekdays = {
         'dia1-date': 'week.segunda',
         'dia2-date': 'week.terca',
@@ -279,7 +258,6 @@ function translatePage(lang) {
         const el = document.getElementById(id);
         if (el) {
             let text = el.innerHTML;
-            // Substituir o dia da semana (parte antes da vírgula)
             const parts = text.split(',');
             if (parts.length > 1) {
                 parts[0] = translations[lang][weekdays[id]];
