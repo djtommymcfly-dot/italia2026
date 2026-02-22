@@ -34,7 +34,7 @@ body {
 }
 
 /* =============================================
-   SISTEMA DE LOGIN SIMPLES - TEXTO SEMPRE ESCURO
+   SISTEMA DE LOGIN - TEXTO SEMPRE ESCURO
    ============================================= */
 .login-container {
     position: fixed;
@@ -63,7 +63,6 @@ body {
     text-shadow: 0 0 5px rgba(0,0,0,0.3);
 }
 
-/* INPUT DO LOGIN - TEXTO ESCURO */
 .login-input {
     background: rgba(255, 255, 255, 0.9);
     border: 2px solid var(--gold);
@@ -87,7 +86,6 @@ body {
     color: #000000 !important;
 }
 
-/* BOTÃO ENTRAR */
 .login-btn {
     background: var(--gold);
     border: none;
@@ -108,7 +106,6 @@ body {
     color: #000000;
 }
 
-/* NOME DO USUÁRIO LOGADO */
 .username-display {
     color: #333333 !important;
     font-weight: 700;
@@ -123,7 +120,6 @@ body {
     border-radius: 20px;
 }
 
-/* BOTÃO SAIR */
 .logout-btn {
     background: rgba(255, 255, 255, 0.3);
     border: 2px solid var(--gold);
@@ -272,7 +268,7 @@ body {
     font-weight: 700;
 }
 
-/* Navigation - CORRIGIDO PARA MOSTRAR TODOS OS DIAS */
+/* Navigation */
 .nav-days {
     position: sticky;
     top: 0;
@@ -509,7 +505,6 @@ body {
     margin-top: 0.3rem;
 }
 
-/* Campo de custo e hotel */
 .activity-cost, .hotel-field {
     margin-top: 0.5rem;
     display: flex;
@@ -586,7 +581,9 @@ body {
     font-size: 1.1rem;
 }
 
-/* Transport Section */
+/* =============================================
+   TRANSPORT SECTION - CARDS COM TEXTO PRETO
+   ============================================= */
 .transport-section {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 2rem 1rem;
@@ -610,7 +607,7 @@ body {
 }
 
 .transport-card {
-    background: white;
+    background: white !important;
     padding: 1rem;
     border-radius: 12px;
     border: 3px solid var(--gold);
@@ -632,13 +629,13 @@ body {
     font-size: 1.5rem;
     font-weight: 900;
     margin-bottom: 0.3rem;
-    color: var(--dark);
+    color: #000000 !important;
     font-family: 'Playfair Display', serif;
 }
 
 .transport-route {
     font-size: 1rem;
-    color: var(--dark);
+    color: #000000 !important;
     font-weight: 600;
     line-height: 1.3;
 }
@@ -646,7 +643,7 @@ body {
 .transport-route small {
     display: block;
     margin-top: 0.3rem;
-    color: #666;
+    color: #333333 !important;
     font-size: 0.8rem;
 }
 
@@ -828,7 +825,7 @@ footer {
 }
 
 /* =============================================
-   BOTÕES DE NAVEGAÇÃO - ÍCONES DOURADOS
+   BOTÕES DE NAVEGAÇÃO
    ============================================= */
 .nav-btn {
     position: fixed;
@@ -872,7 +869,7 @@ footer {
 }
 
 /* =============================================
-   PLAYER DE ÁUDIO MELHORADO - ÍCONES DOURADOS
+   PLAYER DE ÁUDIO MELHORADO
    ============================================= */
 .audio-player-enhanced {
     position: fixed;
@@ -951,7 +948,9 @@ footer {
     color: white;
 }
 
-/* Tablets e telas maiores */
+/* =============================================
+   RESPONSIVO
+   ============================================= */
 @media (min-width: 768px) {
     .budget-grid {
         grid-template-columns: 2fr 1fr;
@@ -979,7 +978,6 @@ footer {
     }
 }
 
-/* Ajustes para telas muito pequenas */
 @media (max-width: 380px) {
     .hero-dates {
         flex-direction: column;
@@ -1005,7 +1003,6 @@ footer {
     }
 }
 
-/* Ajuste para o seletor de idiomas e login no responsivo */
 @media (max-width: 768px) {
     .login-container {
         position: static;
@@ -1110,16 +1107,24 @@ footer {
     }
 }
 
-/* Print styles */
+/* =============================================
+   PRINT STYLES
+   ============================================= */
 @media print {
     .language-selector, .nav-days, .hero, .audio-player-enhanced, .nav-btn, .login-container {
         display: none;
     }
+    
     .day-section {
         page-break-inside: avoid;
     }
+    
     .transport-card {
         background: white !important;
         border: 2px solid #000 !important;
+    }
+    
+    .transport-time, .transport-route {
+        color: black !important;
     }
 }
