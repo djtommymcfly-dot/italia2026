@@ -9,6 +9,20 @@
 </head>
 <body>
 
+    <!-- Login Section -->
+    <div class="login-container">
+        <div class="login-box" id="loginBox">
+            <span class="login-icon">👤</span>
+            <input type="text" id="usernameInput" class="login-input" placeholder="Seu nome" maxlength="20">
+            <button class="login-btn" onclick="handleLogin()">Entrar</button>
+        </div>
+        <div class="user-box" id="userBox" style="display: none;">
+            <span class="user-icon">👤</span>
+            <span class="username-display" id="usernameDisplay"></span>
+            <button class="logout-btn" onclick="handleLogout()">Sair</button>
+        </div>
+    </div>
+
     <!-- Language Selector -->
     <div class="language-selector">
         <button class="lang-btn active" onclick="setLanguage('pt-pt', event)">🇵🇹 PT</button>
@@ -949,8 +963,8 @@
     </footer>
 
     <!-- Botões de Navegação -->
-    <button class="nav-btn nav-prev" onclick="goToPrevDay()" title="Dia anterior">⬇</button>
-    <button class="nav-btn nav-home" onclick="goToHome()" title="Voltar ao início">⬆</button>
+    <button class="nav-btn nav-prev" onclick="goToPrevDay()" title="Dia anterior">◀</button>
+    <button class="nav-btn nav-home" onclick="goToHome()" title="Voltar ao início">⬇</button>
 
     <!-- Player de Áudio Melhorado -->
     <div class="audio-player-enhanced">
