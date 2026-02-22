@@ -481,6 +481,74 @@ function setLanguage(lang) {
     document.documentElement.lang = lang === 'pt-pt' ? 'pt-PT' : 'es-ES';
 }
 
+// =============================================
+// FUNÇÕES PARA NAVEGAÇÃO ENTRE DIAS
+// =============================================
+function goToPrevDay() {
+    const sections = document.querySelectorAll('.day-section');
+    const currentHash = window.location.hash || '#dia1';
+    let currentId = currentHash.replace('#', '');
+    
+    let currentIndex = -1;
+    sections.forEach((section, index) => {
+        if (section.id === currentId) {
+            currentIndex = index;
+        }
+    });
+    
+    if (currentIndex > 0) {
+        const prevSection = sections[currentIndex - 1];
+        window.location.hash = prevSection.id;
+        prevSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        // Se estiver no dia 1, vai para o último dia (loop)
+        const lastSection = sections[sections.length - 1];
+        window.location.hash = lastSection.id;
+        lastSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function goToHome() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+    window.location.hash = '#dia1';
+}
+
+// =============================================
+// FUNÇÕES PARA O PLAYER DE MÚSICA
+// =============================================
+function prevTrack() {
+    if (playlist.length > 0) {
+        currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+        loadTrack(currentTrack);
+        if (isPlaying) {
+            playWithRetry();
+        }
+    }
+}
+
+function nextTrack() {
+    if (playlist.length > 0) {
+        currentTrack = (currentTrack + 1) % playlist.length;
+        loadTrack(currentTrack);
+        if (isPlaying) {
+            playWithRetry();
+        }
+    }
+}
+
+// Inicialização única quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', function() {
     translatePage('pt-pt');
+    // O initAudio já é chamado no script principal
 });
+
+// Garantir que as funções estão disponíveis globalmente
+window.goToPrevDay = goToPrevDay;
+window.goToHome = goToHome;
+window.prevTrack = prevTrack;
+window.nextTrack = nextTrack;
+window.toggleAudio = toggleAudio;
+window.setLanguage = setLanguage;
