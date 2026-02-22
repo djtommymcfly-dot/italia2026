@@ -11,8 +11,8 @@
 
     <!-- Language Selector -->
     <div class="language-selector">
-        <button class="lang-btn active" onclick="setLanguage('pt-pt')">🇵🇹 PT</button>
-        <button class="lang-btn" onclick="setLanguage('es-es')">🇪🇸 ES</button>
+        <button class="lang-btn active" onclick="setLanguage('pt-pt', event)">🇵🇹 PT</button>
+        <button class="lang-btn" onclick="setLanguage('es-es', event)">🇪🇸 ES</button>
     </div>
 
     <!-- Hero Section -->
@@ -52,110 +52,106 @@
 
     <div class="container">
 
-      <!-- DIA 1 - Milão -->
-<section class="day-section" id="dia1">
-    <div class="day-header">
-        <div class="day-number">01</div>
-        <h2 class="day-title" id="dia1-title">Chegada em Milão</h2>
-        <div class="day-date">
-            <span id="dia1-date">Segunda-feira, 30 de Março</span>
-            <span class="city-tag" id="dia1-city">Milão</span>
-        </div>
-    </div>
-    <div class="timeline">
-        <!-- 1º Chegada do voo -->
-        <div class="activity">
-            <div class="time">12:40</div>
-            <div class="content">
-                <div class="activity-title" id="dia1-act1-title">✈️ Chegada BGY</div>
-                <div class="activity-location" id="dia1-act1-location">Aeroporto de Bergamo</div>
-                <div class="activity-note" id="dia1-act1-note">Voo chega no aeroporto de Bergamo (BGY). Pegar mala e seguir para o ônibus.</div>
-                <div class="activity-cost">
-                    <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="voo" min="0" step="0.1" value="0" placeholder="0.00"></label>
+        <!-- DIA 1 - Milão -->
+        <section class="day-section" id="dia1">
+            <div class="day-header">
+                <div class="day-number">01</div>
+                <h2 class="day-title" id="dia1-title">Chegada em Milão</h2>
+                <div class="day-date">
+                    <span id="dia1-date">Segunda-feira, 30 de Março</span>
+                    <span class="city-tag" id="dia1-city">Milão</span>
                 </div>
             </div>
-        </div>
-        
-        <!-- 2º Ônibus para Milão -->
-        <div class="activity">
-            <div class="time">13:40</div>
-            <div class="content">
-                <div class="activity-title" id="dia1-act2-title">🚌 Ônibus para Milão</div>
-                <div class="activity-location" id="dia1-act2-location">BGY → Estação Centrale</div>
-                <div class="activity-note" id="dia1-act2-note">Orio Shuttle ou Terravision. Duração: ~50 minutos.</div>
-                <div class="activity-cost">
-                    <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="onibus" min="0" step="0.1" value="0" placeholder="0.00"></label>
+            <div class="timeline">
+                <div class="activity">
+                    <div class="time">12:40</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act1-title">✈️ Chegada BGY</div>
+                        <div class="activity-location" id="dia1-act1-location">Aeroporto de Bergamo</div>
+                        <div class="activity-note" id="dia1-act1-note">Voo chega no aeroporto de Bergamo (BGY). Pegar mala e seguir para o ônibus.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="voo" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">13:40</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act2-title">🚌 Ônibus para Milão</div>
+                        <div class="activity-location" id="dia1-act2-location">BGY → Estação Centrale</div>
+                        <div class="activity-note" id="dia1-act2-note">Orio Shuttle ou Terravision. Duração: ~50 minutos.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="onibus" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">14:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act3-title">🏨 Check-in Hotel</div>
+                        <div class="activity-location" id="dia1-act3-location">Centro de Milão</div>
+                        <div class="activity-note" id="dia1-act3-note">Fazer check-in e deixar malas.</div>
+                        <div class="hotel-field">
+                            <label for="hotel-milao" id="hotel-label">🏨 Hotel:</label>
+                            <input type="text" id="hotel-milao" class="hotel-input" placeholder="Nome do hotel">
+                        </div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="hoteis" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">15:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act4-title">⛪ Duomo di Milano</div>
+                        <div class="activity-location" id="dia1-act4-location">Piazza del Duomo</div>
+                        <div class="activity-note" id="dia1-act4-note">Subir ao terraço (escadas são mais rápidas e baratas). Vista panorâmica incrível!</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">17:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act5-title">🛍️ Galleria Vittorio Emanuele II</div>
+                        <div class="activity-location" id="dia1-act5-location">Centro Histórico</div>
+                        <div class="activity-note" id="dia1-act5-note">Gire no calcanhar sobre o touro para boa sorte! Arquitetura deslumbrante.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">20:00</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act6-title">🍕 Jantar</div>
+                        <div class="activity-location" id="dia1-act6-location">Panzerotto Luini ou próximo ao Duomo</div>
+                        <div class="activity-note" id="dia1-act6-note">Experimente o famoso panzerotto! Sempre tem fila mas vale a pena.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">21:30</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act7-title">🌃 Passeio Noturno</div>
+                        <div class="activity-location" id="dia1-act7-location">Corso Buenos Aires ou Navigli</div>
+                        <div class="activity-note" id="dia1-act7-note">Conhecer o bairro Navigli (sem mercado hoje, apenas passeio).</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- 3º Finalmente o Check-in (já em Milão) -->
-        <div class="activity">
-            <div class="time">14:30</div>
-            <div class="content">
-                <div class="activity-title" id="dia1-act3-title">🏨 Check-in Hotel</div>
-                <div class="activity-location" id="dia1-act3-location">Centro de Milão</div>
-                <div class="activity-note" id="dia1-act3-note">Fazer check-in e deixar malas.</div>
-                <div class="hotel-field">
-                    <label for="hotel-milao" id="hotel-label">🏨 Hotel:</label>
-                    <input type="text" id="hotel-milao" class="hotel-input" placeholder="Nome do hotel">
-                </div>
-                <div class="activity-cost">
-                    <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="hoteis" min="0" step="0.1" value="0" placeholder="0.00"></label>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Resto das atividades (Duomo, Galleria, etc) -->
-        <div class="activity">
-            <div class="time">15:30</div>
-            <div class="content">
-                <div class="activity-title" id="dia1-act4-title">⛪ Duomo di Milano</div>
-                <div class="activity-location" id="dia1-act4-location">Piazza del Duomo</div>
-                <div class="activity-note" id="dia1-act4-note">Subir ao terraço (escadas são mais rápidas e baratas). Vista panorâmica incrível!</div>
-                <div class="activity-cost">
-                    <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
-                </div>
-            </div>
-        </div>
-        
-        <div class="activity">
-            <div class="time">17:00</div>
-            <div class="content">
-                <div class="activity-title" id="dia1-act5-title">🛍️ Galleria Vittorio Emanuele II</div>
-                <div class="activity-location" id="dia1-act5-location">Centro Histórico</div>
-                <div class="activity-note" id="dia1-act5-note">Gire no calcanhar sobre o touro para boa sorte! Arquitetura deslumbrante.</div>
-                <div class="activity-cost">
-                    <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
-                </div>
-            </div>
-        </div>
-        
-        <div class="activity">
-            <div class="time">20:00</div>
-            <div class="content">
-                <div class="activity-title" id="dia1-act6-title">🍕 Jantar</div>
-                <div class="activity-location" id="dia1-act6-location">Panzerotto Luini ou próximo ao Duomo</div>
-                <div class="activity-note" id="dia1-act6-note">Experimente o famoso panzerotto! Sempre tem fila mas vale a pena.</div>
-                <div class="activity-cost">
-                    <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
-                </div>
-            </div>
-        </div>
-        
-        <div class="activity">
-            <div class="time">21:30</div>
-            <div class="content">
-                <div class="activity-title" id="dia1-act7-title">🌃 Passeio Noturno</div>
-                <div class="activity-location" id="dia1-act7-location">Corso Buenos Aires ou Navigli</div>
-                <div class="activity-note" id="dia1-act7-note">Conhecer o bairro Navigli (sem mercado hoje, apenas passeio).</div>
-                <div class="activity-cost">
-                    <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- DIA 2 - Veneza -->
         <section class="day-section" id="dia2">
@@ -192,7 +188,6 @@
                     </div>
                 </div>
                 
-                <!-- Hotel field ao chegar -->
                 <div class="activity">
                     <div class="time">09:15</div>
                     <div class="content">
@@ -305,7 +300,6 @@
                     </div>
                 </div>
                 
-                <!-- Hotel field ao chegar -->
                 <div class="activity">
                     <div class="time">14:20</div>
                     <div class="content">
@@ -476,7 +470,6 @@
                     </div>
                 </div>
                 
-                <!-- Hotel field ao chegar -->
                 <div class="activity">
                     <div class="time">21:30</div>
                     <div class="content">
@@ -614,7 +607,6 @@
                 </div>
             </div>
             <div class="timeline">
-                <!-- Hotel field no início (já está em Milão) -->
                 <div class="activity">
                     <div class="time">08:00</div>
                     <div class="content">
@@ -956,19 +948,19 @@
         </div>
     </footer>
 
+    <!-- Botões de Navegação -->
+    <button class="nav-btn nav-prev" onclick="goToPrevDay()" title="Dia anterior">◀</button>
+    <button class="nav-btn nav-home" onclick="goToHome()" title="Voltar ao início">⬆</button>
+
     <!-- Player de Áudio Melhorado -->
-<div class="audio-player-enhanced">
-    <button class="player-nav-btn" id="prevTrack" onclick="prevTrack()" title="Música anterior">⏮️</button>
-    <button class="player-main-btn" id="audioButton" onclick="toggleAudio()">▶️</button>
-    <button class="player-nav-btn" id="nextTrack" onclick="nextTrack()" title="Próxima música">⏭️</button>
-</div>
+    <div class="audio-player-enhanced">
+        <button class="player-nav-btn" onclick="prevTrack()" title="Música anterior">⏮️</button>
+        <button class="player-main-btn" id="audioButton" onclick="toggleAudio()">▶️</button>
+        <button class="player-nav-btn" onclick="nextTrack()" title="Próxima música">⏭️</button>
+    </div>
 
-<!-- Botões de Navegação -->
-<button class="nav-btn nav-prev" id="prevDayBtn" onclick="goToPrevDay()" title="Dia anterior">◀</button>
-<button class="nav-btn nav-home" id="homeBtn" onclick="goToHome()" title="Voltar ao início">⬆</button>
-
-<!-- Player de Áudio oculto (mantido para compatibilidade) -->
-<audio id="audioPlayer" preload="auto" style="display: none;"></audio>
+    <!-- Player de Áudio oculto -->
+    <audio id="audioPlayer" preload="auto" style="display: none;"></audio>
 
     <!-- Scripts -->
     <script src="translations.js"></script>
