@@ -29,6 +29,7 @@
             color: var(--dark);
             line-height: 1.6;
             overflow-x: hidden;
+            padding-bottom: 20px;
         }
 
         /* Hero Section */
@@ -358,6 +359,45 @@
             margin-top: 0.5rem;
         }
 
+        /* Campo de custo em cada atividade */
+        .activity-cost {
+            margin-top: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.7);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            border: 2px solid var(--gold);
+            width: fit-content;
+        }
+
+        .activity-cost label {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .activity-cost input {
+            width: 80px;
+            padding: 0.2rem 0.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            text-align: right;
+            outline: none;
+            background: transparent;
+            font-weight: 600;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .activity-cost input:focus {
+            border-bottom-color: var(--italy-green);
+        }
+
         .highlight {
             background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
             border: 2px solid var(--italy-red);
@@ -502,17 +542,14 @@
             font-size: 1rem;
             text-align: right;
             transition: all 0.3s ease;
+            background: #f9f9f9;
+            font-weight: 600;
         }
 
         .budget-item input:focus {
             outline: none;
             border-color: var(--gold);
             box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
-        }
-
-        .budget-item input::placeholder {
-            color: #aaa;
-            font-size: 0.9rem;
         }
 
         .budget-total-card {
@@ -614,7 +651,7 @@
             margin-bottom: 1rem;
         }
 
-        /* NOVO: Player de Áudio Flutuante */
+        /* Player de Áudio Flutuante */
         .audio-player {
             position: fixed;
             bottom: 20px;
@@ -736,6 +773,10 @@
                 height: 55px;
                 font-size: 1.6rem;
             }
+
+            .activity-cost input {
+                width: 60px;
+            }
         }
 
         /* Print styles */
@@ -807,6 +848,7 @@
 
     <div class="container">
 
+        <!-- DIA 1 -->
         <section class="day-section" id="dia1">
             <div class="day-header">
                 <div class="day-number">01</div>
@@ -823,6 +865,9 @@
                         <div class="activity-title">✈️ Chegada BGY</div>
                         <div class="activity-location">Aeroporto de Bergamo</div>
                         <div class="activity-note">Voo chega no aeroporto de Bergamo (BGY). Pegar mala e seguir para o ônibus.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="voo" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -831,6 +876,9 @@
                         <div class="activity-title">🚌 Ônibus para Milão</div>
                         <div class="activity-location">BGY → Estação Centrale</div>
                         <div class="activity-note">Orio Shuttle ou Terravision. Duração: ~50 minutos.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="onibus" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -839,6 +887,9 @@
                         <div class="activity-title">🏨 Check-in Hotel</div>
                         <div class="activity-location">Centro de Milão</div>
                         <div class="activity-note">Deixar malas e preparar para o tour.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="hoteis" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -847,6 +898,9 @@
                         <div class="activity-title">⛪ Duomo di Milano</div>
                         <div class="activity-location">Piazza del Duomo</div>
                         <div class="activity-note">Subir ao terraço (escadas são mais rápidas e baratas). Vista panorâmica incrível!</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -855,6 +909,9 @@
                         <div class="activity-title">🛍️ Galleria Vittorio Emanuele II</div>
                         <div class="activity-location">Centro Histórico</div>
                         <div class="activity-note">Gire no calcanhar sobre o touro para boa sorte! Arquitetura deslumbrante.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -863,6 +920,9 @@
                         <div class="activity-title">🍕 Jantar</div>
                         <div class="activity-location">Panzerotto Luini ou próximo ao Duomo</div>
                         <div class="activity-note">Experimente o famoso panzerotto! Sempre tem fila mas vale a pena.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -871,11 +931,15 @@
                         <div class="activity-title">🌃 Passeio Noturno</div>
                         <div class="activity-location">Corso Buenos Aires ou Navigli</div>
                         <div class="activity-note">Conhecer o bairro Navigli (sem mercado hoje, apenas passeio).</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- DIA 2 -->
         <section class="day-section" id="dia2">
             <div class="day-header">
                 <div class="day-number">02</div>
@@ -892,6 +956,9 @@
                         <div class="activity-title">☕ Café da Manhã</div>
                         <div class="activity-location">Hotel</div>
                         <div class="activity-note">Rápido para pegar o trem cedo.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity highlight">
@@ -900,6 +967,9 @@
                         <div class="activity-title">🚂 Trem Milão → Veneza</div>
                         <div class="activity-location">Estação Centrale → Santa Lucia</div>
                         <div class="activity-note">Duração: 2h15min. Chegada no coração de Veneza!</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -908,6 +978,9 @@
                         <div class="activity-title">🚤 Chegada em Veneza</div>
                         <div class="activity-location">Stazione Santa Lucia</div>
                         <div class="activity-note">Estação no centro da cidade, já entre os canais.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -916,6 +989,9 @@
                         <div class="activity-title">🏛️ Basílica de São Marcos</div>
                         <div class="activity-location">Piazza San Marco</div>
                         <div class="activity-note">Entrada gratuita. Arquitetura bizantina deslumbrante.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -924,6 +1000,9 @@
                         <div class="activity-title">🏰 Palazzo Ducale</div>
                         <div class="activity-location">Piazza San Marco</div>
                         <div class="activity-note">Opcional. Veja também a Ponte dos Suspiros por fora.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -932,6 +1011,9 @@
                         <div class="activity-title">🌉 Ponte Rialto</div>
                         <div class="activity-location">Rialto</div>
                         <div class="activity-note">Vista icônica e mercado nas proximidades.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -940,6 +1022,9 @@
                         <div class="activity-title">🛥️ Grand Canal</div>
                         <div class="activity-location">Vaporetto Linha 1</div>
                         <div class="activity-note">Passeio de barco pelo canal principal. Compre bilhete de 75min.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -948,11 +1033,15 @@
                         <div class="activity-title">🌅 Ponte da Academia</div>
                         <div class="activity-location">Canal Grande</div>
                         <div class="activity-note">Pôr do sol incrível com vista para a basílica.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- DIA 3 -->
         <section class="day-section" id="dia3">
             <div class="day-header">
                 <div class="day-number">03</div>
@@ -968,6 +1057,9 @@
                     <div class="content">
                         <div class="activity-title">☕ Café da Manhã</div>
                         <div class="activity-location">Hotel Veneza</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity highlight">
@@ -976,6 +1068,9 @@
                         <div class="activity-title">🚂 TREM VENEZA → ROMA</div>
                         <div class="activity-location">Santa Lucia → Termini</div>
                         <div class="activity-note">Duração: ~4 horas. Chegada prevista: 14:20.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -983,6 +1078,9 @@
                     <div class="content">
                         <div class="activity-title">🏛️ Chegada em Roma</div>
                         <div class="activity-location">Stazione Termini</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -991,6 +1089,9 @@
                         <div class="activity-title">🏟️ Coliseu</div>
                         <div class="activity-location">Centro Histórico</div>
                         <div class="activity-note">Compre ingresso antecipado para evitar filas enormes!</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -999,6 +1100,9 @@
                         <div class="activity-title">🏛️ Fórum Romano & Palatino</div>
                         <div class="activity-location">Via dei Fori Imperiali</div>
                         <div class="activity-note">Mesmo bilhete do Coliseu. Ruínas antigas impressionantes.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1007,6 +1111,9 @@
                         <div class="activity-title">🎠 Piazza Venezia</div>
                         <div class="activity-location">Centro</div>
                         <div class="activity-note">Monumento a Vittorio Emanuele II (o "bolo de casamento").</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1015,6 +1122,9 @@
                         <div class="activity-title">⛲ Fontana di Trevi</div>
                         <div class="activity-location">Trevi</div>
                         <div class="activity-note">Jogue uma moeda para garantir seu retorno a Roma!</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1023,11 +1133,15 @@
                         <div class="activity-title">🍝 Jantar</div>
                         <div class="activity-location">Bairro Monti ou Trastevere</div>
                         <div class="activity-note">Trastevere é mais autêntico e boêmio.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- DIA 4 -->
         <section class="day-section" id="dia4">
             <div class="day-header">
                 <div class="day-number">04</div>
@@ -1043,6 +1157,9 @@
                     <div class="content">
                         <div class="activity-title">☕ Café da Manhã</div>
                         <div class="activity-location">Hotel Roma</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1051,6 +1168,9 @@
                         <div class="activity-title">🏛️ Panteão</div>
                         <div class="activity-location">Centro</div>
                         <div class="activity-note">Entrada gratuita. Arquitetura romana perfeita.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1059,6 +1179,9 @@
                         <div class="activity-title">🎨 Piazza Navona</div>
                         <div class="activity-location">Centro</div>
                         <div class="activity-note">Três fontes barrocas incríveis.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1067,6 +1190,9 @@
                         <div class="activity-title">🌸 Piazza di Spagna</div>
                         <div class="activity-location">Centro</div>
                         <div class="activity-note">Escadarias da Trinità dei Monti.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1074,6 +1200,9 @@
                     <div class="content">
                         <div class="activity-title">🍽️ Almoço Rápido</div>
                         <div class="activity-location">Centro</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1081,6 +1210,9 @@
                     <div class="content">
                         <div class="activity-title">🧳 Pegar Malas</div>
                         <div class="activity-location">Hotel</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity highlight">
@@ -1089,6 +1221,9 @@
                         <div class="activity-title">🚂 TREM ROMA → NÁPOLES</div>
                         <div class="activity-location">Termini → Centrale</div>
                         <div class="activity-note">Duração: 1h13min. Chegada: ~20:50. Jantar será tarde!</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1096,11 +1231,15 @@
                     <div class="content">
                         <div class="activity-title">🏨 Check-in & Jantar Leve</div>
                         <div class="activity-location">Nápoles</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- DIA 5 -->
         <section class="day-section" id="dia5">
             <div class="day-header">
                 <div class="day-number">05</div>
@@ -1117,6 +1256,9 @@
                         <div class="activity-title">☕ Café da Manhã</div>
                         <div class="activity-location">Hotel</div>
                         <div class="activity-note">Experimente sfogliatella!</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1125,6 +1267,9 @@
                         <div class="activity-title">🏛️ Museu Arqueológico Nacional</div>
                         <div class="activity-location">Centro</div>
                         <div class="activity-note">Melhor museu da cidade. Achados de Pompeia.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1133,6 +1278,9 @@
                         <div class="activity-title">⛪ Duomo di San Gennaro</div>
                         <div class="activity-location">Centro</div>
                         <div class="activity-note">Catedral com o "milagre do sangue".</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1141,6 +1289,9 @@
                         <div class="activity-title">🍕 Almoço</div>
                         <div class="activity-location">Pizzaria Da Michele ou Sorbillo</div>
                         <div class="activity-note">Pizza napolitana autêntica!</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1149,6 +1300,9 @@
                         <div class="activity-title">🎭 Via San Gregorio Armeno</div>
                         <div class="activity-location">Centro Histórico</div>
                         <div class="activity-note">Rua dos presépios. Artesanato único.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1157,6 +1311,9 @@
                         <div class="activity-title">🚶 Spaccanapoli</div>
                         <div class="activity-location">Centro</div>
                         <div class="activity-note">Caminhada pela rua que "divide" o centro histórico.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1164,6 +1321,9 @@
                     <div class="content">
                         <div class="activity-title">🧳 Pegar Malas</div>
                         <div class="activity-location">Hotel</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity highlight">
@@ -1172,11 +1332,15 @@
                         <div class="activity-title">🚂 TREM NÁPOLES → MILÃO</div>
                         <div class="activity-location">Centrale → Centrale</div>
                         <div class="activity-note">Duração: 4h30min. Chegada: ~22:00.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- DIA 6 -->
         <section class="day-section" id="dia6">
             <div class="day-header">
                 <div class="day-number">06</div>
@@ -1192,6 +1356,9 @@
                     <div class="content">
                         <div class="activity-title">☕ Café Rápido</div>
                         <div class="activity-location">Hotel</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity market-day">
@@ -1203,6 +1370,9 @@
                             <strong>Fiera di Sinigaglia!</strong> Funciona 8h-18h. Antiguidades, vintage, vinil, móveis. 
                             Chegue cedo para melhores achados!
                         </div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1210,6 +1380,9 @@
                     <div class="content">
                         <div class="activity-title">🍽️ Almoço Rápido</div>
                         <div class="activity-location">Navigli</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1220,6 +1393,9 @@
                         <div class="activity-note">
                             <strong>RESERVA OBRIGATÓRIA!</strong> A Última Ceia de Leonardo da Vinci.
                         </div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1228,6 +1404,9 @@
                         <div class="activity-title">⛪ Santa Maria delle Grazie</div>
                         <div class="activity-location">Externa</div>
                         <div class="activity-note">Fotos da arquitetura renascentista.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1236,6 +1415,9 @@
                         <div class="activity-title">🦴 San Bernardino alle Ossa</div>
                         <div class="activity-location">Centro</div>
                         <div class="activity-note">Capela decorada com ossos humanos. Macabro mas fascinante!</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1244,6 +1426,9 @@
                         <div class="activity-title">💎 Quadrilatero della Moda</div>
                         <div class="activity-location">Via Montenapoleone</div>
                         <div class="activity-note">Rua das grifes de luxo. Window shopping!</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1251,11 +1436,15 @@
                     <div class="content">
                         <div class="activity-title">🍷 Jantar de Despedida</div>
                         <div class="activity-location">Milão</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- DIA 7 -->
         <section class="day-section" id="dia7">
             <div class="day-header">
                 <div class="day-number">07</div>
@@ -1272,6 +1461,9 @@
                         <div class="activity-title">☕ Café & Check-out</div>
                         <div class="activity-location">Hotel</div>
                         <div class="activity-note">Deixar malas no hotel.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1280,6 +1472,9 @@
                         <div class="activity-title">🏬 Galleria Rinascente</div>
                         <div class="activity-location">Centro</div>
                         <div class="activity-note">Terraço gratuito com vista para o Duomo.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1288,6 +1483,9 @@
                         <div class="activity-title">🏰 Castello Sforzesco</div>
                         <div class="activity-location">Castello</div>
                         <div class="activity-note">Última visita cultural.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1295,6 +1493,9 @@
                     <div class="content">
                         <div class="activity-title">🍽️ Almoço Rápido</div>
                         <div class="activity-location">Centro</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1302,6 +1503,9 @@
                     <div class="content">
                         <div class="activity-title">🧳 Pegar Malas</div>
                         <div class="activity-location">Hotel</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1309,6 +1513,9 @@
                     <div class="content">
                         <div class="activity-title">🚌 Ponto de Ônibus</div>
                         <div class="activity-location">Piazza Luigi di Savoia</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity highlight">
@@ -1317,6 +1524,9 @@
                         <div class="activity-title">🚌 ÔNIBUS MILÃO → BGY</div>
                         <div class="activity-location">Centrale → Aeroporto</div>
                         <div class="activity-note">Duração: ~50min. Não perca o horário!</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="onibus" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity">
@@ -1325,6 +1535,9 @@
                         <div class="activity-title">✈️ Aeroporto BGY</div>
                         <div class="activity-location">Bergamo</div>
                         <div class="activity-note">Check-in, segurança, duty-free.</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
                 <div class="activity highlight">
@@ -1333,6 +1546,9 @@
                         <div class="activity-title">✈️ VOO DE SAÍDA</div>
                         <div class="activity-location">Aeroporto Bergamo</div>
                         <div class="activity-note">Fim da viagem. Até a próxima, Itália! 🇮🇹</div>
+                        <div class="activity-cost">
+                            <label>€ <input type="number" class="cost-input" data-category="voo" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1364,47 +1580,49 @@
             </div>
         </section>
 
+        <!-- BUDGET SECTION - ATUALIZA AUTOMATICAMENTE -->
         <section class="budget-section">
             <h2>💰 Calculadora de Orçamento</h2>
             <div class="budget-grid">
                 <div class="budget-items">
                     <div class="budget-item">
                         <label>✈️ Voo (ida/volta)</label>
-                        <input type="number" id="voo" placeholder="0" min="0" step="1" value="0">
+                        <input type="number" id="voo" class="budget-input" data-category="voo" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                     <div class="budget-item">
                         <label>🏨 Hotéis (7 noites)</label>
-                        <input type="number" id="hoteis" placeholder="0" min="0" step="1" value="0">
+                        <input type="number" id="hoteis" class="budget-input" data-category="hoteis" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                     <div class="budget-item">
                         <label>🚂 Trens (4 trajetos)</label>
-                        <input type="number" id="trens" placeholder="0" min="0" step="1" value="0">
+                        <input type="number" id="trens" class="budget-input" data-category="trens" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                     <div class="budget-item">
                         <label>🍝 Alimentação</label>
-                        <input type="number" id="alimentacao" placeholder="0" min="0" step="1" value="0">
+                        <input type="number" id="alimentacao" class="budget-input" data-category="alimentacao" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                     <div class="budget-item">
                         <label>🎟️ Passeios/Museus</label>
-                        <input type="number" id="passeios" placeholder="0" min="0" step="1" value="0">
+                        <input type="number" id="passeios" class="budget-input" data-category="passeios" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                     <div class="budget-item">
                         <label>🛍️ Compras/Mercado</label>
-                        <input type="number" id="compras" placeholder="0" min="0" step="1" value="0">
+                        <input type="number" id="compras" class="budget-input" data-category="compras" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                     <div class="budget-item">
                         <label>🚌 Ônibus BGY</label>
-                        <input type="number" id="onibus" placeholder="0" min="0" step="1" value="0">
+                        <input type="number" id="onibus" class="budget-input" data-category="onibus" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                     <div class="budget-item">
                         <label>💶 Extras (imprevistos)</label>
-                        <input type="number" id="extras" placeholder="0" min="0" step="1" value="0">
+                        <input type="number" id="extras" class="budget-input" data-category="extras" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                 </div>
                 <div class="budget-total-card">
                     <h3>Total Estimado</h3>
-                    <div class="total-value" id="totalValue">0</div>
+                    <div class="total-value" id="totalValue">0.00</div>
                     <div class="total-currency">Euros (€)</div>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Preços preenchidos automaticamente pelas atividades</p>
                 </div>
             </div>
         </section>
@@ -1449,7 +1667,7 @@
 
     </div>
 
-    <!-- FOOTER (a seção .video-section foi removida) -->
+    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <div class="footer-icon">🇮🇹</div>
@@ -1458,7 +1676,7 @@
         </div>
     </footer>
 
-    <!-- NOVO: Player de Áudio Flutuante -->
+    <!-- Player de Áudio Flutuante -->
     <div class="audio-player">
         <div class="player-button" id="audioButton" onclick="toggleAudio()">
             ▶️
@@ -1466,7 +1684,7 @@
         <audio id="audioPlayer" preload="auto" style="display: none;"></audio>
     </div>
 
-       <script>
+    <script>
         // Smooth scroll and active nav
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1521,29 +1739,58 @@
             observer.observe(el);
         });
 
-        // Budget calculator
-        function updateTotal() {
-            const voo = parseFloat(document.getElementById('voo').value) || 0;
-            const hoteis = parseFloat(document.getElementById('hoteis').value) || 0;
-            const trens = parseFloat(document.getElementById('trens').value) || 0;
-            const alimentacao = parseFloat(document.getElementById('alimentacao').value) || 0;
-            const passeios = parseFloat(document.getElementById('passeios').value) || 0;
-            const compras = parseFloat(document.getElementById('compras').value) || 0;
-            const onibus = parseFloat(document.getElementById('onibus').value) || 0;
-            const extras = parseFloat(document.getElementById('extras').value) || 0;
-            
-            const total = voo + hoteis + trens + alimentacao + passeios + compras + onibus + extras;
+        // =============================================
+        // FUNÇÃO PARA ATUALIZAR ORÇAMENTO A PARTIR DAS ATIVIDADES
+        // =============================================
+        function updateBudgetFromActivities() {
+            // Inicializar todas as categorias com 0
+            const categories = {
+                voo: 0,
+                hoteis: 0,
+                trens: 0,
+                alimentacao: 0,
+                passeios: 0,
+                compras: 0,
+                onibus: 0,
+                extras: 0
+            };
+
+            // Somar todos os inputs das atividades por categoria
+            document.querySelectorAll('.cost-input').forEach(input => {
+                const cat = input.dataset.category;
+                const val = parseFloat(input.value) || 0;
+                if (categories.hasOwnProperty(cat)) {
+                    categories[cat] += val;
+                }
+            });
+
+            // Atualizar os campos da calculadora (que estão readonly)
+            document.getElementById('voo').value = categories.voo.toFixed(2);
+            document.getElementById('hoteis').value = categories.hoteis.toFixed(2);
+            document.getElementById('trens').value = categories.trens.toFixed(2);
+            document.getElementById('alimentacao').value = categories.alimentacao.toFixed(2);
+            document.getElementById('passeios').value = categories.passeios.toFixed(2);
+            document.getElementById('compras').value = categories.compras.toFixed(2);
+            document.getElementById('onibus').value = categories.onibus.toFixed(2);
+            document.getElementById('extras').value = categories.extras.toFixed(2);
+
+            // Calcular e mostrar o total
+            const total = categories.voo + categories.hoteis + categories.trens + 
+                         categories.alimentacao + categories.passeios + categories.compras + 
+                         categories.onibus + categories.extras;
             document.getElementById('totalValue').textContent = total.toFixed(2);
         }
 
-        document.querySelectorAll('.budget-item input').forEach(input => {
-            input.addEventListener('input', updateTotal);
+        // Adicionar evento a TODOS os inputs das atividades
+        document.querySelectorAll('.cost-input').forEach(input => {
+            input.addEventListener('input', updateBudgetFromActivities);
         });
 
-        updateTotal();
+        // Executar uma vez para inicializar
+        updateBudgetFromActivities();
 
         // =============================================
-        // PLAYER DE ÁUDIO COM AUTOPLAY REFORÇADO
+        // PLAYER DE ÁUDIO COM AUTOPLAY
         // =============================================
         const audioPlayer = document.getElementById('audioPlayer');
         const audioButton = document.getElementById('audioButton');
@@ -1573,19 +1820,15 @@
             }
         }
 
-        // Quando a faixa terminar, tocar a próxima (loop na playlist)
+        // Quando a faixa terminar, tocar a próxima (loop)
         audioPlayer.addEventListener('ended', function() {
             currentTrack = (currentTrack + 1) % playlist.length;
             loadTrack(currentTrack);
         });
 
-        // =============================================
-        // AUTOPLAY - MÚLTIPLAS TENTATIVAS
-        // =============================================
-
-        // Função para tentar tocar
+        // AUTOPLAY - Tentar tocar assim que possível
         function tryPlay() {
-            audioPlayer.volume = 0.3; // Volume baixo inicial ajuda no autoplay
+            audioPlayer.volume = 0.3; // Volume inicial mais baixo ajuda no autoplay
             
             let playPromise = audioPlayer.play();
             
@@ -1597,46 +1840,21 @@
                     audioButton.classList.add('playing');
                     console.log('✅ Autoplay funcionou!');
                 }).catch(() => {
-                    // Falhou - tenta de novo em 1 segundo
-                    setTimeout(() => {
-                        audioPlayer.play().then(() => {
-                            isPlaying = true;
-                            audioButton.innerHTML = '⏸️';
-                            audioButton.classList.add('playing');
-                        }).catch(() => {
-                            // Falhou de novo - aguarda interação do usuário
-                            console.log('❌ Autoplay bloqueado. Clique no botão para tocar.');
-                        });
-                    }, 1000);
+                    // Falhou - aguarda interação do usuário
+                    console.log('❌ Autoplay bloqueado. Clique no botão para tocar.');
+                    isPlaying = false;
+                    audioButton.innerHTML = '▶️';
+                    audioButton.classList.remove('playing');
                 });
             }
         }
 
-        // TENTATIVA 1: Assim que o HTML estiver pronto
+        // Iniciar com a primeira música e tentar autoplay
         document.addEventListener('DOMContentLoaded', function() {
             currentTrack = 0;
             audioPlayer.src = playlist[0];
             tryPlay();
         });
-
-        // TENTATIVA 2: Quando a página estiver totalmente carregada
-        window.addEventListener('load', function() {
-            if (!isPlaying) {
-                tryPlay();
-            }
-        });
-
-        // TENTATIVA 3: Na primeira interação do usuário com a página (se as anteriores falharem)
-        document.body.addEventListener('click', function once() {
-            if (!isPlaying) {
-                audioPlayer.play().then(() => {
-                    isPlaying = true;
-                    audioButton.innerHTML = '⏸️';
-                    audioButton.classList.add('playing');
-                }).catch(e => {});
-            }
-            document.body.removeEventListener('click', once);
-        }, { once: true });
 
         // Função manual para tocar/pausar
         function toggleAudio() {
@@ -1657,5 +1875,4 @@
     </script>
 
 </body>
-
 </html>
