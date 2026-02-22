@@ -595,33 +595,6 @@
             flex-shrink: 0;
         }
 
-        /* NOVA SEÇÃO: Player de Vídeo Responsivo */
-        .video-section {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* Proporção 16:9 */
-            height: 0;
-            overflow: hidden;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            border: 4px solid var(--gold);
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
         /* Footer */
         footer {
             background: var(--dark);
@@ -639,6 +612,54 @@
         .footer-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
+        }
+
+        /* NOVO: Player de Áudio Flutuante */
+        .audio-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 2000;
+        }
+
+        .player-button {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 3px solid transparent;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), 
+                              linear-gradient(135deg, var(--italy-green) 0%, var(--italy-white) 50%, var(--italy-red) 100%);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .player-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            animation: none;
+        }
+
+        .player-button.playing {
+            background: linear-gradient(135deg, var(--italy-red) 0%, var(--italy-green) 100%);
+            border-color: var(--gold);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         /* Responsive */
@@ -709,15 +730,17 @@
             .budget-total-card .total-value {
                 font-size: 2.5rem;
             }
-
-            .video-section {
-                padding: 0 1rem;
+            
+            .player-button {
+                width: 55px;
+                height: 55px;
+                font-size: 1.6rem;
             }
         }
 
         /* Print styles */
         @media print {
-            .nav-days, .hero, .video-section { display: none; }
+            .nav-days, .hero, .audio-player { display: none; }
             .day-section { page-break-inside: avoid; }
             .activity { animation: none; }
             .transport-card { 
@@ -1426,18 +1449,7 @@
 
     </div>
 
- <section class="video-section">
-    <div class="video-container">
-       <iframe 
-    src="https://www.youtube.com/embed/8W2m7aV6eLg?rel=0" 
-    title="Sarà Perché Ti Amo" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerpolicy="strict-origin-when-cross-origin" 
-    allowfullscreen>
-</iframe>
-    </div>
-</section>
-
+    <!-- FOOTER (a seção .video-section foi removida) -->
     <footer>
         <div class="footer-content">
             <div class="footer-icon">🇮🇹</div>
@@ -1445,6 +1457,14 @@
             <p>Milão • Veneza • Roma • Nápoles<br>30 Março - 5 Abril 2025</p>
         </div>
     </footer>
+
+    <!-- NOVO: Player de Áudio Flutuante -->
+    <div class="audio-player">
+        <div class="player-button" id="audioButton" onclick="toggleAudio()">
+            ▶️
+        </div>
+        <audio id="audioPlayer" preload="auto" style="display: none;"></audio>
+    </div>
 
     <script>
         // Smooth scroll and active nav
@@ -1521,9 +1541,79 @@
         });
 
         updateTotal();
+
+        // Player de Áudio
+        const audioPlayer = document.getElementById('audioPlayer');
+        const audioButton = document.getElementById('audioButton');
+        let isPlaying = false;
+        let currentTrack = 0;
+        
+        // Lista de músicas (9 arquivos na pasta assets)
+        const playlist = [
+            'assets/1.mp3',
+            'assets/2.mp3',
+            'assets/3.mp3',
+            'assets/4.mp3',
+            'assets/5.mp3',
+            'assets/6.mp3',
+            'assets/7.mp3',
+            'assets/8.mp3',
+            'assets/9.mp3'
+        ];
+
+        // Carregar faixa atual
+        function loadTrack(index) {
+            if (index >= 0 && index < playlist.length) {
+                audioPlayer.src = playlist[index];
+                if (isPlaying) {
+                    audioPlayer.play().catch(e => console.log('Autoplay bloqueado:', e));
+                }
+            }
+        }
+
+        // Quando a faixa terminar, tocar a próxima (loop na playlist)
+        audioPlayer.addEventListener('ended', function() {
+            currentTrack = (currentTrack + 1) % playlist.length;
+            loadTrack(currentTrack);
+        });
+
+        // Tentar autoplay ao carregar a página
+        window.addEventListener('load', function() {
+            // Começar com a primeira música
+            currentTrack = 0;
+            audioPlayer.src = playlist[0];
+            
+            // Tentar tocar automaticamente (pode ser bloqueado pelo navegador)
+            audioPlayer.play().then(() => {
+                isPlaying = true;
+                audioButton.innerHTML = '⏸️';
+                audioButton.classList.add('playing');
+            }).catch(e => {
+                console.log('Autoplay bloqueado pelo navegador. Clique no botão para tocar.');
+                isPlaying = false;
+                audioButton.innerHTML = '▶️';
+                audioButton.classList.remove('playing');
+            });
+        });
+
+        // Função para tocar/pausar
+        function toggleAudio() {
+            if (isPlaying) {
+                audioPlayer.pause();
+                audioButton.innerHTML = '▶️';
+                audioButton.classList.remove('playing');
+            } else {
+                if (!audioPlayer.src) {
+                    audioPlayer.src = playlist[0];
+                }
+                audioPlayer.play().catch(e => console.log('Erro ao reproduzir:', e));
+                audioButton.innerHTML = '⏸️';
+                audioButton.classList.add('playing');
+            }
+            isPlaying = !isPlaying;
+        }
     </script>
 
 </body>
 
 </html>
-
