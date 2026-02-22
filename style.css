@@ -813,3 +813,198 @@ footer {
         border: 2px solid #000 !important;
     }
 }
+/* =============================================
+   BOTÕES DE NAVEGAÇÃO
+   ============================================= */
+.nav-btn {
+    position: fixed;
+    bottom: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 3px solid transparent;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25)), 
+                      linear-gradient(135deg, var(--italy-green) 0%, var(--italy-white) 50%, var(--italy-red) 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    z-index: 2000;
+    border: none;
+}
+
+.nav-prev {
+    left: 20px;
+}
+
+.nav-home {
+    right: 20px;
+}
+
+.nav-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* =============================================
+   PLAYER DE ÁUDIO MELHORADO
+   ============================================= */
+.audio-player-enhanced {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2000;
+    display: flex;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 3px solid transparent;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), 
+                      linear-gradient(135deg, var(--italy-green) 0%, var(--italy-white) 50%, var(--italy-red) 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.player-main-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--italy-red) 0%, var(--italy-green) 100%);
+    border: 3px solid var(--gold);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.player-main-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.player-main-btn.playing {
+    background: linear-gradient(135deg, var(--italy-green) 0%, var(--italy-red) 100%);
+}
+
+.player-nav-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 2px solid var(--gold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+    margin: auto 0;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid var(--gold);
+}
+
+.player-nav-btn:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Ajustes para mobile */
+@media (max-width: 768px) {
+    .nav-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+        bottom: 15px;
+    }
+    
+    .nav-prev {
+        left: 10px;
+    }
+    
+    .nav-home {
+        right: 10px;
+    }
+    
+    .audio-player-enhanced {
+        gap: 10px;
+        padding: 8px 15px;
+        bottom: 15px;
+    }
+    
+    .player-main-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.8rem;
+    }
+    
+    .player-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        bottom: 10px;
+    }
+    
+    .audio-player-enhanced {
+        gap: 8px;
+        padding: 6px 12px;
+        bottom: 10px;
+    }
+    
+    .player-main-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.6rem;
+    }
+    
+    .player-nav-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Ajuste para o menu de dias - garantir que todos os dias apareçam */
+.nav-days ul {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    justify-content: flex-start;
+    min-width: max-content;
+    padding: 0 0.5rem;
+}
+
+/* Garantir que todos os 7 dias sejam visíveis */
+.nav-days ul li {
+    flex: 0 0 auto;
+}
