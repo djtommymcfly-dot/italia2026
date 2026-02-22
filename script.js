@@ -56,7 +56,6 @@ document.querySelectorAll('.activity').forEach((el) => {
 // FUNÇÃO PARA ATUALIZAR ORÇAMENTO A PARTIR DAS ATIVIDADES
 // =============================================
 function updateBudgetFromActivities() {
-    // Inicializar todas as categorias com 0
     const categories = {
         voo: 0,
         hoteis: 0,
@@ -68,7 +67,6 @@ function updateBudgetFromActivities() {
         extras: 0
     };
 
-    // Somar todos os inputs das atividades por categoria
     document.querySelectorAll('.cost-input').forEach(input => {
         const cat = input.dataset.category;
         const val = parseFloat(input.value) || 0;
@@ -77,7 +75,6 @@ function updateBudgetFromActivities() {
         }
     });
 
-    // Atualizar os campos da calculadora (que estão readonly)
     document.getElementById('voo').value = categories.voo.toFixed(2);
     document.getElementById('hoteis').value = categories.hoteis.toFixed(2);
     document.getElementById('trens').value = categories.trens.toFixed(2);
@@ -87,30 +84,27 @@ function updateBudgetFromActivities() {
     document.getElementById('onibus').value = categories.onibus.toFixed(2);
     document.getElementById('extras').value = categories.extras.toFixed(2);
 
-    // Calcular e mostrar o total
     const total = categories.voo + categories.hoteis + categories.trens + 
                  categories.alimentacao + categories.passeios + categories.compras + 
                  categories.onibus + categories.extras;
     document.getElementById('totalValue').textContent = total.toFixed(2);
 }
 
-// Adicionar evento a TODOS os inputs das atividades
 document.querySelectorAll('.cost-input').forEach(input => {
     input.addEventListener('input', updateBudgetFromActivities);
 });
 
-// Executar uma vez para inicializar
 updateBudgetFromActivities();
 
 // =============================================
-// PLAYER DE ÁUDIO COM AUTOPLAY
+// PLAYER DE ÁUDIO COM AUTOPLAY REFORÇADO
 // =============================================
 const audioPlayer = document.getElementById('audioPlayer');
 const audioButton = document.getElementById('audioButton');
 let isPlaying = false;
 let currentTrack = 0;
+let playAttempts = 0;
 
-// Lista de músicas (9 arquivos na pasta assets)
 const playlist = [
     'assets/1.mp3',
     'assets/2.mp3',
@@ -123,25 +117,29 @@ const playlist = [
     'assets/9.mp3'
 ];
 
-// Carregar faixa atual
 function loadTrack(index) {
     if (index >= 0 && index < playlist.length) {
         audioPlayer.src = playlist[index];
+        audioPlayer.load();
         if (isPlaying) {
-            audioPlayer.play().catch(e => console.log('Playback falhou:', e));
+            playWithRetry();
         }
     }
 }
 
-// Quando a faixa terminar, tocar a próxima (loop)
 audioPlayer.addEventListener('ended', function() {
     currentTrack = (currentTrack + 1) % playlist.length;
     loadTrack(currentTrack);
 });
 
-// AUTOPLAY - Tentar tocar assim que possível
-function tryPlay() {
-    audioPlayer.volume = 0.3;
+// Função para tocar com múltiplas tentativas
+function playWithRetry() {
+    if (!audioPlayer.src) {
+        audioPlayer.src = playlist[0];
+    }
+    
+    audioPlayer.volume = 0.5;
+    audioPlayer.muted = false;
     
     let playPromise = audioPlayer.play();
     
@@ -150,26 +148,65 @@ function tryPlay() {
             isPlaying = true;
             audioButton.innerHTML = '⏸️';
             audioButton.classList.add('playing');
-        }).catch(() => {
+            playAttempts = 0;
+            console.log('✅ Áudio tocando');
+        }).catch(error => {
+            console.log('❌ Erro no autoplay:', error);
             isPlaying = false;
             audioButton.innerHTML = '▶️';
             audioButton.classList.remove('playing');
+            
+            // Tentar novamente após interação do usuário
+            if (playAttempts < 3) {
+                playAttempts++;
+                setTimeout(playWithRetry, 1000);
+            }
         });
     }
 }
 
-// Iniciar com a primeira música e tentar autoplay
-document.addEventListener('DOMContentLoaded', function() {
+// ESTRATÉGIAS DE AUTOPLAY
+function initAudio() {
     currentTrack = 0;
     audioPlayer.src = playlist[0];
-    tryPlay();
-});
+    audioPlayer.load();
+    
+    // Tentativa 1: Imediata
+    setTimeout(() => {
+        playWithRetry();
+    }, 500);
+    
+    // Tentativa 2: Após 2 segundos
+    setTimeout(() => {
+        if (!isPlaying) {
+            playWithRetry();
+        }
+    }, 2000);
+    
+    // Tentativa 3: Após 5 segundos
+    setTimeout(() => {
+        if (!isPlaying) {
+            playWithRetry();
+        }
+    }, 5000);
+}
 
+// Iniciar quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', initAudio);
+
+// Tentar novamente quando a página carregar completamente
 window.addEventListener('load', function() {
     if (!isPlaying) {
-        tryPlay();
+        playWithRetry();
     }
 });
+
+// Se o usuário clicar em qualquer lugar, tentar tocar (último recurso)
+document.body.addEventListener('click', function once() {
+    if (!isPlaying) {
+        playWithRetry();
+    }
+}, { once: true });
 
 function toggleAudio() {
     if (isPlaying) {
@@ -177,25 +214,19 @@ function toggleAudio() {
         audioButton.innerHTML = '▶️';
         audioButton.classList.remove('playing');
     } else {
-        if (!audioPlayer.src) {
-            audioPlayer.src = playlist[0];
-        }
-        audioPlayer.play().catch(e => console.log('Erro ao reproduzir:', e));
-        audioButton.innerHTML = '⏸️';
-        audioButton.classList.add('playing');
+        playWithRetry();
     }
     isPlaying = !isPlaying;
 }
 
 // =============================================
-// FUNÇÕES DE TRADUÇÃO
+// FUNÇÕES DE TRADUÇÃO (já existentes)
 // =============================================
 let currentLang = 'pt-pt';
 
 function translatePage(lang) {
     if (!translations[lang]) return;
     
-    // Hero
     document.getElementById('hero-title').textContent = translations[lang]['hero.title'];
     document.getElementById('hero-subtitle').textContent = translations[lang]['hero.subtitle'];
     document.getElementById('hero-chegada').textContent = translations[lang]['hero.chegada'];
@@ -203,12 +234,10 @@ function translatePage(lang) {
     document.getElementById('hero-duracao').textContent = translations[lang]['hero.duracao'];
     document.getElementById('hero-dias').textContent = translations[lang]['hero.dias'];
     
-    // Navigation
     document.querySelectorAll('.nav-dia').forEach(el => {
         el.textContent = translations[lang]['nav.dia'];
     });
     
-    // Dias títulos
     document.getElementById('dia1-title').textContent = translations[lang]['dia1.title'];
     document.getElementById('dia2-title').textContent = translations[lang]['dia2.title'];
     document.getElementById('dia3-title').textContent = translations[lang]['dia3.title'];
@@ -217,7 +246,6 @@ function translatePage(lang) {
     document.getElementById('dia6-title').textContent = translations[lang]['dia6.title'];
     document.getElementById('dia7-title').textContent = translations[lang]['dia7.title'];
     
-    // Dias da semana
     document.getElementById('dia1-date').innerHTML = document.getElementById('dia1-date').innerHTML.replace(/[A-Za-zçãáéíóúâêô]+-feira/g, translations[lang]['week.segunda']);
     document.getElementById('dia2-date').innerHTML = document.getElementById('dia2-date').innerHTML.replace(/[A-Za-zçãáéíóúâêô]+-feira/g, translations[lang]['week.terca']);
     document.getElementById('dia3-date').innerHTML = document.getElementById('dia3-date').innerHTML.replace(/[A-Za-zçãáéíóúâêô]+-feira/g, translations[lang]['week.quarta']);
@@ -226,7 +254,6 @@ function translatePage(lang) {
     document.getElementById('dia6-date').innerHTML = document.getElementById('dia6-date').innerHTML.replace(/[A-Za-zçãáéíóúâêô]+-feira/g, translations[lang]['week.sabado']);
     document.getElementById('dia7-date').innerHTML = document.getElementById('dia7-date').innerHTML.replace(/[A-Za-zçãáéíóúâêô]+-feira/g, translations[lang]['week.domingo']);
     
-    // Cidades
     document.getElementById('dia1-city').textContent = translations[lang]['city.milao'];
     document.getElementById('dia2-city').textContent = translations[lang]['city.veneza'];
     document.getElementById('dia3-city').textContent = translations[lang]['city.roma'];
@@ -235,7 +262,6 @@ function translatePage(lang) {
     document.getElementById('dia6-city').textContent = translations[lang]['city.milao'];
     document.getElementById('dia7-city').textContent = translations[lang]['city.milao_bergamo'];
     
-    // Hotel labels
     document.querySelectorAll('#hotel-label, #hotel-label2, #hotel-label3, #hotel-label4, #hotel-label6').forEach(el => {
         if (el) el.textContent = translations[lang]['hotel.label'];
     });
@@ -244,7 +270,6 @@ function translatePage(lang) {
         el.placeholder = translations[lang]['hotel.placeholder'];
     });
     
-    // Dia 1 atividades
     document.getElementById('dia1-act1-title').textContent = translations[lang]['dia1.act1.title'];
     document.getElementById('dia1-act1-location').textContent = translations[lang]['dia1.act1.location'];
     document.getElementById('dia1-act1-note').textContent = translations[lang]['dia1.act1.note'];
@@ -267,7 +292,6 @@ function translatePage(lang) {
     document.getElementById('dia1-act7-location').textContent = translations[lang]['dia1.act7.location'];
     document.getElementById('dia1-act7-note').textContent = translations[lang]['dia1.act7.note'];
     
-    // Dia 2 atividades
     document.getElementById('dia2-act1-title').textContent = translations[lang]['dia2.act1.title'];
     document.getElementById('dia2-act1-location').textContent = translations[lang]['dia2.act1.location'];
     document.getElementById('dia2-act1-note').textContent = translations[lang]['dia2.act1.note'];
@@ -293,7 +317,6 @@ function translatePage(lang) {
     document.getElementById('dia2-act8-location').textContent = translations[lang]['dia2.act8.location'];
     document.getElementById('dia2-act8-note').textContent = translations[lang]['dia2.act8.note'];
     
-    // Dia 3 atividades
     document.getElementById('dia3-act1-title').textContent = translations[lang]['dia3.act1.title'];
     document.getElementById('dia3-act1-location').textContent = translations[lang]['dia3.act1.location'];
     document.getElementById('dia3-act2-title').textContent = translations[lang]['dia3.act2.title'];
@@ -318,7 +341,6 @@ function translatePage(lang) {
     document.getElementById('dia3-act8-location').textContent = translations[lang]['dia3.act8.location'];
     document.getElementById('dia3-act8-note').textContent = translations[lang]['dia3.act8.note'];
     
-    // Dia 4 atividades
     document.getElementById('dia4-act1-title').textContent = translations[lang]['dia4.act1.title'];
     document.getElementById('dia4-act1-location').textContent = translations[lang]['dia4.act1.location'];
     document.getElementById('dia4-act2-title').textContent = translations[lang]['dia4.act2.title'];
@@ -341,7 +363,6 @@ function translatePage(lang) {
     document.getElementById('dia4-act8-location').textContent = translations[lang]['dia4.act8.location'];
     document.getElementById('dia4-act8-note').textContent = translations[lang]['dia4.act8.note'];
     
-    // Dia 5 atividades
     document.getElementById('dia5-act1-title').textContent = translations[lang]['dia5.act1.title'];
     document.getElementById('dia5-act1-location').textContent = translations[lang]['dia5.act1.location'];
     document.getElementById('dia5-act1-note').textContent = translations[lang]['dia5.act1.note'];
@@ -366,7 +387,6 @@ function translatePage(lang) {
     document.getElementById('dia5-act8-location').textContent = translations[lang]['dia5.act8.location'];
     document.getElementById('dia5-act8-note').textContent = translations[lang]['dia5.act8.note'];
     
-    // Dia 6 atividades
     document.getElementById('dia6-act1-title').textContent = translations[lang]['dia6.act1.title'];
     document.getElementById('dia6-act1-location').textContent = translations[lang]['dia6.act1.location'];
     document.getElementById('dia6-act2-title').textContent = translations[lang]['dia6.act2.title'];
@@ -389,7 +409,6 @@ function translatePage(lang) {
     document.getElementById('dia6-act8-title').textContent = translations[lang]['dia6.act8.title'];
     document.getElementById('dia6-act8-location').textContent = translations[lang]['dia6.act8.location'];
     
-    // Dia 7 atividades
     document.getElementById('dia7-act1-title').textContent = translations[lang]['dia7.act1.title'];
     document.getElementById('dia7-act1-location').textContent = translations[lang]['dia7.act1.location'];
     document.getElementById('dia7-act1-note').textContent = translations[lang]['dia7.act1.note'];
@@ -415,14 +434,12 @@ function translatePage(lang) {
     document.getElementById('dia7-act9-location').textContent = translations[lang]['dia7.act9.location'];
     document.getElementById('dia7-act9-note').textContent = translations[lang]['dia7.act9.note'];
     
-    // Transport
     document.getElementById('transport-title').textContent = translations[lang]['transport.title'];
     document.getElementById('transport-1').innerHTML = translations[lang]['transport.milao_veneza'] + '<br><small>31 março • 2h15min</small>';
     document.getElementById('transport-2').innerHTML = translations[lang]['transport.veneza_roma'] + '<br><small>1 abril • ~4h</small>';
     document.getElementById('transport-3').innerHTML = translations[lang]['transport.roma_napoles'] + '<br><small>2 abril • 1h13min</small>';
     document.getElementById('transport-4').innerHTML = translations[lang]['transport.napoles_milao'] + '<br><small>3 abril • 4h30min</small>';
     
-    // Budget
     document.getElementById('budget-title').textContent = translations[lang]['budget.title'];
     document.getElementById('budget-voo').textContent = translations[lang]['budget.voo'];
     document.getElementById('budget-hoteis').textContent = translations[lang]['budget.hoteis'];
@@ -435,7 +452,6 @@ function translatePage(lang) {
     document.getElementById('budget-total-title').textContent = translations[lang]['budget.total'];
     document.getElementById('budget-auto').textContent = translations[lang]['budget.auto'];
     
-    // Checklist
     document.getElementById('checklist-title').textContent = translations[lang]['checklist.title'];
     document.getElementById('checklist-1').innerHTML = translations[lang]['checklist.1'];
     document.getElementById('checklist-2').innerHTML = translations[lang]['checklist.2'];
@@ -446,10 +462,8 @@ function translatePage(lang) {
     document.getElementById('checklist-7').innerHTML = translations[lang]['checklist.7'];
     document.getElementById('checklist-8').innerHTML = translations[lang]['checklist.8'];
     
-    // Footer
     document.getElementById('footer-text').innerHTML = translations[lang]['footer.text'] + '<br>30 Março - 5 Abril 2025';
     
-    // Cost labels
     document.querySelectorAll('.cost-label').forEach(el => {
         el.textContent = translations[lang]['cost.label'];
     });
@@ -459,17 +473,14 @@ function setLanguage(lang) {
     currentLang = lang;
     translatePage(lang);
     
-    // Update active button
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.remove('active');
     });
     event.target.classList.add('active');
     
-    // Update HTML lang attribute
     document.documentElement.lang = lang === 'pt-pt' ? 'pt-PT' : 'es-ES';
 }
 
-// Initial translation
 document.addEventListener('DOMContentLoaded', function() {
     translatePage('pt-pt');
 });
