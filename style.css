@@ -786,7 +786,20 @@ footer {
         padding-right: 40px;
     }
 }
-
+/* Ajuste para o seletor de idiomas no responsivo */
+@media (max-width: 768px) {
+    .language-selector {
+        position: static;
+        margin: 10px auto;
+        width: fit-content;
+        background: linear-gradient(135deg, var(--italy-green) 0%, var(--italy-red) 100%);
+        border: 2px solid var(--gold);
+    }
+    
+    .nav-days {
+        margin-top: 0;
+    }
+}
 /* Print styles */
 @media print {
     .language-selector, .nav-days, .hero, .audio-player {
