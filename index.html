@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Roteiro Itália 2026 - Milão, Veneza, Roma & Nápoles</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* RESET E VARIÁVEIS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         :root {
             --italy-green: #009246;
             --italy-white: #ffffff;
@@ -13,36 +21,74 @@
             --gold: #d4af37;
             --dark: #1a1a1a;
             --light-gray: #f8f9fa;
-            --shadow: 0 20px 60px rgba(0,0,0,0.15);
-            --shadow-hover: 0 30px 80px rgba(0,0,0,0.2);
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: var(--dark);
-            line-height: 1.6;
+            line-height: 1.5;
             overflow-x: hidden;
-            padding-bottom: 20px;
+            min-height: 100vh;
+            padding-bottom: 80px;
+            position: relative;
+        }
+
+        /* LANGUAGE SELECTOR */
+        .language-selector {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 2000;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 8px 12px;
+            border-radius: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: var(--shadow);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .lang-btn.active {
+            background: var(--gold);
+            color: var(--dark);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--italy-green) 0%, var(--italy-red) 100%);
-            min-height: 100vh;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
             overflow: hidden;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            padding: 2rem 1rem;
         }
 
         .hero::before {
@@ -52,85 +98,76 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
-            background-size: 100px 100px;
+            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="25" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
+            background-size: 60px 60px;
             animation: float 20s linear infinite;
+            opacity: 0.5;
         }
 
         @keyframes float {
             0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-100px) rotate(360deg); }
+            100% { transform: translateY(-50px) rotate(360deg); }
         }
 
         .hero-content {
             text-align: center;
             z-index: 2;
-            padding: 2rem;
+            padding: 1rem;
             max-width: 900px;
+            width: 100%;
         }
 
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 10vw, 6rem);
+            font-size: clamp(2.5rem, 15vw, 5rem);
             font-weight: 900;
             color: white;
-            text-shadow: 4px 4px 0 rgba(0,0,0,0.2);
-            margin-bottom: 1rem;
-            letter-spacing: -2px;
-            animation: slideDown 1s ease-out;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+            line-height: 1.1;
         }
 
         .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-size: clamp(1rem, 4vw, 1.5rem);
             color: rgba(255,255,255,0.95);
             font-weight: 300;
-            margin-bottom: 2rem;
-            animation: slideUp 1s ease-out 0.3s both;
+            margin-bottom: 1.5rem;
         }
 
         .hero-dates {
-            display: inline-flex;
-            gap: 2rem;
+            display: flex;
+            gap: 1rem;
             background: rgba(255,255,255,0.15);
             backdrop-filter: blur(10px);
-            padding: 1.5rem 3rem;
+            -webkit-backdrop-filter: blur(10px);
+            padding: 1rem 1.5rem;
             border-radius: 50px;
             border: 2px solid rgba(255,255,255,0.3);
-            animation: fadeIn 1s ease-out 0.6s both;
             flex-wrap: wrap;
             justify-content: center;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         .date-box {
             text-align: center;
+            flex: 1;
+            min-width: 80px;
         }
 
         .date-box .label {
-            font-size: 0.9rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             opacity: 0.8;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
         }
 
         .date-box .value {
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             font-weight: 700;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         /* Navigation */
@@ -139,30 +176,40 @@
             top: 0;
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 1000;
-            padding: 1rem;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            padding: 0.75rem 0.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .nav-days::-webkit-scrollbar {
+            display: none;
         }
 
         .nav-days ul {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             list-style: none;
-            justify-content: center;
+            justify-content: flex-start;
             min-width: max-content;
+            padding: 0 0.5rem;
         }
 
         .nav-days a {
             text-decoration: none;
             color: var(--dark);
             font-weight: 600;
-            padding: 0.8rem 1.5rem;
+            padding: 0.5rem 1rem;
             border-radius: 30px;
             transition: all 0.3s ease;
             border: 2px solid transparent;
             white-space: nowrap;
+            font-size: 0.9rem;
+            display: block;
         }
 
         .nav-days a:hover, .nav-days a.active {
@@ -175,20 +222,20 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
         }
 
         /* Day Cards */
         .day-section {
-            margin-bottom: 4rem;
-            scroll-margin-top: 100px;
+            margin-bottom: 2rem;
+            scroll-margin-top: 70px;
         }
 
         .day-header {
             background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
             color: white;
-            padding: 2.5rem;
-            border-radius: 20px 20px 0 0;
+            padding: 1.5rem;
+            border-radius: 15px 15px 0 0;
             position: relative;
             overflow: hidden;
         }
@@ -196,10 +243,10 @@
         .day-header::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 300px;
-            height: 300px;
+            top: -30%;
+            right: -5%;
+            width: 150px;
+            height: 150px;
             background: var(--gold);
             border-radius: 50%;
             opacity: 0.1;
@@ -207,37 +254,40 @@
 
         .day-number {
             font-family: 'Playfair Display', serif;
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: 900;
-            opacity: 0.3;
+            opacity: 0.2;
             position: absolute;
-            top: 1rem;
-            right: 2rem;
+            top: 0.5rem;
+            right: 1rem;
+            line-height: 1;
         }
 
         .day-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            margin-bottom: 0.25rem;
             position: relative;
             z-index: 1;
+            line-height: 1.2;
+            padding-right: 60px;
         }
 
         .day-date {
-            font-size: 1.2rem;
+            font-size: 1rem;
             opacity: 0.9;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
         }
 
         .city-tag {
             background: var(--gold);
             color: var(--dark);
-            padding: 0.3rem 1rem;
+            padding: 0.2rem 0.8rem;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -246,8 +296,8 @@
         /* Timeline */
         .timeline {
             background: white;
-            border-radius: 0 0 20px 20px;
-            padding: 2rem;
+            border-radius: 0 0 15px 15px;
+            padding: 1.5rem 1rem;
             box-shadow: var(--shadow);
             position: relative;
         }
@@ -255,47 +305,31 @@
         .timeline::before {
             content: '';
             position: absolute;
-            left: 3rem;
-            top: 2rem;
-            bottom: 2rem;
-            width: 4px;
+            left: 1.5rem;
+            top: 1rem;
+            bottom: 1rem;
+            width: 3px;
             background: linear-gradient(to bottom, var(--italy-green), var(--italy-red));
             border-radius: 2px;
         }
 
         .activity {
             display: flex;
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
             position: relative;
-            padding-left: 4rem;
-            animation: fadeInLeft 0.6s ease-out;
-            animation-fill-mode: both;
-        }
-
-        .activity:nth-child(1) { animation-delay: 0.1s; }
-        .activity:nth-child(2) { animation-delay: 0.2s; }
-        .activity:nth-child(3) { animation-delay: 0.3s; }
-        .activity:nth-child(4) { animation-delay: 0.4s; }
-        .activity:nth-child(5) { animation-delay: 0.5s; }
-        .activity:nth-child(6) { animation-delay: 0.6s; }
-        .activity:nth-child(7) { animation-delay: 0.7s; }
-        .activity:nth-child(8) { animation-delay: 0.8s; }
-
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
+            padding-left: 2.5rem;
         }
 
         .activity::before {
             content: '';
             position: absolute;
-            left: 2.35rem;
-            top: 0.5rem;
-            width: 16px;
-            height: 16px;
+            left: 1.35rem;
+            top: 0.3rem;
+            width: 12px;
+            height: 12px;
             background: white;
-            border: 4px solid var(--gold);
+            border: 3px solid var(--gold);
             border-radius: 50%;
             z-index: 2;
             transition: all 0.3s ease;
@@ -307,24 +341,24 @@
         }
 
         .time {
-            min-width: 80px;
+            min-width: 60px;
             font-weight: 700;
             color: var(--italy-green);
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             font-variant-numeric: tabular-nums;
         }
 
         .content {
             flex: 1;
             background: var(--light-gray);
-            padding: 1.5rem;
-            border-radius: 15px;
+            padding: 1rem;
+            border-radius: 12px;
             transition: all 0.3s ease;
-            border-left: 4px solid transparent;
+            border-left: 3px solid transparent;
         }
 
         .content:hover {
-            transform: translateX(10px);
+            transform: translateX(5px);
             box-shadow: var(--shadow-hover);
             border-left-color: var(--gold);
             background: white;
@@ -332,70 +366,86 @@
 
         .activity-title {
             font-weight: 700;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
             color: var(--dark);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.3rem;
+            flex-wrap: wrap;
         }
 
         .activity-location {
             color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
             display: flex;
             align-items: center;
-            gap: 0.3rem;
+            gap: 0.2rem;
         }
 
         .activity-note {
             background: rgba(212, 175, 55, 0.1);
-            padding: 0.8rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
             color: #555;
-            border-left: 3px solid var(--gold);
-            margin-top: 0.5rem;
+            border-left: 2px solid var(--gold);
+            margin-top: 0.3rem;
         }
 
-        /* Campo de custo em cada atividade */
-        .activity-cost {
-            margin-top: 0.8rem;
+        /* Campo de custo e hotel */
+        .activity-cost, .hotel-field {
+            margin-top: 0.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.9rem;
-            background: rgba(255,255,255,0.7);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            border: 2px solid var(--gold);
-            width: fit-content;
+            font-size: 0.85rem;
+            flex-wrap: wrap;
         }
 
-        .activity-cost label {
+        .activity-cost label, .hotel-field label {
             display: flex;
             align-items: center;
             gap: 0.3rem;
+            background: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            border: 2px solid var(--gold);
             font-weight: 600;
-            color: var(--dark);
         }
 
         .activity-cost input {
-            width: 80px;
-            padding: 0.2rem 0.5rem;
+            width: 70px;
+            padding: 0.2rem 0.3rem;
             border: none;
-            border-radius: 10px;
-            font-size: 0.9rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
             text-align: right;
             outline: none;
             background: transparent;
             font-weight: 600;
-            border-bottom: 2px solid var(--gold);
+            -moz-appearance: textfield;
         }
 
-        .activity-cost input:focus {
-            border-bottom-color: var(--italy-green);
+        .activity-cost input::-webkit-outer-spin-button,
+        .activity-cost input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .hotel-field input {
+            flex: 1;
+            min-width: 150px;
+            padding: 0.2rem 0.5rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .hotel-field input:focus {
+            outline: none;
+            border-color: var(--gold);
         }
 
         .highlight {
@@ -405,7 +455,7 @@
 
         .highlight .activity-title {
             color: var(--italy-red);
-            font-size: 1.3rem;
+            font-size: 1.1rem;
         }
 
         .market-day {
@@ -415,208 +465,193 @@
 
         .market-day .activity-title {
             color: var(--italy-green);
-            font-size: 1.3rem;
+            font-size: 1.1rem;
         }
 
         /* Transport Section */
         .transport-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 3rem 2rem;
-            border-radius: 20px;
-            margin: 4rem 0;
+            padding: 2rem 1rem;
+            border-radius: 15px;
+            margin: 2rem 0;
             text-align: center;
         }
 
         .transport-section h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
             color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .transport-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
         }
 
         .transport-card {
             background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
+            padding: 1rem;
+            border-radius: 12px;
             border: 3px solid var(--gold);
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .transport-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
         }
 
         .transport-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
         }
 
         .transport-time {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 900;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
             color: var(--dark);
             font-family: 'Playfair Display', serif;
         }
 
         .transport-route {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--dark);
             font-weight: 600;
-            line-height: 1.4;
+            line-height: 1.3;
         }
 
         .transport-route small {
             display: block;
-            margin-top: 0.5rem;
+            margin-top: 0.3rem;
             color: #666;
-            font-weight: 500;
+            font-size: 0.8rem;
         }
 
         /* Budget Section */
         .budget-section {
             background: white;
-            padding: 3rem;
-            border-radius: 20px;
+            padding: 1.5rem;
+            border-radius: 15px;
             box-shadow: var(--shadow);
-            margin: 4rem 0;
+            margin: 2rem 0;
         }
 
         .budget-section h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
             text-align: center;
             color: var(--dark);
         }
 
         .budget-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
         }
 
         .budget-items {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.8rem;
         }
 
         .budget-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.8rem 1rem;
+            padding: 0.6rem 0.8rem;
             background: var(--light-gray);
-            border-radius: 10px;
-            transition: all 0.3s ease;
+            border-radius: 8px;
             border-left: 4px solid var(--gold);
-        }
-
-        .budget-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .budget-item label {
             font-weight: 600;
             color: var(--dark);
-            flex: 1;
+            font-size: 0.9rem;
         }
 
         .budget-item input {
-            width: 100px;
-            padding: 0.5rem;
+            width: 80px;
+            padding: 0.3rem;
             border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
             text-align: right;
-            transition: all 0.3s ease;
-            background: #f9f9f9;
-            font-weight: 600;
-        }
-
-        .budget-item input:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+            background: #f0f0f0;
         }
 
         .budget-total-card {
             background: linear-gradient(135deg, var(--italy-green) 0%, var(--italy-red) 100%);
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 15px;
             color: white;
             text-align: center;
             box-shadow: var(--shadow);
-            height: fit-content;
         }
 
         .budget-total-card h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
             font-weight: 400;
         }
 
         .budget-total-card .total-value {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 900;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
             text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+            word-break: break-word;
         }
 
         .budget-total-card .total-currency {
-            font-size: 1.2rem;
+            font-size: 1rem;
             opacity: 0.9;
+        }
+
+        .budget-total-card p {
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+            opacity: 0.8;
         }
 
         /* Checklist */
         .checklist-section {
             background: white;
-            padding: 3rem;
-            border-radius: 20px;
+            padding: 1.5rem;
+            border-radius: 15px;
             box-shadow: var(--shadow);
-            margin: 4rem 0;
+            margin: 2rem 0;
         }
 
         .checklist-section h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
             text-align: center;
             color: var(--dark);
         }
 
         .checklist-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
         }
 
         .check-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1rem;
+            gap: 0.8rem;
+            padding: 0.8rem;
             background: var(--light-gray);
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .check-item:hover {
-            background: #e8f5e9;
-            transform: translateX(5px);
+            border-radius: 8px;
         }
 
         .check-box {
@@ -632,12 +667,17 @@
             flex-shrink: 0;
         }
 
+        .check-item div {
+            font-size: 0.9rem;
+            line-height: 1.3;
+        }
+
         /* Footer */
         footer {
             background: var(--dark);
             color: white;
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 2rem 1rem;
             margin-top: 2rem;
         }
 
@@ -647,45 +687,53 @@
         }
 
         .footer-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .footer-content p {
+            font-size: 0.9rem;
+            opacity: 0.9;
         }
 
         /* Player de Áudio Flutuante */
         .audio-player {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             z-index: 2000;
         }
 
         .player-button {
-            width: 65px;
-            height: 65px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             border: 3px solid transparent;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), 
+            background-image: linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25)), 
                               linear-gradient(135deg, var(--italy-green) 0%, var(--italy-white) 50%, var(--italy-red) 100%);
             background-origin: border-box;
             background-clip: padding-box, border-box;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2rem;
+            font-size: 1.8rem;
             transition: all 0.3s ease;
-            animation: pulse 2s infinite;
         }
 
         .player-button:hover {
             transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            animation: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         .player-button.playing {
@@ -693,986 +741,1014 @@
             border-color: var(--gold);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        /* Tablets e telas maiores */
+        @media (min-width: 768px) {
+            .budget-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+            
+            .checklist-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero h1 {
+                font-size: clamp(3rem, 8vw, 6rem);
+            }
+            
+            .day-title {
+                font-size: 2.2rem;
+            }
+            
+            .activity-title {
+                font-size: 1.1rem;
+            }
+            
+            .time {
+                min-width: 80px;
+                font-size: 1rem;
+            }
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero {
-                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
-                min-height: 80vh;
-            }
-
+        /* Ajustes para telas muito pequenas */
+        @media (max-width: 380px) {
             .hero-dates {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1.5rem;
-            }
-
-            .timeline::before {
-                left: 1.5rem;
-            }
-
-            .activity {
-                padding-left: 3rem;
                 flex-direction: column;
                 gap: 0.5rem;
             }
-
-            .activity::before {
-                left: 0.85rem;
+            
+            .activity {
+                flex-direction: column;
+                gap: 0.3rem;
             }
-
+            
             .time {
-                font-size: 1rem;
+                min-width: auto;
             }
-
-            .day-header {
-                padding: 1.5rem;
-            }
-
+            
             .day-number {
-                font-size: 3rem;
-                right: 1rem;
-                top: 0.5rem;
-            }
-
-            .day-title {
-                font-size: 1.8rem;
-            }
-
-            .container {
-                padding: 1rem;
-            }
-
-            .checklist-section {
-                padding: 1.5rem;
-            }
-
-            .transport-time {
-                font-size: 1.5rem;
-            }
-
-            .budget-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .budget-section {
-                padding: 1.5rem;
-            }
-
-            .budget-total-card .total-value {
                 font-size: 2.5rem;
             }
             
-            .player-button {
-                width: 55px;
-                height: 55px;
-                font-size: 1.6rem;
-            }
-
-            .activity-cost input {
-                width: 60px;
+            .day-title {
+                font-size: 1.5rem;
+                padding-right: 40px;
             }
         }
 
         /* Print styles */
         @media print {
-            .nav-days, .hero, .audio-player { display: none; }
+            .language-selector, .nav-days, .hero, .audio-player { display: none; }
             .day-section { page-break-inside: avoid; }
-            .activity { animation: none; }
             .transport-card { 
                 background: white !important; 
                 border: 2px solid #000 !important;
             }
-            .transport-time, .transport-route { color: black !important; }
-        }
-
-        /* Scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--italy-green);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--italy-red);
         }
     </style>
 </head>
 <body>
 
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="lang-btn active" onclick="setLanguage('pt-pt')">🇵🇹 PT</button>
+        <button class="lang-btn" onclick="setLanguage('es-es')">🇪🇸 ES</button>
+    </div>
+
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Itália 2026</h1>
-            <p class="hero-subtitle">Milão • Veneza • Roma • Nápoles</p>
+            <h1 id="hero-title">Itália 2026</h1>
+            <p class="hero-subtitle" id="hero-subtitle">Milão • Veneza • Roma • Nápoles</p>
             <div class="hero-dates">
                 <div class="date-box">
-                    <div class="label">Chegada</div>
+                    <div class="label" id="hero-chegada">Chegada</div>
                     <div class="value">30 Mar</div>
                 </div>
                 <div class="date-box">
-                    <div class="label">Saída</div>
+                    <div class="label" id="hero-saida">Saída</div>
                     <div class="value">05 Abr</div>
                 </div>
                 <div class="date-box">
-                    <div class="label">Duração</div>
-                    <div class="value">7 Dias</div>
+                    <div class="label" id="hero-duracao">Duração</div>
+                    <div class="value">7 <span id="hero-dias">Dias</span></div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Navigation -->
     <nav class="nav-days">
         <ul>
-            <li><a href="#dia1" class="active">Dia 1</a></li>
-            <li><a href="#dia2">Dia 2</a></li>
-            <li><a href="#dia3">Dia 3</a></li>
-            <li><a href="#dia4">Dia 4</a></li>
-            <li><a href="#dia5">Dia 5</a></li>
-            <li><a href="#dia6">Dia 6</a></li>
-            <li><a href="#dia7">Dia 7</a></li>
+            <li><a href="#dia1" class="active"><span class="nav-dia">Dia</span> 1</a></li>
+            <li><a href="#dia2"><span class="nav-dia">Dia</span> 2</a></li>
+            <li><a href="#dia3"><span class="nav-dia">Dia</span> 3</a></li>
+            <li><a href="#dia4"><span class="nav-dia">Dia</span> 4</a></li>
+            <li><a href="#dia5"><span class="nav-dia">Dia</span> 5</a></li>
+            <li><a href="#dia6"><span class="nav-dia">Dia</span> 6</a></li>
+            <li><a href="#dia7"><span class="nav-dia">Dia</span> 7</a></li>
         </ul>
     </nav>
 
     <div class="container">
 
-        <!-- DIA 1 -->
+        <!-- DIA 1 - Milão -->
         <section class="day-section" id="dia1">
             <div class="day-header">
                 <div class="day-number">01</div>
-                <h2 class="day-title">Chegada em Milão</h2>
+                <h2 class="day-title" id="dia1-title">Chegada em Milão</h2>
                 <div class="day-date">
-                    <span>Segunda-feira, 30 de Março</span>
-                    <span class="city-tag">Milão</span>
+                    <span id="dia1-date">Segunda-feira, 30 de Março</span>
+                    <span class="city-tag" id="dia1-city">Milão</span>
                 </div>
             </div>
             <div class="timeline">
-                <div class="activity">
-                    <div class="time">12:40</div>
-                    <div class="content">
-                        <div class="activity-title">✈️ Chegada BGY</div>
-                        <div class="activity-location">Aeroporto de Bergamo</div>
-                        <div class="activity-note">Voo chega no aeroporto de Bergamo (BGY). Pegar mala e seguir para o ônibus.</div>
-                        <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="voo" min="0" step="0.1" value="0" placeholder="0.00"></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="activity">
-                    <div class="time">13:40</div>
-                    <div class="content">
-                        <div class="activity-title">🚌 Ônibus para Milão</div>
-                        <div class="activity-location">BGY → Estação Centrale</div>
-                        <div class="activity-note">Orio Shuttle ou Terravision. Duração: ~50 minutos.</div>
-                        <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="onibus" min="0" step="0.1" value="0" placeholder="0.00"></label>
-                        </div>
-                    </div>
-                </div>
+                <!-- Hotel field logo no início -->
                 <div class="activity">
                     <div class="time">14:30</div>
                     <div class="content">
-                        <div class="activity-title">🏨 Check-in Hotel</div>
-                        <div class="activity-location">Centro de Milão</div>
-                        <div class="activity-note">Deixar malas e preparar para o tour.</div>
+                        <div class="activity-title" id="dia1-act3-title">🏨 Check-in Hotel</div>
+                        <div class="activity-location" id="dia1-act3-location">Centro de Milão</div>
+                        <div class="activity-note" id="dia1-act3-note">Fazer check-in e deixar malas.</div>
+                        <div class="hotel-field">
+                            <label for="hotel-milao" id="hotel-label">🏨 Hotel:</label>
+                            <input type="text" id="hotel-milao" class="hotel-input" placeholder="Nome do hotel">
+                        </div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="hoteis" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="hoteis" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
+                <div class="activity">
+                    <div class="time">12:40</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act1-title">✈️ Chegada BGY</div>
+                        <div class="activity-location" id="dia1-act1-location">Aeroporto de Bergamo</div>
+                        <div class="activity-note" id="dia1-act1-note">Voo chega no aeroporto de Bergamo (BGY). Pegar mala e seguir para o ônibus.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="voo" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">13:40</div>
+                    <div class="content">
+                        <div class="activity-title" id="dia1-act2-title">🚌 Ônibus para Milão</div>
+                        <div class="activity-location" id="dia1-act2-location">BGY → Estação Centrale</div>
+                        <div class="activity-note" id="dia1-act2-note">Orio Shuttle ou Terravision. Duração: ~50 minutos.</div>
+                        <div class="activity-cost">
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="onibus" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="activity">
                     <div class="time">15:30</div>
                     <div class="content">
-                        <div class="activity-title">⛪ Duomo di Milano</div>
-                        <div class="activity-location">Piazza del Duomo</div>
-                        <div class="activity-note">Subir ao terraço (escadas são mais rápidas e baratas). Vista panorâmica incrível!</div>
+                        <div class="activity-title" id="dia1-act4-title">⛪ Duomo di Milano</div>
+                        <div class="activity-location" id="dia1-act4-location">Piazza del Duomo</div>
+                        <div class="activity-note" id="dia1-act4-note">Subir ao terraço (escadas são mais rápidas e baratas). Vista panorâmica incrível!</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">17:00</div>
                     <div class="content">
-                        <div class="activity-title">🛍️ Galleria Vittorio Emanuele II</div>
-                        <div class="activity-location">Centro Histórico</div>
-                        <div class="activity-note">Gire no calcanhar sobre o touro para boa sorte! Arquitetura deslumbrante.</div>
+                        <div class="activity-title" id="dia1-act5-title">🛍️ Galleria Vittorio Emanuele II</div>
+                        <div class="activity-location" id="dia1-act5-location">Centro Histórico</div>
+                        <div class="activity-note" id="dia1-act5-note">Gire no calcanhar sobre o touro para boa sorte! Arquitetura deslumbrante.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">20:00</div>
                     <div class="content">
-                        <div class="activity-title">🍕 Jantar</div>
-                        <div class="activity-location">Panzerotto Luini ou próximo ao Duomo</div>
-                        <div class="activity-note">Experimente o famoso panzerotto! Sempre tem fila mas vale a pena.</div>
+                        <div class="activity-title" id="dia1-act6-title">🍕 Jantar</div>
+                        <div class="activity-location" id="dia1-act6-location">Panzerotto Luini ou próximo ao Duomo</div>
+                        <div class="activity-note" id="dia1-act6-note">Experimente o famoso panzerotto! Sempre tem fila mas vale a pena.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">21:30</div>
                     <div class="content">
-                        <div class="activity-title">🌃 Passeio Noturno</div>
-                        <div class="activity-location">Corso Buenos Aires ou Navigli</div>
-                        <div class="activity-note">Conhecer o bairro Navigli (sem mercado hoje, apenas passeio).</div>
+                        <div class="activity-title" id="dia1-act7-title">🌃 Passeio Noturno</div>
+                        <div class="activity-location" id="dia1-act7-location">Corso Buenos Aires ou Navigli</div>
+                        <div class="activity-note" id="dia1-act7-note">Conhecer o bairro Navigli (sem mercado hoje, apenas passeio).</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- DIA 2 -->
+        <!-- DIA 2 - Veneza -->
         <section class="day-section" id="dia2">
             <div class="day-header">
                 <div class="day-number">02</div>
-                <h2 class="day-title">Veneza dos Canais</h2>
+                <h2 class="day-title" id="dia2-title">Veneza dos Canais</h2>
                 <div class="day-date">
-                    <span>Terça-feira, 31 de Março</span>
-                    <span class="city-tag">Veneza</span>
+                    <span id="dia2-date">Terça-feira, 31 de Março</span>
+                    <span class="city-tag" id="dia2-city">Veneza</span>
                 </div>
             </div>
             <div class="timeline">
                 <div class="activity">
                     <div class="time">06:30</div>
                     <div class="content">
-                        <div class="activity-title">☕ Café da Manhã</div>
-                        <div class="activity-location">Hotel</div>
-                        <div class="activity-note">Rápido para pegar o trem cedo.</div>
+                        <div class="activity-title" id="dia2-act1-title">☕ Café da Manhã</div>
+                        <div class="activity-location" id="dia2-act1-location">Hotel</div>
+                        <div class="activity-note" id="dia2-act1-note">Rápido para pegar o trem cedo.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity highlight">
                     <div class="time">07:00</div>
                     <div class="content">
-                        <div class="activity-title">🚂 Trem Milão → Veneza</div>
-                        <div class="activity-location">Estação Centrale → Santa Lucia</div>
-                        <div class="activity-note">Duração: 2h15min. Chegada no coração de Veneza!</div>
+                        <div class="activity-title" id="dia2-act2-title">🚂 Trem Milão → Veneza</div>
+                        <div class="activity-location" id="dia2-act2-location">Estação Centrale → Santa Lucia</div>
+                        <div class="activity-note" id="dia2-act2-note">Duração: 2h15min. Chegada no coração de Veneza!</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Hotel field ao chegar -->
                 <div class="activity">
                     <div class="time">09:15</div>
                     <div class="content">
-                        <div class="activity-title">🚤 Chegada em Veneza</div>
-                        <div class="activity-location">Stazione Santa Lucia</div>
-                        <div class="activity-note">Estação no centro da cidade, já entre os canais.</div>
+                        <div class="activity-title" id="dia2-act3-title">🏨 Check-in Hotel</div>
+                        <div class="activity-location" id="dia2-act3-location">Veneza</div>
+                        <div class="activity-note" id="dia2-act3-note">Fazer check-in e deixar malas.</div>
+                        <div class="hotel-field">
+                            <label for="hotel-veneza" id="hotel-label2">🏨 Hotel:</label>
+                            <input type="text" id="hotel-veneza" class="hotel-input" placeholder="Nome do hotel">
+                        </div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="hoteis" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">09:45</div>
                     <div class="content">
-                        <div class="activity-title">🏛️ Basílica de São Marcos</div>
-                        <div class="activity-location">Piazza San Marco</div>
-                        <div class="activity-note">Entrada gratuita. Arquitetura bizantina deslumbrante.</div>
+                        <div class="activity-title" id="dia2-act4-title">🏛️ Basílica de São Marcos</div>
+                        <div class="activity-location" id="dia2-act4-location">Piazza San Marco</div>
+                        <div class="activity-note" id="dia2-act4-note">Entrada gratuita. Arquitetura bizantina deslumbrante.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">11:00</div>
                     <div class="content">
-                        <div class="activity-title">🏰 Palazzo Ducale</div>
-                        <div class="activity-location">Piazza San Marco</div>
-                        <div class="activity-note">Opcional. Veja também a Ponte dos Suspiros por fora.</div>
+                        <div class="activity-title" id="dia2-act5-title">🏰 Palazzo Ducale</div>
+                        <div class="activity-location" id="dia2-act5-location">Piazza San Marco</div>
+                        <div class="activity-note" id="dia2-act5-note">Opcional. Veja também a Ponte dos Suspiros por fora.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">14:00</div>
                     <div class="content">
-                        <div class="activity-title">🌉 Ponte Rialto</div>
-                        <div class="activity-location">Rialto</div>
-                        <div class="activity-note">Vista icônica e mercado nas proximidades.</div>
+                        <div class="activity-title" id="dia2-act6-title">🌉 Ponte Rialto</div>
+                        <div class="activity-location" id="dia2-act6-location">Rialto</div>
+                        <div class="activity-note" id="dia2-act6-note">Vista icônica e mercado nas proximidades.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">15:30</div>
                     <div class="content">
-                        <div class="activity-title">🛥️ Grand Canal</div>
-                        <div class="activity-location">Vaporetto Linha 1</div>
-                        <div class="activity-note">Passeio de barco pelo canal principal. Compre bilhete de 75min.</div>
+                        <div class="activity-title" id="dia2-act7-title">🛥️ Grand Canal</div>
+                        <div class="activity-location" id="dia2-act7-location">Vaporetto Linha 1</div>
+                        <div class="activity-note" id="dia2-act7-note">Passeio de barco pelo canal principal. Compre bilhete de 75min.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">18:30</div>
                     <div class="content">
-                        <div class="activity-title">🌅 Ponte da Academia</div>
-                        <div class="activity-location">Canal Grande</div>
-                        <div class="activity-note">Pôr do sol incrível com vista para a basílica.</div>
+                        <div class="activity-title" id="dia2-act8-title">🌅 Ponte da Academia</div>
+                        <div class="activity-location" id="dia2-act8-location">Canal Grande</div>
+                        <div class="activity-note" id="dia2-act8-note">Pôr do sol incrível com vista para a basílica.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- DIA 3 -->
+        <!-- DIA 3 - Roma -->
         <section class="day-section" id="dia3">
             <div class="day-header">
                 <div class="day-number">03</div>
-                <h2 class="day-title">Roma Imperial</h2>
+                <h2 class="day-title" id="dia3-title">Roma Imperial</h2>
                 <div class="day-date">
-                    <span>Quarta-feira, 1º de Abril</span>
-                    <span class="city-tag">Roma</span>
+                    <span id="dia3-date">Quarta-feira, 1º de Abril</span>
+                    <span class="city-tag" id="dia3-city">Roma</span>
                 </div>
             </div>
             <div class="timeline">
                 <div class="activity">
                     <div class="time">08:00</div>
                     <div class="content">
-                        <div class="activity-title">☕ Café da Manhã</div>
-                        <div class="activity-location">Hotel Veneza</div>
+                        <div class="activity-title" id="dia3-act1-title">☕ Café da Manhã</div>
+                        <div class="activity-location" id="dia3-act1-location">Hotel Veneza</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity highlight">
                     <div class="time">10:26</div>
                     <div class="content">
-                        <div class="activity-title">🚂 TREM VENEZA → ROMA</div>
-                        <div class="activity-location">Santa Lucia → Termini</div>
-                        <div class="activity-note">Duração: ~4 horas. Chegada prevista: 14:20.</div>
+                        <div class="activity-title" id="dia3-act2-title">🚂 TREM VENEZA → ROMA</div>
+                        <div class="activity-location" id="dia3-act2-location">Santa Lucia → Termini</div>
+                        <div class="activity-note" id="dia3-act2-note">Duração: ~4 horas. Chegada prevista: 14:20.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Hotel field ao chegar -->
                 <div class="activity">
                     <div class="time">14:20</div>
                     <div class="content">
-                        <div class="activity-title">🏛️ Chegada em Roma</div>
-                        <div class="activity-location">Stazione Termini</div>
+                        <div class="activity-title" id="dia3-act3-title">🏨 Check-in Hotel</div>
+                        <div class="activity-location" id="dia3-act3-location">Roma</div>
+                        <div class="activity-note" id="dia3-act3-note">Fazer check-in e deixar malas.</div>
+                        <div class="hotel-field">
+                            <label for="hotel-roma" id="hotel-label3">🏨 Hotel:</label>
+                            <input type="text" id="hotel-roma" class="hotel-input" placeholder="Nome do hotel">
+                        </div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="hoteis" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">15:00</div>
                     <div class="content">
-                        <div class="activity-title">🏟️ Coliseu</div>
-                        <div class="activity-location">Centro Histórico</div>
-                        <div class="activity-note">Compre ingresso antecipado para evitar filas enormes!</div>
+                        <div class="activity-title" id="dia3-act4-title">🏟️ Coliseu</div>
+                        <div class="activity-location" id="dia3-act4-location">Centro Histórico</div>
+                        <div class="activity-note" id="dia3-act4-note">Compre ingresso antecipado para evitar filas enormes!</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">16:30</div>
                     <div class="content">
-                        <div class="activity-title">🏛️ Fórum Romano & Palatino</div>
-                        <div class="activity-location">Via dei Fori Imperiali</div>
-                        <div class="activity-note">Mesmo bilhete do Coliseu. Ruínas antigas impressionantes.</div>
+                        <div class="activity-title" id="dia3-act5-title">🏛️ Fórum Romano & Palatino</div>
+                        <div class="activity-location" id="dia3-act5-location">Via dei Fori Imperiali</div>
+                        <div class="activity-note" id="dia3-act5-note">Mesmo bilhete do Coliseu. Ruínas antigas impressionantes.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">18:00</div>
                     <div class="content">
-                        <div class="activity-title">🎠 Piazza Venezia</div>
-                        <div class="activity-location">Centro</div>
-                        <div class="activity-note">Monumento a Vittorio Emanuele II (o "bolo de casamento").</div>
+                        <div class="activity-title" id="dia3-act6-title">🎠 Piazza Venezia</div>
+                        <div class="activity-location" id="dia3-act6-location">Centro</div>
+                        <div class="activity-note" id="dia3-act6-note">Monumento a Vittorio Emanuele II (o "bolo de casamento").</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">19:30</div>
                     <div class="content">
-                        <div class="activity-title">⛲ Fontana di Trevi</div>
-                        <div class="activity-location">Trevi</div>
-                        <div class="activity-note">Jogue uma moeda para garantir seu retorno a Roma!</div>
+                        <div class="activity-title" id="dia3-act7-title">⛲ Fontana di Trevi</div>
+                        <div class="activity-location" id="dia3-act7-location">Trevi</div>
+                        <div class="activity-note" id="dia3-act7-note">Jogue uma moeda para garantir seu retorno a Roma!</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">20:30</div>
                     <div class="content">
-                        <div class="activity-title">🍝 Jantar</div>
-                        <div class="activity-location">Bairro Monti ou Trastevere</div>
-                        <div class="activity-note">Trastevere é mais autêntico e boêmio.</div>
+                        <div class="activity-title" id="dia3-act8-title">🍝 Jantar</div>
+                        <div class="activity-location" id="dia3-act8-location">Bairro Monti ou Trastevere</div>
+                        <div class="activity-note" id="dia3-act8-note">Trastevere é mais autêntico e boêmio.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- DIA 4 -->
+        <!-- DIA 4 - Nápoles -->
         <section class="day-section" id="dia4">
             <div class="day-header">
                 <div class="day-number">04</div>
-                <h2 class="day-title">Nápoles Autêntica</h2>
+                <h2 class="day-title" id="dia4-title">Nápoles Autêntica</h2>
                 <div class="day-date">
-                    <span>Quinta-feira, 2 de Abril</span>
-                    <span class="city-tag">Roma → Nápoles</span>
+                    <span id="dia4-date">Quinta-feira, 2 de Abril</span>
+                    <span class="city-tag" id="dia4-city">Roma → Nápoles</span>
                 </div>
             </div>
             <div class="timeline">
                 <div class="activity">
                     <div class="time">07:30</div>
                     <div class="content">
-                        <div class="activity-title">☕ Café da Manhã</div>
-                        <div class="activity-location">Hotel Roma</div>
+                        <div class="activity-title" id="dia4-act1-title">☕ Café da Manhã</div>
+                        <div class="activity-location" id="dia4-act1-location">Hotel Roma</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">08:30</div>
                     <div class="content">
-                        <div class="activity-title">🏛️ Panteão</div>
-                        <div class="activity-location">Centro</div>
-                        <div class="activity-note">Entrada gratuita. Arquitetura romana perfeita.</div>
+                        <div class="activity-title" id="dia4-act2-title">🏛️ Panteão</div>
+                        <div class="activity-location" id="dia4-act2-location">Centro</div>
+                        <div class="activity-note" id="dia4-act2-note">Entrada gratuita. Arquitetura romana perfeita.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">09:30</div>
                     <div class="content">
-                        <div class="activity-title">🎨 Piazza Navona</div>
-                        <div class="activity-location">Centro</div>
-                        <div class="activity-note">Três fontes barrocas incríveis.</div>
+                        <div class="activity-title" id="dia4-act3-title">🎨 Piazza Navona</div>
+                        <div class="activity-location" id="dia4-act3-location">Centro</div>
+                        <div class="activity-note" id="dia4-act3-note">Três fontes barrocas incríveis.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">10:30</div>
                     <div class="content">
-                        <div class="activity-title">🌸 Piazza di Spagna</div>
-                        <div class="activity-location">Centro</div>
-                        <div class="activity-note">Escadarias da Trinità dei Monti.</div>
+                        <div class="activity-title" id="dia4-act4-title">🌸 Piazza di Spagna</div>
+                        <div class="activity-location" id="dia4-act4-location">Centro</div>
+                        <div class="activity-note" id="dia4-act4-note">Escadarias da Trinità dei Monti.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">12:00</div>
                     <div class="content">
-                        <div class="activity-title">🍽️ Almoço Rápido</div>
-                        <div class="activity-location">Centro</div>
+                        <div class="activity-title" id="dia4-act5-title">🍽️ Almoço Rápido</div>
+                        <div class="activity-location" id="dia4-act5-location">Centro</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">13:30</div>
                     <div class="content">
-                        <div class="activity-title">🧳 Pegar Malas</div>
-                        <div class="activity-location">Hotel</div>
+                        <div class="activity-title" id="dia4-act6-title">🧳 Pegar Malas</div>
+                        <div class="activity-location" id="dia4-act6-location">Hotel</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity highlight">
                     <div class="time">19:35</div>
                     <div class="content">
-                        <div class="activity-title">🚂 TREM ROMA → NÁPOLES</div>
-                        <div class="activity-location">Termini → Centrale</div>
-                        <div class="activity-note">Duração: 1h13min. Chegada: ~20:50. Jantar será tarde!</div>
+                        <div class="activity-title" id="dia4-act7-title">🚂 TREM ROMA → NÁPOLES</div>
+                        <div class="activity-location" id="dia4-act7-location">Termini → Centrale</div>
+                        <div class="activity-note" id="dia4-act7-note">Duração: 1h13min. Chegada: ~20:50.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Hotel field ao chegar -->
                 <div class="activity">
                     <div class="time">21:30</div>
                     <div class="content">
-                        <div class="activity-title">🏨 Check-in & Jantar Leve</div>
-                        <div class="activity-location">Nápoles</div>
+                        <div class="activity-title" id="dia4-act8-title">🏨 Check-in & Jantar Leve</div>
+                        <div class="activity-location" id="dia4-act8-location">Nápoles</div>
+                        <div class="activity-note" id="dia4-act8-note">Fazer check-in e jantar rápido.</div>
+                        <div class="hotel-field">
+                            <label for="hotel-napoles" id="hotel-label4">🏨 Hotel:</label>
+                            <input type="text" id="hotel-napoles" class="hotel-input" placeholder="Nome do hotel">
+                        </div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="hoteis" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- DIA 5 -->
+        <!-- DIA 5 - Nápoles & Retorno -->
         <section class="day-section" id="dia5">
             <div class="day-header">
                 <div class="day-number">05</div>
-                <h2 class="day-title">Nápoles & Retorno</h2>
+                <h2 class="day-title" id="dia5-title">Nápoles & Retorno</h2>
                 <div class="day-date">
-                    <span>Sexta-feira, 3 de Abril</span>
-                    <span class="city-tag">Nápoles → Milão</span>
+                    <span id="dia5-date">Sexta-feira, 3 de Abril</span>
+                    <span class="city-tag" id="dia5-city">Nápoles → Milão</span>
                 </div>
             </div>
             <div class="timeline">
                 <div class="activity">
                     <div class="time">08:00</div>
                     <div class="content">
-                        <div class="activity-title">☕ Café da Manhã</div>
-                        <div class="activity-location">Hotel</div>
-                        <div class="activity-note">Experimente sfogliatella!</div>
+                        <div class="activity-title" id="dia5-act1-title">☕ Café da Manhã</div>
+                        <div class="activity-location" id="dia5-act1-location">Hotel Nápoles</div>
+                        <div class="activity-note" id="dia5-act1-note">Experimente sfogliatella!</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">09:00</div>
                     <div class="content">
-                        <div class="activity-title">🏛️ Museu Arqueológico Nacional</div>
-                        <div class="activity-location">Centro</div>
-                        <div class="activity-note">Melhor museu da cidade. Achados de Pompeia.</div>
+                        <div class="activity-title" id="dia5-act2-title">🏛️ Museu Arqueológico Nacional</div>
+                        <div class="activity-location" id="dia5-act2-location">Centro</div>
+                        <div class="activity-note" id="dia5-act2-note">Melhor museu da cidade. Achados de Pompeia.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">11:00</div>
                     <div class="content">
-                        <div class="activity-title">⛪ Duomo di San Gennaro</div>
-                        <div class="activity-location">Centro</div>
-                        <div class="activity-note">Catedral com o "milagre do sangue".</div>
+                        <div class="activity-title" id="dia5-act3-title">⛪ Duomo di San Gennaro</div>
+                        <div class="activity-location" id="dia5-act3-location">Centro</div>
+                        <div class="activity-note" id="dia5-act3-note">Catedral com o "milagre do sangue".</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">12:30</div>
                     <div class="content">
-                        <div class="activity-title">🍕 Almoço</div>
-                        <div class="activity-location">Pizzaria Da Michele ou Sorbillo</div>
-                        <div class="activity-note">Pizza napolitana autêntica!</div>
+                        <div class="activity-title" id="dia5-act4-title">🍕 Almoço</div>
+                        <div class="activity-location" id="dia5-act4-location">Pizzaria Da Michele ou Sorbillo</div>
+                        <div class="activity-note" id="dia5-act4-note">Pizza napolitana autêntica!</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">14:00</div>
                     <div class="content">
-                        <div class="activity-title">🎭 Via San Gregorio Armeno</div>
-                        <div class="activity-location">Centro Histórico</div>
-                        <div class="activity-note">Rua dos presépios. Artesanato único.</div>
+                        <div class="activity-title" id="dia5-act5-title">🎭 Via San Gregorio Armeno</div>
+                        <div class="activity-location" id="dia5-act5-location">Centro Histórico</div>
+                        <div class="activity-note" id="dia5-act5-note">Rua dos presépios. Artesanato único.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">15:00</div>
                     <div class="content">
-                        <div class="activity-title">🚶 Spaccanapoli</div>
-                        <div class="activity-location">Centro</div>
-                        <div class="activity-note">Caminhada pela rua que "divide" o centro histórico.</div>
+                        <div class="activity-title" id="dia5-act6-title">🚶 Spaccanapoli</div>
+                        <div class="activity-location" id="dia5-act6-location">Centro</div>
+                        <div class="activity-note" id="dia5-act6-note">Caminhada pela rua que "divide" o centro histórico.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">16:00</div>
                     <div class="content">
-                        <div class="activity-title">🧳 Pegar Malas</div>
-                        <div class="activity-location">Hotel</div>
+                        <div class="activity-title" id="dia5-act7-title">🧳 Pegar Malas</div>
+                        <div class="activity-location" id="dia5-act7-location">Hotel</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity highlight">
                     <div class="time">17:25</div>
                     <div class="content">
-                        <div class="activity-title">🚂 TREM NÁPOLES → MILÃO</div>
-                        <div class="activity-location">Centrale → Centrale</div>
-                        <div class="activity-note">Duração: 4h30min. Chegada: ~22:00.</div>
+                        <div class="activity-title" id="dia5-act8-title">🚂 TREM NÁPOLES → MILÃO</div>
+                        <div class="activity-location" id="dia5-act8-location">Centrale → Centrale</div>
+                        <div class="activity-note" id="dia5-act8-note">Duração: 4h30min. Chegada: ~22:00.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="trens" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- DIA 6 -->
+        <!-- DIA 6 - Milão (Mercado) -->
         <section class="day-section" id="dia6">
             <div class="day-header">
                 <div class="day-number">06</div>
-                <h2 class="day-title">Mercado de Navigli & Arte</h2>
+                <h2 class="day-title" id="dia6-title">Mercado de Navigli & Arte</h2>
                 <div class="day-date">
-                    <span>Sábado, 4 de Abril</span>
-                    <span class="city-tag">Milão</span>
+                    <span id="dia6-date">Sábado, 4 de Abril</span>
+                    <span class="city-tag" id="dia6-city">Milão</span>
                 </div>
             </div>
             <div class="timeline">
+                <!-- Hotel field no início (já está em Milão) -->
                 <div class="activity">
                     <div class="time">08:00</div>
                     <div class="content">
-                        <div class="activity-title">☕ Café Rápido</div>
-                        <div class="activity-location">Hotel</div>
+                        <div class="activity-title" id="dia6-act1-title">☕ Café Rápido</div>
+                        <div class="activity-location" id="dia6-act1-location">Hotel Milão</div>
+                        <div class="hotel-field">
+                            <label for="hotel-milao2" id="hotel-label6">🏨 Hotel:</label>
+                            <input type="text" id="hotel-milao2" class="hotel-input" placeholder="Nome do hotel" value="">
+                        </div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity market-day">
                     <div class="time">08:30</div>
                     <div class="content">
-                        <div class="activity-title">🛍️ MERCADO DE NAVIGLI</div>
-                        <div class="activity-location">Ripa di Porta Ticinese</div>
-                        <div class="activity-note">
-                            <strong>Fiera di Sinigaglia!</strong> Funciona 8h-18h. Antiguidades, vintage, vinil, móveis. 
-                            Chegue cedo para melhores achados!
-                        </div>
+                        <div class="activity-title" id="dia6-act2-title">🛍️ MERCADO DE NAVIGLI</div>
+                        <div class="activity-location" id="dia6-act2-location">Ripa di Porta Ticinese</div>
+                        <div class="activity-note" id="dia6-act2-note">Fiera di Sinigaglia! Funciona 8h-18h. Antiguidades, vintage, vinil, móveis. Chegue cedo para melhores achados!</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">12:30</div>
                     <div class="content">
-                        <div class="activity-title">🍽️ Almoço Rápido</div>
-                        <div class="activity-location">Navigli</div>
+                        <div class="activity-title" id="dia6-act3-title">🍽️ Almoço Rápido</div>
+                        <div class="activity-location" id="dia6-act3-location">Navigli</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">14:00</div>
                     <div class="content">
-                        <div class="activity-title">🎨 Cenacolo Vinciano</div>
-                        <div class="activity-location">Santa Maria delle Grazie</div>
-                        <div class="activity-note">
-                            <strong>RESERVA OBRIGATÓRIA!</strong> A Última Ceia de Leonardo da Vinci.
-                        </div>
+                        <div class="activity-title" id="dia6-act4-title">🎨 Cenacolo Vinciano</div>
+                        <div class="activity-location" id="dia6-act4-location">Santa Maria delle Grazie</div>
+                        <div class="activity-note" id="dia6-act4-note">RESERVA OBRIGATÓRIA! A Última Ceia de Leonardo da Vinci.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">15:30</div>
                     <div class="content">
-                        <div class="activity-title">⛪ Santa Maria delle Grazie</div>
-                        <div class="activity-location">Externa</div>
-                        <div class="activity-note">Fotos da arquitetura renascentista.</div>
+                        <div class="activity-title" id="dia6-act5-title">⛪ Santa Maria delle Grazie</div>
+                        <div class="activity-location" id="dia6-act5-location">Externa</div>
+                        <div class="activity-note" id="dia6-act5-note">Fotos da arquitetura renascentista.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">16:30</div>
                     <div class="content">
-                        <div class="activity-title">🦴 San Bernardino alle Ossa</div>
-                        <div class="activity-location">Centro</div>
-                        <div class="activity-note">Capela decorada com ossos humanos. Macabro mas fascinante!</div>
+                        <div class="activity-title" id="dia6-act6-title">🦴 San Bernardino alle Ossa</div>
+                        <div class="activity-location" id="dia6-act6-location">Centro</div>
+                        <div class="activity-note" id="dia6-act6-note">Capela decorada com ossos humanos. Macabro mas fascinante!</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">18:00</div>
                     <div class="content">
-                        <div class="activity-title">💎 Quadrilatero della Moda</div>
-                        <div class="activity-location">Via Montenapoleone</div>
-                        <div class="activity-note">Rua das grifes de luxo. Window shopping!</div>
+                        <div class="activity-title" id="dia6-act7-title">💎 Quadrilatero della Moda</div>
+                        <div class="activity-location" id="dia6-act7-location">Via Montenapoleone</div>
+                        <div class="activity-note" id="dia6-act7-note">Rua das grifes de luxo. Window shopping!</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">20:00</div>
                     <div class="content">
-                        <div class="activity-title">🍷 Jantar de Despedida</div>
-                        <div class="activity-location">Milão</div>
+                        <div class="activity-title" id="dia6-act8-title">🍷 Jantar de Despedida</div>
+                        <div class="activity-location" id="dia6-act8-location">Milão</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- DIA 7 -->
+        <!-- DIA 7 - Saída -->
         <section class="day-section" id="dia7">
             <div class="day-header">
                 <div class="day-number">07</div>
-                <h2 class="day-title">Saída</h2>
+                <h2 class="day-title" id="dia7-title">Saída</h2>
                 <div class="day-date">
-                    <span>Domingo, 5 de Abril</span>
-                    <span class="city-tag">Milão → Bergamo</span>
+                    <span id="dia7-date">Domingo, 5 de Abril</span>
+                    <span class="city-tag" id="dia7-city">Milão → Bergamo</span>
                 </div>
             </div>
             <div class="timeline">
                 <div class="activity">
                     <div class="time">08:00</div>
                     <div class="content">
-                        <div class="activity-title">☕ Café & Check-out</div>
-                        <div class="activity-location">Hotel</div>
-                        <div class="activity-note">Deixar malas no hotel.</div>
+                        <div class="activity-title" id="dia7-act1-title">☕ Café & Check-out</div>
+                        <div class="activity-location" id="dia7-act1-location">Hotel</div>
+                        <div class="activity-note" id="dia7-act1-note">Deixar malas no hotel.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">09:00</div>
                     <div class="content">
-                        <div class="activity-title">🏬 Galleria Rinascente</div>
-                        <div class="activity-location">Centro</div>
-                        <div class="activity-note">Terraço gratuito com vista para o Duomo.</div>
+                        <div class="activity-title" id="dia7-act2-title">🏬 Galleria Rinascente</div>
+                        <div class="activity-location" id="dia7-act2-location">Centro</div>
+                        <div class="activity-note" id="dia7-act2-note">Terraço gratuito com vista para o Duomo.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="compras" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">10:30</div>
                     <div class="content">
-                        <div class="activity-title">🏰 Castello Sforzesco</div>
-                        <div class="activity-location">Castello</div>
-                        <div class="activity-note">Última visita cultural.</div>
+                        <div class="activity-title" id="dia7-act3-title">🏰 Castello Sforzesco</div>
+                        <div class="activity-location" id="dia7-act3-location">Castello</div>
+                        <div class="activity-note" id="dia7-act3-note">Última visita cultural.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="passeios" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">12:00</div>
                     <div class="content">
-                        <div class="activity-title">🍽️ Almoço Rápido</div>
-                        <div class="activity-location">Centro</div>
+                        <div class="activity-title" id="dia7-act4-title">🍽️ Almoço Rápido</div>
+                        <div class="activity-location" id="dia7-act4-location">Centro</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="alimentacao" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">13:00</div>
                     <div class="content">
-                        <div class="activity-title">🧳 Pegar Malas</div>
-                        <div class="activity-location">Hotel</div>
+                        <div class="activity-title" id="dia7-act5-title">🧳 Pegar Malas</div>
+                        <div class="activity-location" id="dia7-act5-location">Hotel</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">13:30</div>
                     <div class="content">
-                        <div class="activity-title">🚌 Ponto de Ônibus</div>
-                        <div class="activity-location">Piazza Luigi di Savoia</div>
+                        <div class="activity-title" id="dia7-act6-title">🚌 Ponto de Ônibus</div>
+                        <div class="activity-location" id="dia7-act6-location">Piazza Luigi di Savoia</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity highlight">
                     <div class="time">14:20</div>
                     <div class="content">
-                        <div class="activity-title">🚌 ÔNIBUS MILÃO → BGY</div>
-                        <div class="activity-location">Centrale → Aeroporto</div>
-                        <div class="activity-note">Duração: ~50min. Não perca o horário!</div>
+                        <div class="activity-title" id="dia7-act7-title">🚌 ÔNIBUS MILÃO → BGY</div>
+                        <div class="activity-location" id="dia7-act7-location">Centrale → Aeroporto</div>
+                        <div class="activity-note" id="dia7-act7-note">Duração: ~50min. Não perca o horário!</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="onibus" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="onibus" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity">
                     <div class="time">15:20</div>
                     <div class="content">
-                        <div class="activity-title">✈️ Aeroporto BGY</div>
-                        <div class="activity-location">Bergamo</div>
-                        <div class="activity-note">Check-in, segurança, duty-free.</div>
+                        <div class="activity-title" id="dia7-act8-title">✈️ Aeroporto BGY</div>
+                        <div class="activity-location" id="dia7-act8-location">Bergamo</div>
+                        <div class="activity-note" id="dia7-act8-note">Check-in, segurança, duty-free.</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="extras" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
+                
                 <div class="activity highlight">
                     <div class="time">17:30</div>
                     <div class="content">
-                        <div class="activity-title">✈️ VOO DE SAÍDA</div>
-                        <div class="activity-location">Aeroporto Bergamo</div>
-                        <div class="activity-note">Fim da viagem. Até a próxima, Itália! 🇮🇹</div>
+                        <div class="activity-title" id="dia7-act9-title">✈️ VOO DE SAÍDA</div>
+                        <div class="activity-location" id="dia7-act9-location">Aeroporto Bergamo</div>
+                        <div class="activity-note" id="dia7-act9-note">Fim da viagem. Até a próxima, Itália! 🇮🇹</div>
                         <div class="activity-cost">
-                            <label>€ <input type="number" class="cost-input" data-category="voo" min="0" step="0.1" value="0" placeholder="0.00"></label>
+                            <label><span class="cost-label">€</span> <input type="number" class="cost-input" data-category="voo" min="0" step="0.1" value="0" placeholder="0.00"></label>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Transport Section -->
         <section class="transport-section">
-            <h2>🚂 Horários de Trem</h2>
+            <h2 id="transport-title">🚂 Horários de Trem</h2>
             <div class="transport-grid">
                 <div class="transport-card">
                     <div class="transport-icon">🚄</div>
                     <div class="transport-time">07:00</div>
-                    <div class="transport-route">Milão → Veneza<br><small>31 março • 2h15min</small></div>
+                    <div class="transport-route" id="transport-1">Milão → Veneza<br><small>31 março • 2h15min</small></div>
                 </div>
                 <div class="transport-card">
                     <div class="transport-icon">🚄</div>
                     <div class="transport-time">10:26</div>
-                    <div class="transport-route">Veneza → Roma<br><small>1 abril • ~4h</small></div>
+                    <div class="transport-route" id="transport-2">Veneza → Roma<br><small>1 abril • ~4h</small></div>
                 </div>
                 <div class="transport-card">
                     <div class="transport-icon">🚄</div>
                     <div class="transport-time">19:35</div>
-                    <div class="transport-route">Roma → Nápoles<br><small>2 abril • 1h13min</small></div>
+                    <div class="transport-route" id="transport-3">Roma → Nápoles<br><small>2 abril • 1h13min</small></div>
                 </div>
                 <div class="transport-card">
                     <div class="transport-icon">🚄</div>
                     <div class="transport-time">17:25</div>
-                    <div class="transport-route">Nápoles → Milão<br><small>3 abril • 4h30min</small></div>
+                    <div class="transport-route" id="transport-4">Nápoles → Milão<br><small>3 abril • 4h30min</small></div>
                 </div>
             </div>
         </section>
 
-        <!-- BUDGET SECTION - ATUALIZA AUTOMATICAMENTE -->
+        <!-- Budget Section -->
         <section class="budget-section">
-            <h2>💰 Calculadora de Orçamento</h2>
+            <h2 id="budget-title">💰 Calculadora de Orçamento</h2>
             <div class="budget-grid">
                 <div class="budget-items">
                     <div class="budget-item">
-                        <label>✈️ Voo (ida/volta)</label>
-                        <input type="number" id="voo" class="budget-input" data-category="voo" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                        <label id="budget-voo">✈️ Voo (ida/volta)</label>
+                        <input type="number" id="voo" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                     <div class="budget-item">
-                        <label>🏨 Hotéis (7 noites)</label>
-                        <input type="number" id="hoteis" class="budget-input" data-category="hoteis" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                        <label id="budget-hoteis">🏨 Hotéis</label>
+                        <input type="number" id="hoteis" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                     <div class="budget-item">
-                        <label>🚂 Trens (4 trajetos)</label>
-                        <input type="number" id="trens" class="budget-input" data-category="trens" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                        <label id="budget-trens">🚂 Trens (4 trajetos)</label>
+                        <input type="number" id="trens" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                     <div class="budget-item">
-                        <label>🍝 Alimentação</label>
-                        <input type="number" id="alimentacao" class="budget-input" data-category="alimentacao" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                        <label id="budget-alimentacao">🍝 Alimentação</label>
+                        <input type="number" id="alimentacao" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                     <div class="budget-item">
-                        <label>🎟️ Passeios/Museus</label>
-                        <input type="number" id="passeios" class="budget-input" data-category="passeios" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                        <label id="budget-passeios">🎟️ Passeios/Museus</label>
+                        <input type="number" id="passeios" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                     <div class="budget-item">
-                        <label>🛍️ Compras/Mercado</label>
-                        <input type="number" id="compras" class="budget-input" data-category="compras" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                        <label id="budget-compras">🛍️ Compras/Mercado</label>
+                        <input type="number" id="compras" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                     <div class="budget-item">
-                        <label>🚌 Ônibus BGY</label>
-                        <input type="number" id="onibus" class="budget-input" data-category="onibus" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                        <label id="budget-onibus">🚌 Ônibus BGY</label>
+                        <input type="number" id="onibus" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                     <div class="budget-item">
-                        <label>💶 Extras (imprevistos)</label>
-                        <input type="number" id="extras" class="budget-input" data-category="extras" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
+                        <label id="budget-extras">💶 Extras (imprevistos)</label>
+                        <input type="number" id="extras" class="budget-input" min="0" step="0.1" value="0" readonly style="background:#f0f0f0;">
                     </div>
                 </div>
                 <div class="budget-total-card">
-                    <h3>Total Estimado</h3>
+                    <h3 id="budget-total-title">Total Estimado</h3>
                     <div class="total-value" id="totalValue">0.00</div>
                     <div class="total-currency">Euros (€)</div>
-                    <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Preços preenchidos automaticamente pelas atividades</p>
+                    <p id="budget-auto">Preços preenchidos automaticamente pelas atividades</p>
                 </div>
             </div>
         </section>
 
+        <!-- Checklist -->
         <section class="checklist-section">
-            <h2>✅ Checklist Importante</h2>
+            <h2 id="checklist-title">✅ Checklist Importante</h2>
             <div class="checklist-grid">
                 <div class="check-item">
                     <div class="check-box">✓</div>
-                    <div>Reservar <strong>A Última Ceia</strong> (Cenacolo Vinciano) - 2-3 meses antes!</div>
+                    <div id="checklist-1">Reservar <strong>A Última Ceia</strong> (Cenacolo Vinciano) - 2-3 meses antes!</div>
                 </div>
                 <div class="check-item">
                     <div class="check-box">✓</div>
-                    <div>Comprar bilhetes de <strong>trem antecipados</strong> (Trenitalia/Italo)</div>
+                    <div id="checklist-2">Comprar bilhetes de <strong>trem antecipados</strong> (Trenitalia/Italo)</div>
                 </div>
                 <div class="check-item">
                     <div class="check-box">✓</div>
-                    <div>Reservar <strong>Capela de San Severo</strong> em Nápoles (se der tempo)</div>
+                    <div id="checklist-3">Reservar <strong>Capela de San Severo</strong> em Nápoles (se der tempo)</div>
                 </div>
                 <div class="check-item">
                     <div class="check-box">✓</div>
-                    <div>Baixar apps <strong>Trenitalia</strong> e <strong>Italo</strong></div>
+                    <div id="checklist-4">Baixar apps <strong>Trenitalia</strong> e <strong>Italo</strong></div>
                 </div>
                 <div class="check-item">
                     <div class="check-box">✓</div>
-                    <div>Levar <strong>sacolas reutilizáveis</strong> para o Mercado de Navigli</div>
+                    <div id="checklist-5">Levar <strong>sacolas reutilizáveis</strong> para o Mercado de Navigli</div>
                 </div>
                 <div class="check-item">
                     <div class="check-box">✓</div>
-                    <div>Confirmar ônibus <strong>BGY-Milão</strong> e <strong>Milão-BGY</strong></div>
+                    <div id="checklist-6">Confirmar ônibus <strong>BGY-Milão</strong> e <strong>Milão-BGY</strong></div>
                 </div>
                 <div class="check-item">
                     <div class="check-box">✓</div>
-                    <div>Comprar ingresso <strong>Coliseu</strong> com antecedência</div>
+                    <div id="checklist-7">Comprar ingresso <strong>Coliseu</strong> com antecedência</div>
                 </div>
                 <div class="check-item">
                     <div class="check-box">✓</div>
-                    <div>Levar <strong>adaptador de tomada</strong> europeu</div>
+                    <div id="checklist-8">Levar <strong>adaptador de tomada</strong> europeu</div>
                 </div>
             </div>
         </section>
 
     </div>
 
-    <!-- FOOTER -->
+    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-icon">🇮🇹</div>
             <h3>Buon Viaggio!</h3>
-            <p>Milão • Veneza • Roma • Nápoles<br>30 Março - 5 Abril 2025</p>
+            <p id="footer-text">Milão • Veneza • Roma • Nápoles<br>30 Março - 5 Abril 2025</p>
         </div>
     </footer>
 
@@ -1684,6 +1760,8 @@
         <audio id="audioPlayer" preload="auto" style="display: none;"></audio>
     </div>
 
+    <!-- Scripts -->
+    <script src="translations.js"></script>
     <script>
         // Smooth scroll and active nav
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1704,7 +1782,7 @@
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
+                if (scrollY >= (sectionTop - 150)) {
                     current = section.getAttribute('id');
                 }
             });
@@ -1828,20 +1906,16 @@
 
         // AUTOPLAY - Tentar tocar assim que possível
         function tryPlay() {
-            audioPlayer.volume = 0.3; // Volume inicial mais baixo ajuda no autoplay
+            audioPlayer.volume = 0.3;
             
             let playPromise = audioPlayer.play();
             
             if (playPromise !== undefined) {
                 playPromise.then(() => {
-                    // Sucesso!
                     isPlaying = true;
                     audioButton.innerHTML = '⏸️';
                     audioButton.classList.add('playing');
-                    console.log('✅ Autoplay funcionou!');
                 }).catch(() => {
-                    // Falhou - aguarda interação do usuário
-                    console.log('❌ Autoplay bloqueado. Clique no botão para tocar.');
                     isPlaying = false;
                     audioButton.innerHTML = '▶️';
                     audioButton.classList.remove('playing');
@@ -1856,7 +1930,12 @@
             tryPlay();
         });
 
-        // Função manual para tocar/pausar
+        window.addEventListener('load', function() {
+            if (!isPlaying) {
+                tryPlay();
+            }
+        });
+
         function toggleAudio() {
             if (isPlaying) {
                 audioPlayer.pause();
@@ -1872,6 +1951,293 @@
             }
             isPlaying = !isPlaying;
         }
+
+        // =============================================
+        // FUNÇÕES DE TRADUÇÃO
+        // =============================================
+        let currentLang = 'pt-pt';
+
+        function translatePage(lang) {
+            if (!translations[lang]) return;
+            
+            // Hero
+            document.getElementById('hero-title').textContent = translations[lang]['hero.title'];
+            document.getElementById('hero-subtitle').textContent = translations[lang]['hero.subtitle'];
+            document.getElementById('hero-chegada').textContent = translations[lang]['hero.chegada'];
+            document.getElementById('hero-saida').textContent = translations[lang]['hero.saida'];
+            document.getElementById('hero-duracao').textContent = translations[lang]['hero.duracao'];
+            document.getElementById('hero-dias').textContent = translations[lang]['hero.dias'];
+            
+            // Navigation
+            document.querySelectorAll('.nav-dia').forEach(el => {
+                el.textContent = translations[lang]['nav.dia'];
+            });
+            
+            // Dias títulos
+            document.getElementById('dia1-title').textContent = translations[lang]['dia1.title'];
+            document.getElementById('dia2-title').textContent = translations[lang]['dia2.title'];
+            document.getElementById('dia3-title').textContent = translations[lang]['dia3.title'];
+            document.getElementById('dia4-title').textContent = translations[lang]['dia4.title'];
+            document.getElementById('dia5-title').textContent = translations[lang]['dia5.title'];
+            document.getElementById('dia6-title').textContent = translations[lang]['dia6.title'];
+            document.getElementById('dia7-title').textContent = translations[lang]['dia7.title'];
+            
+            // Dias da semana
+            document.getElementById('dia1-date').innerHTML = document.getElementById('dia1-date').innerHTML.replace(/[A-Za-zçãáéíóúâêô]+-feira/g, translations[lang]['week.segunda']);
+            document.getElementById('dia2-date').innerHTML = document.getElementById('dia2-date').innerHTML.replace(/[A-Za-zçãáéíóúâêô]+-feira/g, translations[lang]['week.terca']);
+            document.getElementById('dia3-date').innerHTML = document.getElementById('dia3-date').innerHTML.replace(/[A-Za-zçãáéíóúâêô]+-feira/g, translations[lang]['week.quarta']);
+            document.getElementById('dia4-date').innerHTML = document.getElementById('dia4-date').innerHTML.replace(/[A-Za-zçãáéíóúâêô]+-feira/g, translations[lang]['week.quinta']);
+            document.getElementById('dia5-date').innerHTML = document.getElementById('dia5-date').innerHTML.replace(/[A-Za-zçãáéíóúâêô]+-feira/g, translations[lang]['week.sexta']);
+            document.getElementById('dia6-date').innerHTML = document.getElementById('dia6-date').innerHTML.replace(/[A-Za-zçãáéíóúâêô]+-feira/g, translations[lang]['week.sabado']);
+            document.getElementById('dia7-date').innerHTML = document.getElementById('dia7-date').innerHTML.replace(/[A-Za-zçãáéíóúâêô]+-feira/g, translations[lang]['week.domingo']);
+            
+            // Cidades
+            document.getElementById('dia1-city').textContent = translations[lang]['city.milao'];
+            document.getElementById('dia2-city').textContent = translations[lang]['city.veneza'];
+            document.getElementById('dia3-city').textContent = translations[lang]['city.roma'];
+            document.getElementById('dia4-city').textContent = translations[lang]['city.roma_napoles'];
+            document.getElementById('dia5-city').textContent = translations[lang]['city.napoles_milao'];
+            document.getElementById('dia6-city').textContent = translations[lang]['city.milao'];
+            document.getElementById('dia7-city').textContent = translations[lang]['city.milao_bergamo'];
+            
+            // Hotel labels
+            document.querySelectorAll('#hotel-label, #hotel-label2, #hotel-label3, #hotel-label4, #hotel-label6').forEach(el => {
+                if (el) el.textContent = translations[lang]['hotel.label'];
+            });
+            
+            document.querySelectorAll('.hotel-input').forEach(el => {
+                el.placeholder = translations[lang]['hotel.placeholder'];
+            });
+            
+            // Dia 1 atividades
+            document.getElementById('dia1-act1-title').textContent = translations[lang]['dia1.act1.title'];
+            document.getElementById('dia1-act1-location').textContent = translations[lang]['dia1.act1.location'];
+            document.getElementById('dia1-act1-note').textContent = translations[lang]['dia1.act1.note'];
+            document.getElementById('dia1-act2-title').textContent = translations[lang]['dia1.act2.title'];
+            document.getElementById('dia1-act2-location').textContent = translations[lang]['dia1.act2.location'];
+            document.getElementById('dia1-act2-note').textContent = translations[lang]['dia1.act2.note'];
+            document.getElementById('dia1-act3-title').textContent = translations[lang]['dia1.act3.title'];
+            document.getElementById('dia1-act3-location').textContent = translations[lang]['dia1.act3.location'];
+            document.getElementById('dia1-act3-note').textContent = translations[lang]['dia1.act3.note'];
+            document.getElementById('dia1-act4-title').textContent = translations[lang]['dia1.act4.title'];
+            document.getElementById('dia1-act4-location').textContent = translations[lang]['dia1.act4.location'];
+            document.getElementById('dia1-act4-note').textContent = translations[lang]['dia1.act4.note'];
+            document.getElementById('dia1-act5-title').textContent = translations[lang]['dia1.act5.title'];
+            document.getElementById('dia1-act5-location').textContent = translations[lang]['dia1.act5.location'];
+            document.getElementById('dia1-act5-note').textContent = translations[lang]['dia1.act5.note'];
+            document.getElementById('dia1-act6-title').textContent = translations[lang]['dia1.act6.title'];
+            document.getElementById('dia1-act6-location').textContent = translations[lang]['dia1.act6.location'];
+            document.getElementById('dia1-act6-note').textContent = translations[lang]['dia1.act6.note'];
+            document.getElementById('dia1-act7-title').textContent = translations[lang]['dia1.act7.title'];
+            document.getElementById('dia1-act7-location').textContent = translations[lang]['dia1.act7.location'];
+            document.getElementById('dia1-act7-note').textContent = translations[lang]['dia1.act7.note'];
+            
+            // Dia 2 atividades
+            document.getElementById('dia2-act1-title').textContent = translations[lang]['dia2.act1.title'];
+            document.getElementById('dia2-act1-location').textContent = translations[lang]['dia2.act1.location'];
+            document.getElementById('dia2-act1-note').textContent = translations[lang]['dia2.act1.note'];
+            document.getElementById('dia2-act2-title').textContent = translations[lang]['dia2.act2.title'];
+            document.getElementById('dia2-act2-location').textContent = translations[lang]['dia2.act2.location'];
+            document.getElementById('dia2-act2-note').textContent = translations[lang]['dia2.act2.note'];
+            document.getElementById('dia2-act3-title').textContent = translations[lang]['dia2.act3.title'];
+            document.getElementById('dia2-act3-location').textContent = translations[lang]['dia2.act3.location'];
+            document.getElementById('dia2-act3-note').textContent = translations[lang]['dia2.act3.note'];
+            document.getElementById('dia2-act4-title').textContent = translations[lang]['dia2.act4.title'];
+            document.getElementById('dia2-act4-location').textContent = translations[lang]['dia2.act4.location'];
+            document.getElementById('dia2-act4-note').textContent = translations[lang]['dia2.act4.note'];
+            document.getElementById('dia2-act5-title').textContent = translations[lang]['dia2.act5.title'];
+            document.getElementById('dia2-act5-location').textContent = translations[lang]['dia2.act5.location'];
+            document.getElementById('dia2-act5-note').textContent = translations[lang]['dia2.act5.note'];
+            document.getElementById('dia2-act6-title').textContent = translations[lang]['dia2.act6.title'];
+            document.getElementById('dia2-act6-location').textContent = translations[lang]['dia2.act6.location'];
+            document.getElementById('dia2-act6-note').textContent = translations[lang]['dia2.act6.note'];
+            document.getElementById('dia2-act7-title').textContent = translations[lang]['dia2.act7.title'];
+            document.getElementById('dia2-act7-location').textContent = translations[lang]['dia2.act7.location'];
+            document.getElementById('dia2-act7-note').textContent = translations[lang]['dia2.act7.note'];
+            document.getElementById('dia2-act8-title').textContent = translations[lang]['dia2.act8.title'];
+            document.getElementById('dia2-act8-location').textContent = translations[lang]['dia2.act8.location'];
+            document.getElementById('dia2-act8-note').textContent = translations[lang]['dia2.act8.note'];
+            
+            // Dia 3 atividades
+            document.getElementById('dia3-act1-title').textContent = translations[lang]['dia3.act1.title'];
+            document.getElementById('dia3-act1-location').textContent = translations[lang]['dia3.act1.location'];
+            document.getElementById('dia3-act2-title').textContent = translations[lang]['dia3.act2.title'];
+            document.getElementById('dia3-act2-location').textContent = translations[lang]['dia3.act2.location'];
+            document.getElementById('dia3-act2-note').textContent = translations[lang]['dia3.act2.note'];
+            document.getElementById('dia3-act3-title').textContent = translations[lang]['dia3.act3.title'];
+            document.getElementById('dia3-act3-location').textContent = translations[lang]['dia3.act3.location'];
+            document.getElementById('dia3-act3-note').textContent = translations[lang]['dia3.act3.note'];
+            document.getElementById('dia3-act4-title').textContent = translations[lang]['dia3.act4.title'];
+            document.getElementById('dia3-act4-location').textContent = translations[lang]['dia3.act4.location'];
+            document.getElementById('dia3-act4-note').textContent = translations[lang]['dia3.act4.note'];
+            document.getElementById('dia3-act5-title').textContent = translations[lang]['dia3.act5.title'];
+            document.getElementById('dia3-act5-location').textContent = translations[lang]['dia3.act5.location'];
+            document.getElementById('dia3-act5-note').textContent = translations[lang]['dia3.act5.note'];
+            document.getElementById('dia3-act6-title').textContent = translations[lang]['dia3.act6.title'];
+            document.getElementById('dia3-act6-location').textContent = translations[lang]['dia3.act6.location'];
+            document.getElementById('dia3-act6-note').textContent = translations[lang]['dia3.act6.note'];
+            document.getElementById('dia3-act7-title').textContent = translations[lang]['dia3.act7.title'];
+            document.getElementById('dia3-act7-location').textContent = translations[lang]['dia3.act7.location'];
+            document.getElementById('dia3-act7-note').textContent = translations[lang]['dia3.act7.note'];
+            document.getElementById('dia3-act8-title').textContent = translations[lang]['dia3.act8.title'];
+            document.getElementById('dia3-act8-location').textContent = translations[lang]['dia3.act8.location'];
+            document.getElementById('dia3-act8-note').textContent = translations[lang]['dia3.act8.note'];
+            
+            // Dia 4 atividades
+            document.getElementById('dia4-act1-title').textContent = translations[lang]['dia4.act1.title'];
+            document.getElementById('dia4-act1-location').textContent = translations[lang]['dia4.act1.location'];
+            document.getElementById('dia4-act2-title').textContent = translations[lang]['dia4.act2.title'];
+            document.getElementById('dia4-act2-location').textContent = translations[lang]['dia4.act2.location'];
+            document.getElementById('dia4-act2-note').textContent = translations[lang]['dia4.act2.note'];
+            document.getElementById('dia4-act3-title').textContent = translations[lang]['dia4.act3.title'];
+            document.getElementById('dia4-act3-location').textContent = translations[lang]['dia4.act3.location'];
+            document.getElementById('dia4-act3-note').textContent = translations[lang]['dia4.act3.note'];
+            document.getElementById('dia4-act4-title').textContent = translations[lang]['dia4.act4.title'];
+            document.getElementById('dia4-act4-location').textContent = translations[lang]['dia4.act4.location'];
+            document.getElementById('dia4-act4-note').textContent = translations[lang]['dia4.act4.note'];
+            document.getElementById('dia4-act5-title').textContent = translations[lang]['dia4.act5.title'];
+            document.getElementById('dia4-act5-location').textContent = translations[lang]['dia4.act5.location'];
+            document.getElementById('dia4-act6-title').textContent = translations[lang]['dia4.act6.title'];
+            document.getElementById('dia4-act6-location').textContent = translations[lang]['dia4.act6.location'];
+            document.getElementById('dia4-act7-title').textContent = translations[lang]['dia4.act7.title'];
+            document.getElementById('dia4-act7-location').textContent = translations[lang]['dia4.act7.location'];
+            document.getElementById('dia4-act7-note').textContent = translations[lang]['dia4.act7.note'];
+            document.getElementById('dia4-act8-title').textContent = translations[lang]['dia4.act8.title'];
+            document.getElementById('dia4-act8-location').textContent = translations[lang]['dia4.act8.location'];
+            document.getElementById('dia4-act8-note').textContent = translations[lang]['dia4.act8.note'];
+            
+            // Dia 5 atividades
+            document.getElementById('dia5-act1-title').textContent = translations[lang]['dia5.act1.title'];
+            document.getElementById('dia5-act1-location').textContent = translations[lang]['dia5.act1.location'];
+            document.getElementById('dia5-act1-note').textContent = translations[lang]['dia5.act1.note'];
+            document.getElementById('dia5-act2-title').textContent = translations[lang]['dia5.act2.title'];
+            document.getElementById('dia5-act2-location').textContent = translations[lang]['dia5.act2.location'];
+            document.getElementById('dia5-act2-note').textContent = translations[lang]['dia5.act2.note'];
+            document.getElementById('dia5-act3-title').textContent = translations[lang]['dia5.act3.title'];
+            document.getElementById('dia5-act3-location').textContent = translations[lang]['dia5.act3.location'];
+            document.getElementById('dia5-act3-note').textContent = translations[lang]['dia5.act3.note'];
+            document.getElementById('dia5-act4-title').textContent = translations[lang]['dia5.act4.title'];
+            document.getElementById('dia5-act4-location').textContent = translations[lang]['dia5.act4.location'];
+            document.getElementById('dia5-act4-note').textContent = translations[lang]['dia5.act4.note'];
+            document.getElementById('dia5-act5-title').textContent = translations[lang]['dia5.act5.title'];
+            document.getElementById('dia5-act5-location').textContent = translations[lang]['dia5.act5.location'];
+            document.getElementById('dia5-act5-note').textContent = translations[lang]['dia5.act5.note'];
+            document.getElementById('dia5-act6-title').textContent = translations[lang]['dia5.act6.title'];
+            document.getElementById('dia5-act6-location').textContent = translations[lang]['dia5.act6.location'];
+            document.getElementById('dia5-act6-note').textContent = translations[lang]['dia5.act6.note'];
+            document.getElementById('dia5-act7-title').textContent = translations[lang]['dia5.act7.title'];
+            document.getElementById('dia5-act7-location').textContent = translations[lang]['dia5.act7.location'];
+            document.getElementById('dia5-act8-title').textContent = translations[lang]['dia5.act8.title'];
+            document.getElementById('dia5-act8-location').textContent = translations[lang]['dia5.act8.location'];
+            document.getElementById('dia5-act8-note').textContent = translations[lang]['dia5.act8.note'];
+            
+            // Dia 6 atividades
+            document.getElementById('dia6-act1-title').textContent = translations[lang]['dia6.act1.title'];
+            document.getElementById('dia6-act1-location').textContent = translations[lang]['dia6.act1.location'];
+            document.getElementById('dia6-act2-title').textContent = translations[lang]['dia6.act2.title'];
+            document.getElementById('dia6-act2-location').textContent = translations[lang]['dia6.act2.location'];
+            document.getElementById('dia6-act2-note').textContent = translations[lang]['dia6.act2.note'];
+            document.getElementById('dia6-act3-title').textContent = translations[lang]['dia6.act3.title'];
+            document.getElementById('dia6-act3-location').textContent = translations[lang]['dia6.act3.location'];
+            document.getElementById('dia6-act4-title').textContent = translations[lang]['dia6.act4.title'];
+            document.getElementById('dia6-act4-location').textContent = translations[lang]['dia6.act4.location'];
+            document.getElementById('dia6-act4-note').textContent = translations[lang]['dia6.act4.note'];
+            document.getElementById('dia6-act5-title').textContent = translations[lang]['dia6.act5.title'];
+            document.getElementById('dia6-act5-location').textContent = translations[lang]['dia6.act5.location'];
+            document.getElementById('dia6-act5-note').textContent = translations[lang]['dia6.act5.note'];
+            document.getElementById('dia6-act6-title').textContent = translations[lang]['dia6.act6.title'];
+            document.getElementById('dia6-act6-location').textContent = translations[lang]['dia6.act6.location'];
+            document.getElementById('dia6-act6-note').textContent = translations[lang]['dia6.act6.note'];
+            document.getElementById('dia6-act7-title').textContent = translations[lang]['dia6.act7.title'];
+            document.getElementById('dia6-act7-location').textContent = translations[lang]['dia6.act7.location'];
+            document.getElementById('dia6-act7-note').textContent = translations[lang]['dia6.act7.note'];
+            document.getElementById('dia6-act8-title').textContent = translations[lang]['dia6.act8.title'];
+            document.getElementById('dia6-act8-location').textContent = translations[lang]['dia6.act8.location'];
+            
+            // Dia 7 atividades
+            document.getElementById('dia7-act1-title').textContent = translations[lang]['dia7.act1.title'];
+            document.getElementById('dia7-act1-location').textContent = translations[lang]['dia7.act1.location'];
+            document.getElementById('dia7-act1-note').textContent = translations[lang]['dia7.act1.note'];
+            document.getElementById('dia7-act2-title').textContent = translations[lang]['dia7.act2.title'];
+            document.getElementById('dia7-act2-location').textContent = translations[lang]['dia7.act2.location'];
+            document.getElementById('dia7-act2-note').textContent = translations[lang]['dia7.act2.note'];
+            document.getElementById('dia7-act3-title').textContent = translations[lang]['dia7.act3.title'];
+            document.getElementById('dia7-act3-location').textContent = translations[lang]['dia7.act3.location'];
+            document.getElementById('dia7-act3-note').textContent = translations[lang]['dia7.act3.note'];
+            document.getElementById('dia7-act4-title').textContent = translations[lang]['dia7.act4.title'];
+            document.getElementById('dia7-act4-location').textContent = translations[lang]['dia7.act4.location'];
+            document.getElementById('dia7-act5-title').textContent = translations[lang]['dia7.act5.title'];
+            document.getElementById('dia7-act5-location').textContent = translations[lang]['dia7.act5.location'];
+            document.getElementById('dia7-act6-title').textContent = translations[lang]['dia7.act6.title'];
+            document.getElementById('dia7-act6-location').textContent = translations[lang]['dia7.act6.location'];
+            document.getElementById('dia7-act7-title').textContent = translations[lang]['dia7.act7.title'];
+            document.getElementById('dia7-act7-location').textContent = translations[lang]['dia7.act7.location'];
+            document.getElementById('dia7-act7-note').textContent = translations[lang]['dia7.act7.note'];
+            document.getElementById('dia7-act8-title').textContent = translations[lang]['dia7.act8.title'];
+            document.getElementById('dia7-act8-location').textContent = translations[lang]['dia7.act8.location'];
+            document.getElementById('dia7-act8-note').textContent = translations[lang]['dia7.act8.note'];
+            document.getElementById('dia7-act9-title').textContent = translations[lang]['dia7.act9.title'];
+            document.getElementById('dia7-act9-location').textContent = translations[lang]['dia7.act9.location'];
+            document.getElementById('dia7-act9-note').textContent = translations[lang]['dia7.act9.note'];
+            
+            // Transport
+            document.getElementById('transport-title').textContent = translations[lang]['transport.title'];
+            document.getElementById('transport-1').innerHTML = translations[lang]['transport.milao_veneza'] + '<br><small>31 março • 2h15min</small>';
+            document.getElementById('transport-2').innerHTML = translations[lang]['transport.veneza_roma'] + '<br><small>1 abril • ~4h</small>';
+            document.getElementById('transport-3').innerHTML = translations[lang]['transport.roma_napoles'] + '<br><small>2 abril • 1h13min</small>';
+            document.getElementById('transport-4').innerHTML = translations[lang]['transport.napoles_milao'] + '<br><small>3 abril • 4h30min</small>';
+            
+            // Budget
+            document.getElementById('budget-title').textContent = translations[lang]['budget.title'];
+            document.getElementById('budget-voo').textContent = translations[lang]['budget.voo'];
+            document.getElementById('budget-hoteis').textContent = translations[lang]['budget.hoteis'];
+            document.getElementById('budget-trens').textContent = translations[lang]['budget.trens'];
+            document.getElementById('budget-alimentacao').textContent = translations[lang]['budget.alimentacao'];
+            document.getElementById('budget-passeios').textContent = translations[lang]['budget.passeios'];
+            document.getElementById('budget-compras').textContent = translations[lang]['budget.compras'];
+            document.getElementById('budget-onibus').textContent = translations[lang]['budget.onibus'];
+            document.getElementById('budget-extras').textContent = translations[lang]['budget.extras'];
+            document.getElementById('budget-total-title').textContent = translations[lang]['budget.total'];
+            document.getElementById('budget-auto').textContent = translations[lang]['budget.auto'];
+            
+            // Checklist
+            document.getElementById('checklist-title').textContent = translations[lang]['checklist.title'];
+            document.getElementById('checklist-1').innerHTML = translations[lang]['checklist.1'];
+            document.getElementById('checklist-2').innerHTML = translations[lang]['checklist.2'];
+            document.getElementById('checklist-3').innerHTML = translations[lang]['checklist.3'];
+            document.getElementById('checklist-4').innerHTML = translations[lang]['checklist.4'];
+            document.getElementById('checklist-5').innerHTML = translations[lang]['checklist.5'];
+            document.getElementById('checklist-6').innerHTML = translations[lang]['checklist.6'];
+            document.getElementById('checklist-7').innerHTML = translations[lang]['checklist.7'];
+            document.getElementById('checklist-8').innerHTML = translations[lang]['checklist.8'];
+            
+            // Footer
+            document.getElementById('footer-text').innerHTML = translations[lang]['footer.text'] + '<br>30 Março - 5 Abril 2025';
+            
+            // Cost labels
+            document.querySelectorAll('.cost-label').forEach(el => {
+                el.textContent = translations[lang]['cost.label'];
+            });
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            translatePage(lang);
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang === 'pt-pt' ? 'pt-PT' : 'es-ES';
+        }
+
+        // Initial translation
+        document.addEventListener('DOMContentLoaded', function() {
+            translatePage('pt-pt');
+        });
     </script>
 
 </body>
