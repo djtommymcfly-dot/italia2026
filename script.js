@@ -316,21 +316,18 @@ function loadSavedData() {
     
     // Preencher campos de hotel
     document.querySelectorAll('.hotel-input').forEach(input => {
-        const id = input.id;
-        if (userData[id]) {
-            input.value = userData[id];
-        }
+        input.value = userData[input.id] || '';
     });
     
     // Preencher campos de custo
     document.querySelectorAll('.cost-input').forEach(input => {
-        const parent = input.closest('.activity');
-        const timeElem = parent?.querySelector('.time');
-        const titleElem = parent?.querySelector('.activity-title');
-        const key = `cost_${timeElem?.textContent?.trim()}_${titleElem?.textContent?.trim()}`.replace(/\s+/g, '_');
+        const titleElem = input.closest('.activity')?.querySelector('.activity-title');
+        const key = titleElem ? `cost_${titleElem.id}` : null;
         
-        if (userData[key]) {
+        if (key && userData[key] !== undefined) {
             input.value = userData[key];
+        } else {
+            input.value = 0;
         }
     });
     
@@ -349,11 +346,11 @@ function saveAllData() {
     
     // Salvar campos de custo
     document.querySelectorAll('.cost-input').forEach(input => {
-        const parent = input.closest('.activity');
-        const timeElem = parent?.querySelector('.time');
-        const titleElem = parent?.querySelector('.activity-title');
-        const key = `cost_${timeElem?.textContent?.trim()}_${titleElem?.textContent?.trim()}`.replace(/\s+/g, '_');
-        userData[key] = input.value;
+        const titleElem = input.closest('.activity')?.querySelector('.activity-title');
+        const key = titleElem ? `cost_${titleElem.id}` : null;
+        if (key) {
+            userData[key] = input.value;
+        }
     });
     
     saveUserData(currentUser, userData);
@@ -391,8 +388,11 @@ function handleLogout() {
     updateLoginUI();
     sessionStorage.removeItem('currentUser');
     
-    document.querySelectorAll('.hotel-input, .cost-input').forEach(input => {
+    document.querySelectorAll('.hotel-input').forEach(input => {
         input.value = '';
+    });
+    document.querySelectorAll('.cost-input').forEach(input => {
+        input.value = 0;
     });
     
     updateBudgetFromActivities();
@@ -404,6 +404,12 @@ function checkSavedLogin() {
         currentUser = savedUser;
         updateLoginUI();
         loadSavedData();
+    } else {
+        // Focar no input de nome se não estiver logado
+        setTimeout(() => {
+            const input = document.getElementById('usernameInput');
+            if (input) input.focus();
+        }, 500);
     }
 }
 
@@ -484,6 +490,16 @@ document.addEventListener('DOMContentLoaded', function() {
             playWithRetry();
         }
     }, 1000);
+
+    // Suporte para tecla Enter no login
+    const usernameInput = document.getElementById('usernameInput');
+    if (usernameInput) {
+        usernameInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleLogin();
+            }
+        });
+    }
 });
 
 // Tornar funções globais
