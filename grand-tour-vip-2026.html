@@ -1,1387 +1,2013 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grand Tour VIP · Abril 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-:root {
-  --gold: #c9a84c;
-  --gold-light: #e8cc7a;
-  --gold-pale: #f5e9c8;
-  --dark: #0d0d0f;
-  --dark-2: #141416;
-  --dark-3: #1c1c20;
-  --dark-4: #252529;
-  --text: #e8dfc8;
-  --text-muted: #9a8e75;
-  --border: #2e2e34;
-  --transport: #4a7c7e;
-  --food: #7e4a4a;
-  --attraction: #4a5a7e;
-  --hotel: #5a4a7e;
-}
-
-* { margin:0; padding:0; box-sizing:border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--dark);
-  color: var(--text);
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* Noise texture overlay */
-body::before {
-  content: '';
-  position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none; z-index: 0;
-}
-
-/* ─── HERO ─── */
-.hero {
-  position: relative;
-  padding: 80px 60px 60px;
-  background: linear-gradient(160deg, #17171b 0%, #0d0d0f 60%, #12100d 100%);
-  border-bottom: 1px solid var(--border);
-  overflow: hidden;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  top: -120px; right: -120px;
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, #c9a84c18 0%, transparent 65%);
-  pointer-events: none;
-}
-.hero-eyebrow {
-  font-size: 0.7rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 20px;
-}
-.hero h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.8rem, 5vw, 5rem);
-  font-weight: 300;
-  line-height: 1.05;
-  color: var(--gold-pale);
-  margin-bottom: 30px;
-  letter-spacing: -0.01em;
-}
-.hero h1 em {
-  font-style: italic;
-  color: var(--gold-light);
-}
-.hero-meta {
-  display: flex; flex-wrap: wrap; gap: 20px;
-  align-items: center;
-  border-top: 1px solid #2a2a2e;
-  padding-top: 30px;
-}
-.hero-pill {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--dark-4);
-  border: 1px solid #3a3a40;
-  padding: 8px 18px; border-radius: 100px;
-  font-size: 0.78rem; letter-spacing: 0.06em;
-  color: var(--text-muted);
-}
-.hero-pill i { color: var(--gold); font-size: 0.85rem; }
-.hero-total {
-  margin-left: auto;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem; font-weight: 600;
-  color: var(--gold-light);
-}
-.hero-total small { font-size: 0.9rem; letter-spacing: 0.1em; color: var(--text-muted); display: block; font-family: 'Montserrat', sans-serif; font-weight: 300; }
-
-/* ─── NAV BAR ─── */
-.sticky-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: #0d0d0fe8;
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 40px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.sticky-nav::-webkit-scrollbar { display: none; }
-.nav-inner {
-  display: flex; gap: 0;
-  min-width: max-content;
-}
-.nav-inner a {
-  display: flex; flex-direction: column; align-items: center; gap: 3px;
-  padding: 14px 18px;
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s;
-  white-space: nowrap;
-}
-.nav-inner a i { font-size: 1rem; }
-.nav-inner a:hover {
-  color: var(--gold-light);
-  border-bottom-color: var(--gold);
-}
-
-/* ─── LAYOUT ─── */
-.content { max-width: 1100px; margin: 0 auto; padding: 60px 40px; }
-
-/* ─── LEGEND ─── */
-.legend {
-  display: flex; flex-wrap: wrap; gap: 10px;
-  margin-bottom: 50px; padding-bottom: 40px;
-  border-bottom: 1px solid var(--border);
-}
-.legend-item {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--text-muted); padding: 6px 14px;
-  border-radius: 4px;
-}
-.legend-dot {
-  width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0;
-}
-
-/* ─── DAY CARD ─── */
-.day-section { margin-bottom: 60px; scroll-margin-top: 64px; }
-
-.day-header {
-  display: flex; align-items: flex-end; justify-content: space-between;
-  flex-wrap: wrap; gap: 12px;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border);
-}
-.day-number {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.75rem; font-weight: 600;
-  letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--gold);
-}
-.day-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.2rem; font-weight: 300;
-  color: var(--gold-pale);
-  line-height: 1;
-}
-.day-date {
-  font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 4px;
-}
-.day-total {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem; font-weight: 600;
-  color: var(--gold-light);
-  text-align: right;
-}
-.day-total small {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--text-muted); display: block;
-}
-
-/* ─── BLOCKS GRID ─── */
-.blocks-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.blocks-grid.single { grid-template-columns: 1fr; }
-.blocks-grid.triple { grid-template-columns: 1fr 1fr 1fr; }
-
-.block {
-  background: var(--dark-3);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 20px 22px;
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.2s;
-}
-.block::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
-}
-.block:hover { border-color: #3a3a44; }
-
-.block-transport::before { background: var(--transport); }
-.block-food::before { background: var(--food); }
-.block-attraction::before { background: var(--attraction); }
-.block-hotel::before { background: var(--hotel); }
-
-.block-type {
-  font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
-  margin-bottom: 8px;
-  display: flex; align-items: center; gap: 6px;
-}
-.block-type.t { color: #6fb5b8; }
-.block-type.f { color: #b87878; }
-.block-type.a { color: #7888c9; }
-.block-type.h { color: #9878c9; }
-
-.block-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.35rem; font-weight: 600;
-  color: var(--gold-pale);
-  margin-bottom: 6px;
-  line-height: 1.2;
-}
-.block-detail {
-  font-size: 0.72rem; color: var(--text-muted);
-  line-height: 1.6; margin-bottom: 12px;
-}
-.block-detail strong { color: var(--text); font-weight: 400; }
-.block-price {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem; font-weight: 600;
-  color: var(--gold);
-  margin-bottom: 12px;
-}
-.block-links {
-  display: flex; flex-wrap: wrap; gap: 6px;
-}
-.btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 6px 14px; border-radius: 4px;
-  font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.18s;
-  font-weight: 500;
-  cursor: pointer;
-}
-.btn-primary {
-  background: var(--gold);
-  color: #0d0d0f;
-  border: 1px solid var(--gold);
-}
-.btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); }
-.btn-secondary {
-  background: transparent;
-  color: var(--gold);
-  border: 1px solid #3a3530;
-}
-.btn-secondary:hover { border-color: var(--gold); background: #c9a84c10; }
-
-/* ─── SPAN WIDE ─── */
-.span-2 { grid-column: span 2; }
-
-/* ─── SUMMARY TABLE ─── */
-.summary {
-  margin-top: 80px;
-  padding: 60px;
-  background: var(--dark-2);
-  border: 1px solid #2a2a30;
-  border-radius: 12px;
-  position: relative;
-  overflow: hidden;
-}
-.summary::before {
-  content: '';
-  position: absolute;
-  bottom: -100px; left: -100px;
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, #c9a84c0d 0%, transparent 65%);
-}
-.summary h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.8rem; font-weight: 300;
-  color: var(--gold-pale);
-  margin-bottom: 8px;
-}
-.summary-subtitle {
-  font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--text-muted); margin-bottom: 50px;
-}
-.summary-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
-  margin-bottom: 2px;
-}
-.summary-cell {
-  background: var(--dark-3);
-  padding: 28px 24px;
-  text-align: center;
-}
-.summary-cell:first-child { border-radius: 8px 0 0 0; }
-.summary-cell:last-child { border-radius: 0 8px 0 0; }
-.summary-cell-label {
-  font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--text-muted); margin-bottom: 10px;
-}
-.summary-cell-value {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem; font-weight: 600;
-  color: var(--gold-light);
-}
-.summary-total {
-  background: #c9a84c10;
-  border: 1px solid #3a3020;
-  padding: 32px 24px;
-  border-radius: 0 0 8px 8px;
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 16px;
-}
-.summary-total-label {
-  font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--text-muted);
-}
-.summary-total-value {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 3.2rem; font-weight: 600;
-  color: var(--gold-light);
-}
-
-/* ─── DIVIDER ─── */
-.divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-  margin: 60px 0;
-}
-
-/* ─── FOOTER ─── */
-.footer {
-  text-align: center;
-  padding: 40px;
-  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: #3a3a40;
-  border-top: 1px solid var(--border);
-}
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 768px) {
-  .hero { padding: 50px 24px 40px; }
-  .content { padding: 40px 20px; }
-  .blocks-grid { grid-template-columns: 1fr; }
-  .blocks-grid.triple { grid-template-columns: 1fr; }
-  .span-2 { grid-column: span 1; }
-  .summary { padding: 30px 20px; }
-  .summary-grid { grid-template-columns: 1fr 1fr; }
-  .hero-total { margin-left: 0; }
-}
-
-/* ─── STAR RATING ─── */
-.stars { color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; }
-
-/* ─── TAG ─── */
-.tag {
-  display: inline-block;
-  background: #c9a84c15;
-  border: 1px solid #c9a84c40;
-  color: var(--gold);
-  font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
-  padding: 2px 8px; border-radius: 3px;
-  margin-bottom: 6px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Dolce Vita Grand Tour 2026 · Roteiro VIP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f4e4bc;
+            --dark: #0a0b0e;
+            --dark-light: #15171e;
+            --text: #f0e6d2;
+            --accent: #c5a059;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1c24 0%, #0f1014 100%);
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #f4e4bc, #d4af37, #f4e4bc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--gold-light);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .hero-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .hero-badge {
+            background: rgba(212,175,55,0.1);
+            border: 1px solid var(--gold);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .hero-badge i {
+            color: var(--gold);
+        }
+        
+        /* Navigation */
+        .nav-container {
+            background: rgba(21,23,30,0.95);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+            padding: 15px 0;
+        }
+        
+        .nav-dias {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 0 20px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold) var(--dark);
+        }
+        
+        .nav-dias::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .nav-dias::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 3px;
+        }
+        
+        .nav-dias a {
+            white-space: nowrap;
+            padding: 10px 20px;
+            background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 30px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-dias a:hover {
+            background: var(--gold);
+            color: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212,175,55,0.3);
+        }
+        
+        /* Legend */
+        .legend {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            color: var(--gold-light);
+        }
+        
+        .legend-item i {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+        
+        /* Day Cards */
+        .day-card {
+            background: linear-gradient(145deg, #15171e, #1a1c24);
+            border-radius: 24px;
+            margin-bottom: 40px;
+            overflow: hidden;
+            border: 1px solid rgba(212,175,55,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            border-color: rgba(212,175,55,0.4);
+        }
+        
+        .day-header {
+            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
+            padding: 30px;
+            border-bottom: 2px solid rgba(212,175,55,0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .day-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .day-route {
+            background: rgba(212,175,55,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            color: var(--gold-light);
+            border: 1px solid var(--gold);
+        }
+        
+        .day-content {
+            padding: 30px;
+        }
+        
+        /* Activity Blocks */
+        .activity {
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--gold);
+            transition: all 0.3s;
+        }
+        
+        .activity:hover {
+            background: rgba(255,255,255,0.05);
+            transform: translateX(5px);
+        }
+        
+        .activity-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--gold-light);
+        }
+        
+        .activity-header i {
+            color: var(--gold);
+            font-size: 1.4rem;
+        }
+        
+        .activity-details {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .detail-value {
+            color: var(--text);
+            font-weight: 500;
+        }
+        
+        .price-tag {
+            background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.1));
+            color: var(--gold);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            border: 1px solid var(--gold);
+            font-size: 1.1rem;
+        }
+        
+        /* Links */
+        .links-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .luxury-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .luxury-link:hover {
+            background: var(--gold);
+            color: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212,175,55,0.3);
+        }
+        
+        .luxury-link.primary {
+            background: var(--gold);
+            color: var(--dark);
+        }
+        
+        .luxury-link.primary:hover {
+            background: var(--gold-light);
+        }
+        
+        /* Day Total */
+        .day-total {
+            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 2px solid rgba(212,175,55,0.3);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+        }
+        
+        .day-total span:last-child {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 1.6rem;
+        }
+        
+        /* Summary Section */
+        .summary {
+            background: linear-gradient(145deg, #15171e, #1a1c24);
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin-top: 60px;
+            border: 3px double var(--gold);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .summary::before {
+            content: '✦';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold);
+            font-size: 2rem;
+            opacity: 0.5;
+        }
+        
+        .summary h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 40px;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .summary-item {
+            background: rgba(212,175,55,0.05);
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 20px;
+            padding: 30px 20px;
+            transition: transform 0.3s;
+        }
+        
+        .summary-item:hover {
+            transform: translateY(-5px);
+            background: rgba(212,175,55,0.1);
+        }
+        
+        .summary-label {
+            font-size: 0.9rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        
+        .summary-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+        
+        .grand-total {
+            background: linear-gradient(135deg, var(--gold), #b8941f);
+            color: var(--dark);
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 30px;
+        }
+        
+        .grand-total-label {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        
+        .grand-total-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+        }
+        
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(212,175,55,0.3);
+            color: var(--gold-light);
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .day-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .activity-header {
+                font-size: 1.1rem;
+            }
+            
+            .detail-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .links-group {
+                flex-direction: column;
+            }
+            
+            .luxury-link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+<base target="_blank">
 </head>
 <body>
 
-<!-- ══════════════════════ HERO ══════════════════════ -->
-<header class="hero">
-  <div class="hero-eyebrow">Roteiro VIP · 2 Adultos · Business &amp; Primeira Classe</div>
-  <h1>Grand Tour<br><em>Italia &amp; Lisboa</em><br>Abril 2026</h1>
-  <div class="hero-meta">
-    <div class="hero-pill"><i class="fas fa-calendar-alt"></i> 01 – 16 Abril 2026</div>
-    <div class="hero-pill"><i class="fas fa-route"></i> Faro · Lisboa · Roma · Sardenha · Florença · Veneza · Milão</div>
-    <div class="hero-pill"><i class="fas fa-users"></i> 2 Pax</div>
-    <div class="hero-pill"><i class="fas fa-star"></i> Hotéis 5 ★ · Michelin</div>
-    <div class="hero-total">
-      <small>Total Estimado</small>
-      61.905 €
-    </div>
-  </div>
-</header>
-
-<!-- ══════════════════════ NAV ══════════════════════ -->
-<nav class="sticky-nav">
-  <div class="nav-inner">
-    <a href="#dia1"><i class="fas fa-train"></i>01/04</a>
-    <a href="#dia2"><i class="fas fa-plane"></i>02/04</a>
-    <a href="#dia3"><i class="fas fa-umbrella-beach"></i>03/04</a>
-    <a href="#dia4"><i class="fas fa-water"></i>04/04</a>
-    <a href="#dia5"><i class="fas fa-landmark"></i>05/04</a>
-    <a href="#dia6"><i class="fas fa-shopping-bag"></i>06/04</a>
-    <a href="#dia7"><i class="fas fa-church"></i>07/04</a>
-    <a href="#dia8"><i class="fas fa-water"></i>08/04</a>
-    <a href="#dia9"><i class="fas fa-train"></i>09/04</a>
-    <a href="#dia10"><i class="fas fa-gem"></i>10/04</a>
-    <a href="#dia11"><i class="fas fa-mountain"></i>11/04</a>
-    <a href="#dia12"><i class="fas fa-masks-theater"></i>12/04</a>
-    <a href="#dia13"><i class="fas fa-wine-glass"></i>13/04</a>
-    <a href="#dia14"><i class="fas fa-plane-departure"></i>16/04</a>
-    <a href="#resumo"><i class="fas fa-coins"></i>Resumo</a>
-  </div>
-</nav>
-
-<!-- ══════════════════════ CONTENT ══════════════════════ -->
-<main class="content">
-
-  <!-- Legend -->
-  <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:#4a7c7e"></div> Transporte</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#7e4a4a"></div> Restaurante / Refeição</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#4a5a7e"></div> Atração / Tour</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#5a4a7e"></div> Alojamento</div>
-  </div>
-
-  <!-- ─── DIA 1 ─── -->
-  <section id="dia1" class="day-section">
-    <div class="day-header">
-      <div>
-        <div class="day-number">Dia 01</div>
-        <div class="day-date">01 Abril 2026 · Quarta-feira</div>
-        <div class="day-title">Faro <span style="color:var(--gold)">→</span> Lisboa</div>
-      </div>
-      <div class="day-total"><small>Total do Dia</small>2.175 €</div>
-    </div>
-    <div class="blocks-grid">
-
-      <div class="block block-transport">
-        <div class="block-type t"><i class="fas fa-train"></i> Transporte</div>
-        <div class="block-name">Alfa Pendular · Primeira Classe</div>
-        <div class="block-detail">
-          <strong>Comboio AP 128</strong> · 07:00 Faro → 09:35 Lisboa Entrecampos<br>
-          Serviço de bordo incluído · Champanhe Moët a bordo
-        </div>
-        <div class="block-price">145 € <span style="font-size:0.8rem;color:var(--text-muted)">/ pax</span></div>
-        <div class="block-links">
-          <a href="https://www.cp.pt/passageiros/pt/comprar-bilhetes" target="_blank" class="btn btn-primary"><i class="fas fa-ticket-alt"></i> Reservar CP</a>
-          <a href="https://www.cp.pt/passageiros/pt/train-times" target="_blank" class="btn btn-secondary"><i class="fas fa-clock"></i> Horários</a>
-        </div>
-      </div>
-
-      <div class="block block-attraction">
-        <div class="block-type a"><i class="fas fa-crown"></i> Atração VIP</div>
-        <div class="block-name">Belém · Tour Privado</div>
-        <div class="block-detail">
-          <strong>Torre de Belém + Mosteiro dos Jerónimos</strong><br>
-          Guia privado exclusivo · Acesso after-hours · 2–3 horas
-        </div>
-        <div class="block-price">260 €</div>
-        <div class="block-links">
-          <a href="https://www.torrebelem.gov.pt/pt/index.php?s=white&pid=167" target="_blank" class="btn btn-primary"><i class="fas fa-ticket-alt"></i> Torre Belém</a>
-          <a href="https://www.mosteirojeronimos.gov.pt/pt/index.php?s=white&pid=168" target="_blank" class="btn btn-secondary"><i class="fas fa-church"></i> Jerónimos</a>
-          <a href="https://www.getyourguide.com/lisbon-l42/private-tour-belem-t392869/" target="_blank" class="btn btn-secondary"><i class="fas fa-user-tie"></i> Guia Privado</a>
-        </div>
-      </div>
-
-      <div class="block block-food">
-        <div class="block-type f"><i class="fas fa-utensils"></i> Almoço · Michelin ★</div>
-        <div class="block-name">Feitoria</div>
-        <div class="block-detail">
-          <strong>Chef João Rodrigues</strong> · 1 Estrela Michelin<br>
-          Altis Belém Hotel · Doca do Bom Sucesso, Lisboa<br>
-          Menu de degustação com harmonização
-        </div>
-        <div class="block-price">380 €</div>
-        <div class="block-links">
-          <a href="https://www.restaurantefeitoria.com/en/reservations" target="_blank" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Reservar Mesa</a>
-          <a href="https://www.restaurantefeitoria.com" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-        </div>
-      </div>
-
-      <div class="block block-food">
-        <div class="block-type f"><i class="fas fa-utensils"></i> Jantar · Michelin ★</div>
-        <div class="block-name">Restaurante Eleven</div>
-        <div class="block-detail">
-          <strong>Chef Joachim Koerper</strong> · 1 Estrela Michelin<br>
-          Rua Marquês de Fronteira, Lisboa · Vista panorâmica<br>
-          Reserva antecipada recomendada
-        </div>
-        <div class="block-price">290 €</div>
-        <div class="block-links">
-          <a href="https://www.restauranteleven.com/reservas" target="_blank" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Reservar Mesa</a>
-          <a href="https://www.restauranteleven.com" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-        </div>
-      </div>
-
-      <div class="block block-hotel span-2">
-        <div class="block-type h"><i class="fas fa-hotel"></i> Alojamento · 5 ★★★★★</div>
-        <div class="block-name">Four Seasons Hotel Ritz Lisboa</div>
-        <div class="block-detail">
-          <strong>Suite Parque</strong> · Vista sobre o Parque Eduardo VII e o Tejo<br>
-          Rua Rodrigo da Fonseca 88, Lisboa · Check-in a partir das 15:00<br>
-          Spa, piscina interior, concierge 24h, transfer incluído
-        </div>
-        <div class="block-price">980 €</div>
-        <div class="block-links">
-          <a href="https://www.fourseasons.com/lisbon/rooms-and-suites/suites/" target="_blank" class="btn btn-primary"><i class="fas fa-door-open"></i> Ver Suites</a>
-          <a href="https://www.fourseasons.com/lisbon/" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-          <a href="https://www.fourseasons.com/lisbon/dining/" target="_blank" class="btn btn-secondary"><i class="fas fa-utensils"></i> Restaurante</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ─── DIA 2 ─── -->
-  <section id="dia2" class="day-section">
-    <div class="day-header">
-      <div>
-        <div class="day-number">Dia 02</div>
-        <div class="day-date">02 Abril 2026 · Quinta-feira</div>
-        <div class="day-title">Lisboa <span style="color:var(--gold)">→</span> Roma</div>
-      </div>
-      <div class="day-total"><small>Total do Dia</small>4.210 €</div>
-    </div>
-    <div class="blocks-grid">
-
-      <div class="block block-transport">
-        <div class="block-type t"><i class="fas fa-plane"></i> Voo Business</div>
-        <div class="block-name">TAP Air Portugal · TP 832</div>
-        <div class="block-detail">
-          <strong>Business Class</strong> · 08:30 LIS → 10:55 FCO<br>
-          Aeroporto Humberto Delgado → Fiumicino · ~2h25<br>
-          Lounge exclusivo TAP Premium · Transfer Roma 280 €
-        </div>
-        <div class="block-price">1.380 € <span style="font-size:0.8rem;color:var(--text-muted)">/ pax</span></div>
-        <div class="block-links">
-          <a href="https://www.flytap.com/pt-pt/gerir-a-minha-reserva" target="_blank" class="btn btn-primary"><i class="fas fa-plane"></i> Gerir Reserva TAP</a>
-          <a href="https://www.flytap.com/pt-pt/experiencia-de-voo/classes-de-servico/business" target="_blank" class="btn btn-secondary"><i class="fas fa-gem"></i> TAP Business</a>
-        </div>
-      </div>
-
-      <div class="block block-hotel">
-        <div class="block-type h"><i class="fas fa-hotel"></i> Alojamento · 5 ★★★★★</div>
-        <div class="block-name">Hotel de Russie</div>
-        <div class="block-detail">
-          <strong>Rocco Forte Collection</strong> · Via del Babuino 9, Roma<br>
-          Suite Deluxe Jardim · Jardim histórico exclusivo<br>
-          Spa de Russie · Entre a Piazza del Popolo e a Piazza di Spagna
-        </div>
-        <div class="block-price">1.450 €</div>
-        <div class="block-links">
-          <a href="https://www.roccofortehotels.com/hotels-and-resorts/hotel-de-russie/rooms-and-suites/" target="_blank" class="btn btn-primary"><i class="fas fa-door-open"></i> Ver Suites</a>
-          <a href="https://www.roccofortehotels.com/hotels-and-resorts/hotel-de-russie/" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-        </div>
-      </div>
-
-      <div class="block block-attraction">
-        <div class="block-type a"><i class="fas fa-landmark"></i> Atração VIP</div>
-        <div class="block-name">Coliseu · Tour Underground Privado</div>
-        <div class="block-detail">
-          <strong>Acesso exclusivo</strong> · Arenas subterrâneas + Via Sacra<br>
-          Guia arqueólogo privado · Acesso antes da abertura ao público<br>
-          Combinado com Fórum Romano e Monte Palatino
-        </div>
-        <div class="block-price">450 €</div>
-        <div class="block-links">
-          <a href="https://www.coopculture.it/en/poi/the-colosseum/" target="_blank" class="btn btn-primary"><i class="fas fa-ticket-alt"></i> Bilhetes Oficiais</a>
-          <a href="https://www.getyourguide.com/rome-l33/colosseum-underground-private-tour-t398001/" target="_blank" class="btn btn-secondary"><i class="fas fa-user-tie"></i> Tour Privado</a>
-        </div>
-      </div>
-
-      <div class="block block-food">
-        <div class="block-type f"><i class="fas fa-utensils"></i> Jantar · Michelin ★★★</div>
-        <div class="block-name">La Pergola</div>
-        <div class="block-detail">
-          <strong>Chef Heinz Beck</strong> · 3 Estrelas Michelin<br>
-          Rome Cavalieri Hotel · Via Alberto Cadlolo 101<br>
-          Vista panorâmica sobre Roma · Uma das mesas mais exclusivas da Itália
-        </div>
-        <div class="block-price">780 €</div>
-        <div class="block-links">
-          <a href="https://www.romecavalieri.com/la-pergola/reservations/" target="_blank" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Reservar Mesa</a>
-          <a href="https://www.romecavalieri.com/la-pergola/" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ─── DIA 3 ─── -->
-  <section id="dia3" class="day-section">
-    <div class="day-header">
-      <div>
-        <div class="day-number">Dia 03</div>
-        <div class="day-date">03 Abril 2026 · Sexta-feira</div>
-        <div class="day-title">Roma <span style="color:var(--gold)">→</span> Sardenha</div>
-      </div>
-      <div class="day-total"><small>Total do Dia</small>7.620 €</div>
-    </div>
-    <div class="blocks-grid">
-
-      <div class="block block-transport">
-        <div class="block-type t"><i class="fas fa-plane"></i> Voo Business</div>
-        <div class="block-name">ITA Airways · AZ 1550</div>
-        <div class="block-detail">
-          <strong>Business Class</strong> · 09:00 FCO → 10:10 OLB<br>
-          Olbia Costa Smeralda Airport · Sardenha Norte<br>
-          Transfer privado para Porto Cervo incluído
-        </div>
-        <div class="block-price">590 € <span style="font-size:0.8rem;color:var(--text-muted)">/ pax</span></div>
-        <div class="block-links">
-          <a href="https://www.ita-airways.com/en_en/fly-ita/check-in.html" target="_blank" class="btn btn-primary"><i class="fas fa-plane"></i> Check-in ITA</a>
-          <a href="https://www.ita-airways.com" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-        </div>
-      </div>
-
-      <div class="block block-attraction">
-        <div class="block-type a"><i class="fas fa-ship"></i> Experiência</div>
-        <div class="block-name">Iate Privado · Costa Smeralda</div>
-        <div class="block-detail">
-          <strong>Charter exclusivo 4 horas</strong> · Águas cristalinas da Esmeralda<br>
-          Rota: Porto Cervo → Cala di Volpe → Baia di Cala Granu<br>
-          Catering incluído · Snorkeling · Aperitivo a bordo
-        </div>
-        <div class="block-price">2.800 €</div>
-        <div class="block-links">
-          <a href="https://www.boataround.com/en/costa-smeralda-sardinia" target="_blank" class="btn btn-primary"><i class="fas fa-ship"></i> Reservar Iate</a>
-          <a href="https://www.click-and-boat.com/en/boat-hire/italy/sardinia/olbia" target="_blank" class="btn btn-secondary"><i class="fas fa-anchor"></i> Alternativas</a>
-        </div>
-      </div>
-
-      <div class="block block-hotel span-2">
-        <div class="block-type h"><i class="fas fa-hotel"></i> Alojamento · Ícone da Costa Smeralda</div>
-        <div class="block-name">Hotel Cala di Volpe · Starwood Luxury Collection</div>
-        <div class="block-detail">
-          <strong>Capo d'Orso, Porto Cervo</strong> · Inaugurado em 1963 por Aga Khan · Arquitetura típica sarda<br>
-          Suite Vista Mar · Piscina privada · Acesso direto à praia · 2 noites<br>
-          Restaurante Il Pontile · Jantar menu degustação com chef executivo
-        </div>
-        <div class="block-price">2.950 € <span style="font-size:0.8rem;color:var(--text-muted)">/ noite</span></div>
-        <div class="block-links">
-          <a href="https://www.marriott.com/en-us/hotels/olbcv-hotel-cala-di-volpe-a-luxury-collection-hotel-costa-smeralda/rooms/" target="_blank" class="btn btn-primary"><i class="fas fa-door-open"></i> Ver Suites</a>
-          <a href="https://www.marriott.com/en-us/hotels/olbcv-hotel-cala-di-volpe-a-luxury-collection-hotel-costa-smeralda/" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-          <a href="https://www.marriott.com/en-us/hotels/olbcv-hotel-cala-di-volpe-a-luxury-collection-hotel-costa-smeralda/dining/" target="_blank" class="btn btn-secondary"><i class="fas fa-utensils"></i> Restaurante</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ─── DIA 4 ─── -->
-  <section id="dia4" class="day-section">
-    <div class="day-header">
-      <div>
-        <div class="day-number">Dia 04</div>
-        <div class="day-date">04 Abril 2026 · Sábado</div>
-        <div class="day-title">Sardenha <span style="color:var(--gold)">→</span> Florença</div>
-      </div>
-      <div class="day-total"><small>Total do Dia</small>6.280 €</div>
-    </div>
-    <div class="blocks-grid">
-
-      <div class="block block-attraction">
-        <div class="block-type a"><i class="fas fa-shopping-bag"></i> Shopping</div>
-        <div class="block-name">Porto Cervo · Boutiques</div>
-        <div class="block-detail">
-          <strong>Via Aga Khan &amp; Piazzetta</strong> · O shopping mais exclusivo da Itália<br>
-          Bulgari · Cartier · Hermès · Dior · Bottega Veneta<br>
-          Orçamento estimado para compras pessoais
-        </div>
-        <div class="block-price">~2.000 €</div>
-        <div class="block-links">
-          <a href="https://www.portocervo.com/en/shopping" target="_blank" class="btn btn-secondary"><i class="fas fa-map-marker-alt"></i> Mapa Porto Cervo</a>
-        </div>
-      </div>
-
-      <div class="block block-food">
-        <div class="block-type f"><i class="fas fa-utensils"></i> Almoço · Michelin ★★</div>
-        <div class="block-name">Pedrinelli</div>
-        <div class="block-detail">
-          <strong>Porto Cervo</strong> · Especialidades sardas de altitude<br>
-          Frescas locais · Vista sobre a baía · 2 Estrelas Michelin
-        </div>
-        <div class="block-price">580 €</div>
-        <div class="block-links">
-          <a href="https://www.thefork.com/restaurant/pedrinelli-porto-cervo" target="_blank" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Reservar</a>
-        </div>
-      </div>
-
-      <div class="block block-transport">
-        <div class="block-type t"><i class="fas fa-plane"></i> Voo</div>
-        <div class="block-name">ITA Airways · AZ 1582</div>
-        <div class="block-detail">
-          <strong>Business Class</strong> · 19:00 OLB → 20:00 FLR<br>
-          Aeroporto Olbia → Aeroporto Amerigo Vespucci, Florença
-        </div>
-        <div class="block-price">520 € <span style="font-size:0.8rem;color:var(--text-muted)">/ pax</span></div>
-        <div class="block-links">
-          <a href="https://www.ita-airways.com" target="_blank" class="btn btn-secondary"><i class="fas fa-plane"></i> ITA Airways</a>
-        </div>
-      </div>
-
-      <div class="block block-hotel">
-        <div class="block-type h"><i class="fas fa-hotel"></i> Alojamento · 5 ★★★★★</div>
-        <div class="block-name">Hotel Savoy Firenze</div>
-        <div class="block-detail">
-          <strong>Piazza della Repubblica 7, Florença</strong><br>
-          Suite Duomo View · Vista direta sobre a Catedral · Rocco Forte Collection<br>
-          Spa Irene · Restaurante Irene · No coração histórico
-        </div>
-        <div class="block-price">2.200 €</div>
-        <div class="block-links">
-          <a href="https://www.roccofortehotels.com/hotels-and-resorts/hotel-savoy/rooms-and-suites/" target="_blank" class="btn btn-primary"><i class="fas fa-door-open"></i> Ver Suites</a>
-          <a href="https://www.roccofortehotels.com/hotels-and-resorts/hotel-savoy/" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-        </div>
-      </div>
-
-      <div class="block block-food span-2">
-        <div class="block-type f"><i class="fas fa-utensils"></i> Jantar · Michelin ★★★</div>
-        <div class="block-name">Enoteca Pinchiorri</div>
-        <div class="block-detail">
-          <strong>Chef Annie Féolde &amp; Giorgio Pinchiorri</strong> · 3 Estrelas Michelin · Uma das melhores caves de vinho da Europa<br>
-          Via Ghibellina 87, Florença · Palazzo histórico do século XVI · Reserva com meses de antecedência
-        </div>
-        <div class="block-price">860 €</div>
-        <div class="block-links">
-          <a href="https://www.enotecapinchiorri.com/en/reservations" target="_blank" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Reservar Mesa</a>
-          <a href="https://www.enotecapinchiorri.com" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ─── DIA 5 ─── -->
-  <section id="dia5" class="day-section">
-    <div class="day-header">
-      <div>
-        <div class="day-number">Dia 05</div>
-        <div class="day-date">05 Abril 2026 · Domingo</div>
-        <div class="day-title">Florença · <em style="font-family:'Cormorant Garamond',serif;font-style:italic">Arte</em></div>
-      </div>
-      <div class="day-total"><small>Total do Dia</small>3.030 €</div>
-    </div>
-    <div class="blocks-grid">
-
-      <div class="block block-attraction">
-        <div class="block-type a"><i class="fas fa-paint-brush"></i> Museu VIP</div>
-        <div class="block-name">Galleria dell'Accademia · After Hours</div>
-        <div class="block-detail">
-          <strong>Acesso exclusivo após encerramento</strong> · O David de Michelangelo em privado<br>
-          Piazza San Marco 98 · Guia especializado em arte renascentista<br>
-          Champanhe diante das obras · ~2 horas
-        </div>
-        <div class="block-price">900 €</div>
-        <div class="block-links">
-          <a href="https://www.galleriaaccademiafirenze.it/en/tickets/" target="_blank" class="btn btn-primary"><i class="fas fa-ticket-alt"></i> Bilhetes Oficiais</a>
-          <a href="https://www.getyourguide.com/florence-l385/accademia-after-hours-t178002/" target="_blank" class="btn btn-secondary"><i class="fas fa-moon"></i> After Hours VIP</a>
-        </div>
-      </div>
-
-      <div class="block block-attraction">
-        <div class="block-type a"><i class="fas fa-landmark"></i> Museu VIP</div>
-        <div class="block-name">Galleria degli Uffizi · Privado</div>
-        <div class="block-detail">
-          <strong>Tour privado antes da abertura</strong> · Botticelli, Leonardo, Raffaello<br>
-          Piazzale degli Uffizi 6 · Curador pessoal · Sem multidões<br>
-          Acesso às reservas e depósitos não abertos ao público
-        </div>
-        <div class="block-price">1.200 €</div>
-        <div class="block-links">
-          <a href="https://www.uffizi.it/en/tickets" target="_blank" class="btn btn-primary"><i class="fas fa-ticket-alt"></i> Bilhetes Oficiais</a>
-          <a href="https://www.getyourguide.com/florence-l385/uffizi-private-early-access-t292001/" target="_blank" class="btn btn-secondary"><i class="fas fa-user-tie"></i> Tour Privado</a>
-        </div>
-      </div>
-
-      <div class="block block-food">
-        <div class="block-type f"><i class="fas fa-sun"></i> Almoço</div>
-        <div class="block-name">Buca Mario ou Equivalent</div>
-        <div class="block-detail">Trattoria histórica · Cozinha toscana · Bistecca alla Fiorentina</div>
-        <div class="block-price">240 €</div>
-        <div class="block-links">
-          <a href="https://www.bucamario.it" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-        </div>
-      </div>
-
-      <div class="block block-food">
-        <div class="block-type f"><i class="fas fa-moon"></i> Jantar</div>
-        <div class="block-name">Il Palagio · Four Seasons Firenze</div>
-        <div class="block-detail">
-          <strong>Chef Vito Mollica</strong> · No Palazzo della Gherardesca<br>
-          Jardim renascentista privado · Ambiente histórico único
-        </div>
-        <div class="block-price">490 €</div>
-        <div class="block-links">
-          <a href="https://www.fourseasons.com/florence/dining/restaurants/il-palagio/" target="_blank" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Reservar</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ─── DIA 6 ─── -->
-  <section id="dia6" class="day-section">
-    <div class="day-header">
-      <div>
-        <div class="day-number">Dia 06</div>
-        <div class="day-date">06 Abril 2026 · Segunda-feira</div>
-        <div class="day-title">Florença · <em style="font-family:'Cormorant Garamond',serif;font-style:italic">Shopping</em></div>
-      </div>
-      <div class="day-total"><small>Estimativa</small>2.200 €</div>
-    </div>
-    <div class="blocks-grid triple">
-
-      <div class="block block-attraction">
-        <div class="block-type a"><i class="fas fa-tshirt"></i> Moda</div>
-        <div class="block-name">Gucci Garden</div>
-        <div class="block-detail">
-          <strong>Personal Shopper exclusivo</strong><br>Piazza della Signoria 10<br>
-          Museu + Boutique · Experiência imersiva
-        </div>
-        <div class="block-links">
-          <a href="https://www.gucci.com/us/en/st/capsule/gucci-garden" target="_blank" class="btn btn-primary"><i class="fas fa-bag-shopping"></i> Gucci Garden</a>
-          <a href="https://www.gucci.com/us/en/store/gucci-garden-florence" target="_blank" class="btn btn-secondary"><i class="fas fa-map-marker-alt"></i> Loja</a>
-        </div>
-      </div>
-
-      <div class="block block-attraction">
-        <div class="block-type a"><i class="fas fa-map-marked-alt"></i> Roteiro</div>
-        <div class="block-name">Via Tornabuoni · Haute Couture</div>
-        <div class="block-detail">
-          Salvatore Ferragamo · Prada<br>Armani · Bulgari · Cartier<br>
-          A rua mais elegante de Florença
-        </div>
-        <div class="block-links">
-          <a href="https://www.ferragamo.com/en-us/museo" target="_blank" class="btn btn-secondary"><i class="fas fa-museum"></i> Museu Ferragamo</a>
-        </div>
-      </div>
-
-      <div class="block block-food">
-        <div class="block-type f"><i class="fas fa-coffee"></i> Experiência</div>
-        <div class="block-name">Caffè Giacosa · Roberto Cavalli</div>
-        <div class="block-detail">
-          Caffè histórico de Florença<br>Via della Vigna Nuova 83<br>
-          Almoço leve entre compras
-        </div>
-        <div class="block-links">
-          <a href="https://www.caffegiacosa.it" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ─── DIA 7 ─── -->
-  <section id="dia7" class="day-section">
-    <div class="day-header">
-      <div>
-        <div class="day-number">Dia 07</div>
-        <div class="day-date">07 Abril 2026 · Terça-feira</div>
-        <div class="day-title">Florença <span style="color:var(--gold)">→</span> Veneza</div>
-      </div>
-      <div class="day-total"><small>Total do Dia</small>4.100 €</div>
-    </div>
-    <div class="blocks-grid">
-
-      <div class="block block-transport">
-        <div class="block-type t"><i class="fas fa-train"></i> Alta Velocidade</div>
-        <div class="block-name">Italo · Executive Class</div>
-        <div class="block-detail">
-          <strong>Executive Class</strong> · 10:25 FLR → 12:05 VCE Santa Lucia<br>
-          Serviço de bordo gourmet · Espaço privado<br>
-          Transfer de barco-táxi privado da estação ao hotel
-        </div>
-        <div class="block-price">340 €</div>
-        <div class="block-links">
-          <a href="https://www.italotreno.it/en" target="_blank" class="btn btn-primary"><i class="fas fa-ticket-alt"></i> Italo · E-Ticket</a>
-          <a href="https://www.italotreno.it/en/services/executive" target="_blank" class="btn btn-secondary"><i class="fas fa-star"></i> Executive Class</a>
-        </div>
-      </div>
-
-      <div class="block block-hotel">
-        <div class="block-type h"><i class="fas fa-hotel"></i> Alojamento · Ícone de Veneza</div>
-        <div class="block-name">Hotel Danieli</div>
-        <div class="block-detail">
-          <strong>Riva degli Schiavoni 4196</strong> · Palazzo histórico do século XIV<br>
-          Suite Laguna com terraço privado · Vista Canal de São Marcos<br>
-          Restaurante Terrazza Danieli no rooftop
-        </div>
-        <div class="block-price">2.650 €</div>
-        <div class="block-links">
-          <a href="https://www.hoteldanieli.com/en/rooms/suites" target="_blank" class="btn btn-primary"><i class="fas fa-door-open"></i> Ver Suites</a>
-          <a href="https://www.hoteldanieli.com" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-          <a href="https://www.hoteldanieli.com/en/restaurant-bar/terrazza-danieli" target="_blank" class="btn btn-secondary"><i class="fas fa-utensils"></i> Rooftop Bar</a>
-        </div>
-      </div>
-
-      <div class="block block-food span-2">
-        <div class="block-type f"><i class="fas fa-utensils"></i> Jantar · Michelin ★</div>
-        <div class="block-name">Ristorante Quadri</div>
-        <div class="block-detail">
-          <strong>Piazza San Marco 121</strong> · 1 Estrela Michelin · Grupo Alajmo<br>
-          Vista sobre a Piazza San Marco iluminada · Um dos restaurantes mais romanticos do mundo<br>
-          Chef Silvio Giavedoni · Cozinha veneziana contemporânea
-        </div>
-        <div class="block-price">720 €</div>
-        <div class="block-links">
-          <a href="https://alajmo.it/en/sezioni/quadri/ristorazione" target="_blank" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Reservar Mesa</a>
-          <a href="https://alajmo.it/en/sezioni/quadri" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ─── DIA 8 ─── -->
-  <section id="dia8" class="day-section">
-    <div class="day-header">
-      <div>
-        <div class="day-number">Dia 08</div>
-        <div class="day-date">08 Abril 2026 · Quarta-feira</div>
-        <div class="day-title">Veneza · <em style="font-family:'Cormorant Garamond',serif;font-style:italic">La Serenissima</em></div>
-      </div>
-      <div class="day-total"><small>Total do Dia</small>3.260 €</div>
-    </div>
-    <div class="blocks-grid">
-
-      <div class="block block-attraction">
-        <div class="block-type a"><i class="fas fa-moon"></i> Experiência</div>
-        <div class="block-name">Gôndola Serenata · Ao Luar</div>
-        <div class="block-detail">
-          <strong>Noite privada nos canais</strong> · Serenata com músicos ao vivo<br>
-          Percurso: Canal Grande → Canais secretos → Rialto<br>
-          Champanhe e frutos do mar a bordo · ~2 horas
-        </div>
-        <div class="block-price">590 €</div>
-        <div class="block-links">
-          <a href="https://www.venetiangoondoliers.com/serenades" target="_blank" class="btn btn-primary"><i class="fas fa-music"></i> Reservar Serenata</a>
-          <a href="https://www.getyourguide.com/venice-l24/private-gondola-serenade-t152003/" target="_blank" class="btn btn-secondary"><i class="fas fa-heart"></i> Tour Privado</a>
-        </div>
-      </div>
-
-      <div class="block block-attraction">
-        <div class="block-type a"><i class="fas fa-landmark"></i> Palácio VIP</div>
-        <div class="block-name">Palazzo Ducale · After Hours</div>
-        <div class="block-detail">
-          <strong>Acesso privado após encerramento</strong><br>
-          Piazza San Marco 1 · Ponte dos Suspiros iluminada<br>
-          Câmaras secretas + Sala do Grande Consiglio · Curador exclusivo
-        </div>
-        <div class="block-price">1.400 €</div>
-        <div class="block-links">
-          <a href="https://palazzoducale.visitmuve.it/en/plan-your-visit/tickets-and-reductions/" target="_blank" class="btn btn-primary"><i class="fas fa-ticket-alt"></i> Bilhetes VIP</a>
-          <a href="https://palazzoducale.visitmuve.it" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-        </div>
-      </div>
-
-      <div class="block block-food">
-        <div class="block-type f"><i class="fas fa-sun"></i> Almoço</div>
-        <div class="block-name">Osteria Alle Testiere</div>
-        <div class="block-detail">
-          Frutos do mar venezianos · Ambiente íntimo<br>
-          Calle del Mondo Novo, Castello · Exige reserva com semanas de antecedência
-        </div>
-        <div class="block-price">380 €</div>
-        <div class="block-links">
-          <a href="https://www.osterialletestiere.it" target="_blank" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Reservar</a>
-        </div>
-      </div>
-
-      <div class="block block-food">
-        <div class="block-type f"><i class="fas fa-moon"></i> Jantar · Aman Venice</div>
-        <div class="block-name">Arva · Aman Venice</div>
-        <div class="block-detail">
-          <strong>Palazzo Papadopoli</strong> · Grand Canal<br>
-          Salões de fresco do século XVI · Cozinha veneto-italiana de alta linha<br>
-          Único no mundo · Experiência gastronómica inesquecível
-        </div>
-        <div class="block-price">890 €</div>
-        <div class="block-links">
-          <a href="https://www.aman.com/hotels/aman-venice/dining" target="_blank" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Reservar Aman</a>
-          <a href="https://www.aman.com/hotels/aman-venice" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Aman Venice</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ─── DIA 9 ─── -->
-  <section id="dia9" class="day-section">
-    <div class="day-header">
-      <div>
-        <div class="day-number">Dia 09</div>
-        <div class="day-date">09 Abril 2026 · Quinta-feira</div>
-        <div class="day-title">Veneza <span style="color:var(--gold)">→</span> Milão</div>
-      </div>
-      <div class="day-total"><small>Total do Dia</small>3.930 €</div>
-    </div>
-    <div class="blocks-grid">
-
-      <div class="block block-transport">
-        <div class="block-type t"><i class="fas fa-train"></i> Alta Velocidade</div>
-        <div class="block-name">Frecciarossa · Business Class</div>
-        <div class="block-detail">
-          <strong>Business Class</strong> · 16:30 VCE → 18:15 MXP Centrale<br>
-          Trenitalia · Serviço de bordo · Transfer privado incluído
-        </div>
-        <div class="block-price">300 €</div>
-        <div class="block-links">
-          <a href="https://www.trenitalia.com/en.html" target="_blank" class="btn btn-primary"><i class="fas fa-ticket-alt"></i> Reservar Trenitalia</a>
-          <a href="https://www.trenitalia.com/en/information/business-class-frecciarossa.html" target="_blank" class="btn btn-secondary"><i class="fas fa-star"></i> Business Class</a>
-        </div>
-      </div>
-
-      <div class="block block-hotel">
-        <div class="block-type h"><i class="fas fa-hotel"></i> Alojamento · Design Icónico</div>
-        <div class="block-name">Armani Hotel Milano</div>
-        <div class="block-detail">
-          <strong>Via Manzoni 31</strong> · Concebido por Giorgio Armani<br>
-          Suite Armani · Design minimalista milanese · Galleria Vittorio Emanuele a 5 min<br>
-          Armani SPA · Armani Ristorante no 10º andar · Vista sobre Milão
-        </div>
-        <div class="block-price">2.950 €</div>
-        <div class="block-links">
-          <a href="https://www.armanihotels.com/en/hotels/milan/rooms-suites" target="_blank" class="btn btn-primary"><i class="fas fa-door-open"></i> Ver Suites</a>
-          <a href="https://www.armanihotels.com/en/hotels/milan" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-          <a href="https://www.armanihotels.com/en/hotels/milan/dining/armani-ristorante" target="_blank" class="btn btn-secondary"><i class="fas fa-utensils"></i> Restaurante</a>
-        </div>
-      </div>
-
-      <div class="block block-food span-2">
-        <div class="block-type f"><i class="fas fa-utensils"></i> Jantar · Michelin ★★</div>
-        <div class="block-name">Seta · Mandarin Oriental Milano</div>
-        <div class="block-detail">
-          <strong>Chef Antonio Guida</strong> · 2 Estrelas Michelin<br>
-          Via Andegari 9 · Mandarin Oriental Milano<br>
-          Cozinha italiana contemporânea de máximo refinamento · Cave excepcional
-        </div>
-        <div class="block-price">680 €</div>
-        <div class="block-links">
-          <a href="https://www.mandarinoriental.com/milan/via-andegari/fine-dining/restaurants/seta-restaurant/reservations" target="_blank" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Reservar Mesa</a>
-          <a href="https://www.mandarinoriental.com/milan/via-andegari/fine-dining/restaurants/seta-restaurant" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ─── DIA 10 ─── -->
-  <section id="dia10" class="day-section">
-    <div class="day-header">
-      <div>
-        <div class="day-number">Dia 10</div>
-        <div class="day-date">10 Abril 2026 · Sexta-feira</div>
-        <div class="day-title">Milão · <em style="font-family:'Cormorant Garamond',serif;font-style:italic">Quadrilatero della Moda</em></div>
-      </div>
-      <div class="day-total"><small>Estimativa</small>2.200 €</div>
-    </div>
-    <div class="blocks-grid">
-
-      <div class="block block-attraction">
-        <div class="block-type a"><i class="fas fa-shopping-bag"></i> Fashion Week</div>
-        <div class="block-name">Quadrilatero · Personal Shopper</div>
-        <div class="block-detail">
-          Via Montenapoleone · Via della Spiga · Via Manzoni<br>
-          <strong>Personal shopper de luxo</strong> · Acesso VIP às boutiques<br>
-          Prada · Versace · Dolce &amp; Gabbana · Max Mara · Valextra
-        </div>
-        <div class="block-links">
-          <a href="https://www.montenapoleone.it/en/" target="_blank" class="btn btn-secondary"><i class="fas fa-map-marked-alt"></i> Via Montenapoleone</a>
-          <a href="https://www.getyourguide.com/milan-l125/milan-fashion-personal-shopper-t310022/" target="_blank" class="btn btn-primary"><i class="fas fa-user-tie"></i> Personal Shopper</a>
-        </div>
-      </div>
-
-      <div class="block block-attraction">
-        <div class="block-type a"><i class="fas fa-landmark"></i> Arte</div>
-        <div class="block-name">Pinacoteca Brera</div>
-        <div class="block-detail">
-          Via Brera 28 · Uma das melhores coleções de pintura italiana<br>
-          Raphael, Caravaggio, Mantegna, Tiepolo<br>
-          Visita guiada privada disponível
-        </div>
-        <div class="block-links">
-          <a href="https://pinacotecabrera.org/en/visit/tickets/" target="_blank" class="btn btn-primary"><i class="fas fa-ticket-alt"></i> Bilhetes</a>
-          <a href="https://pinacotecabrera.org" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-        </div>
-      </div>
-
-      <div class="block block-food">
-        <div class="block-type f"><i class="fas fa-sun"></i> Almoço · Michelin ★</div>
-        <div class="block-name">Ristorante Cracco</div>
-        <div class="block-detail">
-          <strong>Chef Carlo Cracco</strong> · 1 Estrela Michelin<br>
-          Galleria Vittorio Emanuele II · Interior deslumbrante<br>
-          Menu degustação milanese contemporâneo
-        </div>
-        <div class="block-price">340 €</div>
-        <div class="block-links">
-          <a href="https://www.ristorantecracco.it/en/reservations" target="_blank" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Reservar</a>
-          <a href="https://www.ristorantecracco.it" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-        </div>
-      </div>
-
-      <div class="block block-food">
-        <div class="block-type f"><i class="fas fa-moon"></i> Jantar</div>
-        <div class="block-name">Armani Ristorante</div>
-        <div class="block-detail">
-          Via Manzoni 31 · 10º andar do Armani Hotel<br>
-          Vista panorâmica sobre os telhados de Milão<br>
-          Cozinha contemporânea assinada
-        </div>
-        <div class="block-price">680 €</div>
-        <div class="block-links">
-          <a href="https://www.armanihotels.com/en/hotels/milan/dining/armani-ristorante/reservations" target="_blank" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Reservar</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ─── DIA 11 ─── -->
-  <section id="dia11" class="day-section">
-    <div class="day-header">
-      <div>
-        <div class="day-number">Dia 11</div>
-        <div class="day-date">11 Abril 2026 · Sábado</div>
-        <div class="day-title">Lago de Como · <em style="font-family:'Cormorant Garamond',serif;font-style:italic">Escapadela</em></div>
-      </div>
-      <div class="day-total"><small>Total do Dia</small>4.000 €</div>
-    </div>
-    <div class="blocks-grid">
-
-      <div class="block block-transport">
-        <div class="block-type t"><i class="fas fa-helicopter"></i> Transfer VIP</div>
-        <div class="block-name">Helicóptero Milão → Como → Milão</div>
-        <div class="block-detail">
-          <strong>Charter privado</strong> · ~15 min cada sentido<br>
-          Vista aérea sobre os Alpes e o lago · Helipad privado do hotel<br>
-          Operador: HeliAir · Check-in 09:00
-        </div>
-        <div class="block-price">2.800 €</div>
-        <div class="block-links">
-          <a href="https://www.heliair.it/en/helicopter-charter" target="_blank" class="btn btn-primary"><i class="fas fa-helicopter"></i> Reservar Helicóptero</a>
-          <a href="https://www.blu-panorama.it/en/helicopter-rental-lake-como" target="_blank" class="btn btn-secondary"><i class="fas fa-route"></i> Alternativa</a>
-        </div>
-      </div>
-
-      <div class="block block-food">
-        <div class="block-type f"><i class="fas fa-utensils"></i> Almoço · Ícone</div>
-        <div class="block-name">Villa d'Este · Ristorante Veranda</div>
-        <div class="block-detail">
-          <strong>Via Regina 40, Cernobbio</strong> · Hotel histórico desde 1873<br>
-          Jardins renascentistas à beira do lago · Almoço com vista para as Alpes<br>
-          Frutos do lago · Carta de vinhos lombarda
-        </div>
-        <div class="block-price">1.200 €</div>
-        <div class="block-links">
-          <a href="https://www.villadeste.com/en/restaurants-bars/the-veranda" target="_blank" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Reservar</a>
-          <a href="https://www.villadeste.com" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Villa d'Este</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ─── DIA 12 ─── -->
-  <section id="dia12" class="day-section">
-    <div class="day-header">
-      <div>
-        <div class="day-number">Dia 12</div>
-        <div class="day-date">12 Abril 2026 · Domingo</div>
-        <div class="day-title">Milão · <em style="font-family:'Cormorant Garamond',serif;font-style:italic">Cultura & Spa</em></div>
-      </div>
-      <div class="day-total"><small>Total do Dia</small>2.230 €</div>
-    </div>
-    <div class="blocks-grid triple">
-
-      <div class="block block-attraction">
-        <div class="block-type a"><i class="fas fa-spa"></i> Bem-Estar</div>
-        <div class="block-name">Armani SPA</div>
-        <div class="block-detail">
-          Dia completo · Ritual exclusivo<br>Massagem · Hammam · Piscina<br>
-          No Armani Hotel · 3h de experiência
-        </div>
-        <div class="block-price">650 €</div>
-        <div class="block-links">
-          <a href="https://www.armanihotels.com/en/hotels/milan/spa" target="_blank" class="btn btn-primary"><i class="fas fa-spa"></i> Reservar Spa</a>
-        </div>
-      </div>
-
-      <div class="block block-attraction">
-        <div class="block-type a"><i class="fas fa-masks-theater"></i> Ópera</div>
-        <div class="block-name">Teatro alla Scala</div>
-        <div class="block-detail">
-          <strong>Camarote Real</strong> · Palco histórico desde 1778<br>
-          Piazza della Scala · Ópera ou concerto sinfónico<br>
-          Champanhe no intervalo · Dress code rigoroso
-        </div>
-        <div class="block-price">1.100 €</div>
-        <div class="block-links">
-          <a href="https://www.teatroallascala.org/en/season-and-tickets/book-tickets.html" target="_blank" class="btn btn-primary"><i class="fas fa-ticket-alt"></i> Reservar Camarote</a>
-          <a href="https://www.teatroallascala.org" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> La Scala</a>
-        </div>
-      </div>
-
-      <div class="block block-food">
-        <div class="block-type f"><i class="fas fa-utensils"></i> Jantar</div>
-        <div class="block-name">Pré-Ópera · Trussardi alla Scala</div>
-        <div class="block-detail">
-          Piazza della Scala 5 · A passos do teatro<br>
-          Cozinha italiana contemporânea · Perfeito para pré-espetáculo<br>
-          Jantar às 19:00 · Espetáculo às 20:30
-        </div>
-        <div class="block-price">480 €</div>
-        <div class="block-links">
-          <a href="https://www.trussardiallascala.com/en/ristorante/reservations" target="_blank" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Reservar</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ─── DIA 13 ─── -->
-  <section id="dia13" class="day-section">
-    <div class="day-header">
-      <div>
-        <div class="day-number">Dia 13</div>
-        <div class="day-date">13 Abril 2026 · Segunda-feira</div>
-        <div class="day-title">Milão · <em style="font-family:'Cormorant Garamond',serif;font-style:italic">Navigli & Despedida</em></div>
-      </div>
-      <div class="day-total"><small>Total do Dia</small>1.030 €</div>
-    </div>
-    <div class="blocks-grid">
-
-      <div class="block block-attraction">
-        <div class="block-type a"><i class="fas fa-fish"></i> Mercado</div>
-        <div class="block-name">Mercato Naviglio Grande</div>
-        <div class="block-detail">
-          Rione Navigli · Milão boémio e autêntico<br>
-          Caviar beluga · Trufas · Queijos DOP · Vinhos<br>
-          Mercado de antiguidades ao longo do canal
-        </div>
-        <div class="block-price">240 €</div>
-        <div class="block-links">
-          <a href="https://www.navigliogrande.com" target="_blank" class="btn btn-secondary"><i class="fas fa-map-marker-alt"></i> Navigli Grande</a>
-        </div>
-      </div>
-
-      <div class="block block-food">
-        <div class="block-type f"><i class="fas fa-star"></i> Jantar de Despedida</div>
-        <div class="block-name">Il Luogo di Aimo e Nadia</div>
-        <div class="block-detail">
-          <strong>Michelin ★★</strong> · Via Montecuccoli 6<br>
-          Lendária cozinha italiana desde 1962 · Despedida digna da viagem<br>
-          Menu de degustação completo com harmonização de vinhos
-        </div>
-        <div class="block-price">790 €</div>
-        <div class="block-links">
-          <a href="https://www.aimoenadiamilan.it/en/reservations" target="_blank" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Reservar Mesa</a>
-          <a href="https://www.aimoenadiamilan.it" target="_blank" class="btn btn-secondary"><i class="fas fa-globe"></i> Website</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ─── DIA 14 ─── -->
-  <section id="dia14" class="day-section">
-    <div class="day-header">
-      <div>
-        <div class="day-number">Dia 14</div>
-        <div class="day-date">16 Abril 2026 · Quinta-feira</div>
-        <div class="day-title">Milão MXP <span style="color:var(--gold)">→</span> Faro FAO</div>
-      </div>
-      <div class="day-total"><small>Total do Dia</small>2.400 €</div>
-    </div>
-    <div class="blocks-grid">
-
-      <div class="block block-transport span-2">
-        <div class="block-type t"><i class="fas fa-plane-departure"></i> Regresso · Business Class</div>
-        <div class="block-name">TAP Air Portugal · TP 827 + TP 1906</div>
-        <div class="block-detail">
-          <strong>Milão MXP → Lisboa</strong> · TP 827 · 11:50 → 13:20<br>
-          <strong>Lisboa LIS → Faro FAO</strong> · TP 1906 · 15:45 → 17:20<br>
-          Business Class em ambos os trechos · Transfer MXP 240 € + Transfer Faro 180 €<br>
-          Lounge TAP Premium em Lisboa durante a escala
-        </div>
-        <div class="block-price">1.980 € <span style="font-size:0.8rem;color:var(--text-muted)">/ pax</span></div>
-        <div class="block-links">
-          <a href="https://www.flytap.com/pt-pt/gerir-a-minha-reserva" target="_blank" class="btn btn-primary"><i class="fas fa-plane"></i> Gerir Reserva TAP</a>
-          <a href="https://www.flytap.com/pt-pt/check-in-online" target="_blank" class="btn btn-secondary"><i class="fas fa-check-circle"></i> Check-in Online</a>
-          <a href="https://www.flytap.com/pt-pt/experiencia-de-voo/lounges" target="_blank" class="btn btn-secondary"><i class="fas fa-couch"></i> Lounges TAP</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ══════════════════════ RESUMO FINAL ══════════════════════ -->
-  <div id="resumo" class="summary" style="scroll-margin-top:64px">
-    <h2>Resumo Financeiro</h2>
-    <div class="summary-subtitle">2 Pax · 01 – 16 Abril 2026 · Grand Tour VIP</div>
-
-    <div class="summary-grid">
-      <div class="summary-cell">
-        <div class="summary-cell-label">✈ Transportes</div>
-        <div class="summary-cell-value">8.215 €</div>
-      </div>
-      <div class="summary-cell">
-        <div class="summary-cell-label">🏛 Atrações VIP</div>
-        <div class="summary-cell-value">10.980 €</div>
-      </div>
-      <div class="summary-cell">
-        <div class="summary-cell-label">🍽 Refeições Michelin</div>
-        <div class="summary-cell-value">12.430 €</div>
-      </div>
-      <div class="summary-cell">
-        <div class="summary-cell-label">🏨 Hotéis 5 ★</div>
-        <div class="summary-cell-value">30.280 €</div>
-      </div>
-    </div>
-    <div class="summary-total">
-      <div>
-        <div class="summary-total-label">Total Geral · Tudo Incluído</div>
-        <div style="font-size:0.65rem;color:var(--text-muted);margin-top:4px">Excl. compras pessoais · Preços estimados para 2 pax</div>
-      </div>
-      <div class="summary-total-value">61.905 €</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-crown"></i> LA DOLCE VITA GRAND TOUR <i class="fas fa-crown"></i></h1>
+            <p class="hero-subtitle">Roteiro VIP Premium · 16 Dias de Experiências Inesquecíveis</p>
+            <div class="hero-info">
+                <div class="hero-badge">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>01 – 16 Abril 2026</span>
+                </div>
+                <div class="hero-badge">
+                    <i class="fas fa-user-friends"></i>
+                    <span>2 Adultos · Business/Primeira Classe</span>
+                </div>
+                <div class="hero-badge">
+                    <i class="fas fa-gem"></i>
+                    <span>Hotéis 5* · Restaurantes Michelin</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-dias">
+            <a href="#dia1"><i class="fas fa-train"></i> 01/04 Faro-Lisboa</a>
+            <a href="#dia2"><i class="fas fa-plane"></i> 02/04 Lisboa-Roma</a>
+            <a href="#dia3"><i class="fas fa-umbrella-beach"></i> 03/04 Roma-Sardenha</a>
+            <a href="#dia4"><i class="fas fa-ship"></i> 04/04 Sardenha-Firenze</a>
+            <a href="#dia5"><i class="fas fa-landmark"></i> 05/04 Firenze</a>
+            <a href="#dia6"><i class="fas fa-palette"></i> 06/04 Firenze</a>
+            <a href="#dia7"><i class="fas fa-church"></i> 07/04 Firenze-Veneza</a>
+            <a href="#dia8"><i class="fas fa-gondola"></i> 08/04 Veneza</a>
+            <a href="#dia9"><i class="fas fa-train"></i> 09/04 Veneza-Milão</a>
+            <a href="#dia10"><i class="fas fa-shopping-bag"></i> 10/04 Milão</a>
+            <a href="#dia11"><i class="fas fa-helicopter"></i> 11/04 Lago Como</a>
+            <a href="#dia12"><i class="fas fa-mask"></i> 12/04 Milão</a>
+            <a href="#dia13"><i class="fas fa-water"></i> 13/04 Navigli</a>
+            <a href="#dia14"><i class="fas fa-plane-departure"></i> 16/04 Retorno</a>
+        </div>
+    </nav>
+
+    <!-- Legend -->
+    <div class="legend">
+        <div class="legend-item"><i class="fas fa-train"></i> 1ª Classe</div>
+        <div class="legend-item"><i class="fas fa-plane"></i> Business</div>
+        <div class="legend-item"><i class="fas fa-utensils"></i> Michelin Stars</div>
+        <div class="legend-item"><i class="fas fa-hotel"></i> 5 Estrelas LUXO</div>
+        <div class="legend-item"><i class="fas fa-link"></i> Links Diretos</div>
     </div>
 
-    <div style="margin-top:40px;padding-top:30px;border-top:1px solid var(--border);text-align:center;color:var(--text-muted);font-size:0.72rem;line-height:2;letter-spacing:0.1em">
-      FARO · LISBOA · ROMA · SARDEGNA · FIRENZE · VENEZIA · MILANO<br>
-      <span style="color:var(--gold)">01 – 16 ABRIL 2026 · EXPERIÊNCIA SUPREMA</span>
+    <div class="container">
+
+        <!-- DIA 1 -->
+        <section id="dia1" class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <i class="fas fa-gem"></i>
+                    Dia 1 · 01 Abril 2026
+                </div>
+                <div class="day-route">Faro → Lisboa</div>
+            </div>
+            
+            <div class="day-content">
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-train"></i>
+                        <span>Transporte · Alfa Pendular Primeira Classe</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Horário</span>
+                            <span class="detail-value">07:00 Faro → 09:35 Entrecampos (AP 128)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Serviço Premium</span>
+                            <span class="detail-value">Champanhe Moët & Chandon incluso</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">145 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.cp.pt/passageiros/pt" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-ticket-alt"></i> Reservar CP
+                        </a>
+                        <a href="https://www.cp.pt/passageiros/pt/consultar-horarios" target="_blank" class="luxury-link">
+                            <i class="fas fa-clock"></i> Horários
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-landmark"></i>
+                        <span>Atração · Belém VIP Experience</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Experiência</span>
+                            <span class="detail-value">Tour Privado Torre de Belém + Mosteiro dos Jerónimos</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Duração</span>
+                            <span class="detail-value">3 horas com guia especializado</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">260 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.parquesdesintra.pt/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-ticket-alt"></i> Parques de Sintra
+                        </a>
+                        <a href="https://www.visitlisboa.com/" target="_blank" class="luxury-link">
+                            <i class="fas fa-info-circle"></i> Visit Lisboa
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-utensils"></i>
+                        <span>Gastronomia · Almoço Michelin</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Restaurante</span>
+                            <span class="detail-value">Feitoria ★ (Chef João Rodrigues)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Menu</span>
+                            <span class="detail-value">Journey Menu com harmonização</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">380 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://guide.michelin.com/us/en/lisboa-region/lisboa/restaurant/feitoria" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-star"></i> Michelin Guide
+                        </a>
+                        <a href="https://www.alfama-lda.com/feitoria" target="_blank" class="luxury-link">
+                            <i class="fas fa-calendar-check"></i> Reservar Mesa
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-utensils"></i>
+                        <span>Gastronomia · Jantar</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Restaurante</span>
+                            <span class="detail-value">Eleven ★ (Chef Joachim Koerper)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Especialidade</span>
+                            <span class="detail-value">Cozinha Mediterrânea Premium</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">290 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.restauranteleven.com/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-globe"></i> Website Oficial
+                        </a>
+                        <a href="https://guide.michelin.com/us/en/lisboa-region/lisboa/restaurant/eleven118394" target="_blank" class="luxury-link">
+                            <i class="fas fa-star"></i> Michelin
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-hotel"></i>
+                        <span>Hospedagem · Four Seasons Hotel Ritz</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Acomodação</span>
+                            <span class="detail-value">Suite Premium com Vista Parque</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Localização</span>
+                            <span class="detail-value">Marquês de Pombal · Centro de Lisboa</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">980 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.fourseasons.com/lisbon/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-hotel"></i> Website Oficial
+                        </a>
+                        <a href="https://www.fourseasons.com/lisbon/offers/" target="_blank" class="luxury-link">
+                            <i class="fas fa-tag"></i> Ofertas Especiais
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="day-total">
+                <span>Total Dia 1</span>
+                <span>2.055 €</span>
+            </div>
+        </section>
+
+        <!-- DIA 2 -->
+        <section id="dia2" class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <i class="fas fa-plane"></i>
+                    Dia 2 · 02 Abril 2026
+                </div>
+                <div class="day-route">Lisboa → Roma</div>
+            </div>
+            
+            <div class="day-content">
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-plane"></i>
+                        <span>Voo · TAP Business Class</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Voo</span>
+                            <span class="detail-value">TP 832 · 08:30 LIS → 10:55 FCO</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Classe</span>
+                            <span class="detail-value">Business · Assentos-flat bed</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">1.380 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.flytap.com/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-plane"></i> Gerar Reserva
+                        </a>
+                        <a href="https://www.flytap.com/en-pt/manage-booking" target="_blank" class="luxury-link">
+                            <i class="fas fa-cog"></i> Manage Booking
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-hotel"></i>
+                        <span>Hospedagem · Hotel de Russie</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Hotel</span>
+                            <span class="detail-value">Rocco Forte Hotel de Russie *****</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Acomodação</span>
+                            <span class="detail-value">Executive Suite com Jardim Secreto</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Localização</span>
+                            <span class="detail-value">Via del Babuino · Centro Histórico</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">1.450 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.roccofortehotels.com/hotels-and-resorts/hotel-de-russie/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-globe"></i> Website Oficial
+                        </a>
+                        <a href="https://www.roccofortehotels.com/hotels-and-resorts/hotel-de-russie/rooms-and-suites/" target="_blank" class="luxury-link">
+                            <i class="fas fa-bed"></i> Suítes
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-landmark"></i>
+                        <span>Atração · Coliseu Underground VIP</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Experiência</span>
+                            <span class="detail-value">Acesso aos Undergrounds + Arena Floor</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Inclui</span>
+                            <span class="detail-value">Guia privado · Skip-the-line</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">450 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.coopculture.it/en/colosseo-e-foro-romano.cfm" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-ticket-alt"></i> Ingressos Oficiais
+                        </a>
+                        <a href="https://www.viator.com/Rome-tours/Colosseum/d511-g6-c8" target="_blank" class="luxury-link">
+                            <i class="fas fa-route"></i> Tours VIP
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-utensils"></i>
+                        <span>Gastronomia · Jantar 3 Estrelas Michelin</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Restaurante</span>
+                            <span class="detail-value">La Pergola ★★★ (Chef Heinz Beck)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Local</span>
+                            <span class="detail-value">Rome Cavalieri Waldorf Astoria</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Menu</span>
+                            <span class="detail-value">Degustação 10 pratos · Adega 65k garrafas</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">780 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.rome.cavalieri.hilton.com/it/dining/la-pergola.html" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-star"></i> Website Oficial
+                        </a>
+                        <a href="https://www.theworlds50best.com/discovery/Establishments/Italy/Rome/La-Pergola.html" target="_blank" class="luxury-link">
+                            <i class="fas fa-award"></i> 50 Best
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="day-total">
+                <span>Total Dia 2</span>
+                <span>4.060 €</span>
+            </div>
+        </section>
+
+        <!-- DIA 3 -->
+        <section id="dia3" class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <i class="fas fa-umbrella-beach"></i>
+                    Dia 3 · 03 Abril 2026
+                </div>
+                <div class="day-route">Roma → Sardenha (Costa Smeralda)</div>
+            </div>
+            
+            <div class="day-content">
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-plane"></i>
+                        <span>Voo · ITA Airways Business</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Voo</span>
+                            <span class="detail-value">AZ 1550 · 09:00 FCO → 10:10 OLB</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Duração</span>
+                            <span class="detail-value">1h 10min</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">590 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.ita-airways.com/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-plane"></i> ITA Airways
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-hotel"></i>
+                        <span>Hospedagem · Hotel Cala di Volpe</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Resort</span>
+                            <span class="detail-value">Hotel Cala di Volpe ***** (Luxury Collection)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Acomodação</span>
+                            <span class="detail-value">Suite Premium Vista Mar</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Localização</span>
+                            <span class="detail-value">Porto Cervo · Costa Smeralda</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">2.950 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.marriott.com/hotels/travel/olbcv-hotel-cala-di-volpe-a-luxury-collection-hotel-costa-smeralda/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-globe"></i> Website Oficial
+                        </a>
+                        <a href="https://www.marriott.com/hotels/hotel-rooms/olbcv-hotel-cala-di-volpe-a-luxury-collection-hotel-costa-smeralda/" target="_blank" class="luxury-link">
+                            <i class="fas fa-bed"></i> Quartos & Suítes
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-ship"></i>
+                        <span>Experiência · Iate Privado</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Passeio</span>
+                            <span class="detail-value">4 horas · Arquipélago La Maddalena</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Inclui</span>
+                            <span class="detail-value">Champanhe · Petiscos gourmet · Tripulação</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">2.800 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.yachtcharterfleet.com/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-ship"></i> Charter Fleet
+                        </a>
+                        <a href="https://www.costasmeralda.it/" target="_blank" class="luxury-link">
+                            <i class="fas fa-info-circle"></i> Costa Smeralda
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-utensils"></i>
+                        <span>Gastronomia · Jantar no Resort</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Restaurante</span>
+                            <span class="detail-value">Restaurante Principal Cala di Volpe</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Menu</span>
+                            <span class="detail-value">Degustação de frutos do mar</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">680 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="day-total">
+                <span>Total Dia 3</span>
+                <span>7.020 €</span>
+            </div>
+        </section>
+
+        <!-- DIA 4 -->
+        <section id="dia4" class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <i class="fas fa-ship"></i>
+                    Dia 4 · 04 Abril 2026
+                </div>
+                <div class="day-route">Sardenha → Florença</div>
+            </div>
+            
+            <div class="day-content">
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Experiência · Porto Cervo Luxury Shopping</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Boutiques</span>
+                            <span class="detail-value">Hermès, Gucci, Prada, Louis Vuitton, Cartier</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Local</span>
+                            <span class="detail-value">Promenade du Port</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Orçamento estimado</span>
+                            <span class="price-tag">2.000 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.thisisportocervo.com/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-shopping-bag"></i> Porto Cervo
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-utensins"></i>
+                        <span>Gastronomia · Almoço Michelin</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Restaurante</span>
+                            <span class="detail-value">Ristorante Gianni Pedrinelli ★★</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Especialidade</span>
+                            <span class="detail-value">Cozinha Sarda Premium</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">580 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.wbpstars.com/restaurant/ristorante-gianni-pedrinelli/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-star"></i> WBP Stars
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-plane"></i>
+                        <span>Voo · ITA Airways</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Voo</span>
+                            <span class="detail-value">AZ 1582 · 19:00 OLB → 20:00 FLR</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">520 €</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-hotel"></i>
+                        <span>Hospedagem · Hotel Savoy</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Hotel</span>
+                            <span class="detail-value">Rocco Forte Hotel Savoy *****</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Acomodação</span>
+                            <span class="detail-value">Suite Panorâmica Piazza della Repubblica</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">2.200 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.roccofortehotels.com/hotels-and-resorts/hotel-savoy/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-globe"></i> Website Oficial
+                        </a>
+                        <a href="https://www.roccofortehotels.com/hotels-and-resorts/hotel-savoy/rooms-and-suites/" target="_blank" class="luxury-link">
+                            <i class="fas fa-bed"></i> Suítes
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-utensils"></i>
+                        <span>Gastronomia · Jantar 3 Estrelas</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Restaurante</span>
+                            <span class="detail-value">Enoteca Pinchiorri ★★★</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Cave</span>
+                            <span class="detail-value">70.000 garrafas · Melhor adega da Itália</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">860 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://enotecapinchiorri.it/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-star"></i> Website Oficial
+                        </a>
+                        <a href="https://enotecapinchiorri.it/prenota-una-cena.php" target="_blank" class="luxury-link">
+                            <i class="fas fa-calendar-check"></i> Reservar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="day-total">
+                <span>Total Dia 4</span>
+                <span>6.160 €</span>
+            </div>
+        </section>
+
+        <!-- DIA 5 -->
+        <section id="dia5" class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <i class="fas fa-landmark"></i>
+                    Dia 5 · 05 Abril 2026
+                </div>
+                <div class="day-route">Florença · Dia de Arte</div>
+            </div>
+            
+            <div class="day-content">
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-palette"></i>
+                        <span>Atração · Galleria dell'Accademia</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Experiência</span>
+                            <span class="detail-value">After Hours Privado · David de Michelangelo</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Horário</span>
+                            <span class="detail-value">19:00 - 21:00 (fechado ao público)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">900 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.galleriaaccademiafirenze.it/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-ticket-alt"></i> Site Oficial
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-landmark"></i>
+                        <span>Atração · Uffizi Gallery</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Experiência</span>
+                            <span class="detail-value">Tour Privado · Obras Primas Renascentistas</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Duração</span>
+                            <span class="detail-value">3 horas com historiador de arte</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">1.200 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.uffizi.it/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-ticket-alt"></i> Uffizi Gallery
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-utensils"></i>
+                        <span>Gastronomia · Refeições</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Almoço</span>
+                            <span class="detail-value">Trattoria tradicional · 240 €</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Jantar</span>
+                            <span class="detail-value">Restaurante gourmet · 490 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="day-total">
+                <span>Total Dia 5</span>
+                <span>2.830 €</span>
+            </div>
+        </section>
+
+        <!-- DIA 6 -->
+        <section id="dia6" class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <i class="fas fa-shopping-bag"></i>
+                    Dia 6 · 06 Abril 2026
+                </div>
+                <div class="day-route">Florença · Shopping de Luxo</div>
+            </div>
+            
+            <div class="day-content">
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-user-tie"></i>
+                        <span>Experiência · Personal Shopper</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Serviço</span>
+                            <span class="detail-value">Personal Shopper Profissional · 4 horas</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Locais</span>
+                            <span class="detail-value">Via de' Tornabuoni · Gucci Garden · Ferragamo</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">400 €</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Shopping · Estimativa</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Boutiques</span>
+                            <span class="detail-value">Gucci, Prada, Ferragamo, Bottega Veneta</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Orçamento</span>
+                            <span class="price-tag">1.800 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://guccigarden.com/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-store"></i> Gucci Garden
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="day-total">
+                <span>Total Dia 6</span>
+                <span>2.200 €</span>
+            </div>
+        </section>
+
+        <!-- DIA 7 -->
+        <section id="dia7" class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <i class="fas fa-train"></i>
+                    Dia 7 · 07 Abril 2026
+                </div>
+                <div class="day-route">Florença → Veneza</div>
+            </div>
+            
+            <div class="day-content">
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-train"></i>
+                        <span>Transporte · Italo Executive</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Trem</span>
+                            <span class="detail-value">10:25 Firenze SMN → 12:05 Venezia S.L.</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Classe</span>
+                            <span class="detail-value">Executive Club · Serviço de bordo gourmet</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">340 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.italotreno.it/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-train"></i> Italo Treno
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-hotel"></i>
+                        <span>Hospedagem · Hotel Danieli</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Hotel</span>
+                            <span class="detail-value">Hotel Danieli ***** (Luxury Collection)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Acomodação</span>
+                            <span class="detail-value">Suite Laguna Vista Panorâmica</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Localização</span>
+                            <span class="detail-value">Riva degli Schiavoni · Frente à Praça San Marco</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">2.650 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.marriott.com/hotels/travel/vcexr-hotel-danieli-a-luxury-collection-hotel-venice/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-globe"></i> Website Oficial
+                        </a>
+                        <a href="https://www.marriott.com/hotels/hotel-rooms/vcexr-hotel-danieli-a-luxury-collection-hotel-venice/" target="_blank" class="luxury-link">
+                            <i class="fas fa-bed"></i> Suítes
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-utensils"></i>
+                        <span>Gastronomia · Jantar Estrelado</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Restaurante</span>
+                            <span class="detail-value">Quadri ★ (Chef Alajmo)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Local</span>
+                            <span class="detail-value">Piazza San Marco · Design Philippe Starck</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">720 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://alajmo.it/en/pages/ristorante-quadri" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-star"></i> Website Oficial
+                        </a>
+                        <a href="https://alajmo.it/en/pages/booking-ristorante-quadri" target="_blank" class="luxury-link">
+                            <i class="fas fa-calendar-check"></i> Reservar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="day-total">
+                <span>Total Dia 7</span>
+                <span>3.710 €</span>
+            </div>
+        </section>
+
+        <!-- DIA 8 -->
+        <section id="dia8" class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <i class="fas fa-gondola"></i>
+                    Dia 8 · 08 Abril 2026
+                </div>
+                <div class="day-route">Veneza · Experiências Únicas</div>
+            </div>
+            
+            <div class="day-content">
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-water"></i>
+                        <span>Experiência · Gôndola Serenata</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Passeio</span>
+                            <span class="detail-value">Gôndola privada com músico (violino/acordeão)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Duração</span>
+                            <span class="detail-value">1 hora · Pôr do sol</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">590 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.veneziaunica.it/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-ticket-alt"></i> Venezia Unica
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-landmark"></i>
+                        <span>Atração · Palácio Ducal</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Experiência</span>
+                            <span class="detail-value">After Hours Secret Itinerary · Ponte dos Suspiros</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Inclui</span>
+                            <span class="detail-value">Caminhos secretos · Prisões · Salas privadas</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">1.400 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://palazzoducale.visitmuve.it/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-ticket-alt"></i> Site Oficial
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-utensils"></i>
+                        <span>Gastronomia · Refeições</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Almoço</span>
+                            <span class="detail-value">Terrazza Danieli · 380 €</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Jantar</span>
+                            <span class="detail-value">Aman Venice · 890 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="day-total">
+                <span>Total Dia 8</span>
+                <span>3.260 €</span>
+            </div>
+        </section>
+
+        <!-- DIA 9 -->
+        <section id="dia9" class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <i class="fas fa-train"></i>
+                    Dia 9 · 09 Abril 2026
+                </div>
+                <div class="day-route">Veneza → Milão</div>
+            </div>
+            
+            <div class="day-content">
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-train"></i>
+                        <span>Transporte · Frecciarossa</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Trem</span>
+                            <span class="detail-value">16:30 Venezia S.L. → 18:15 Milano Centrale</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Classe</span>
+                            <span class="detail-value">Business · Wi-Fi · Refeição</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">300 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.trenitalia.com/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-train"></i> Trenitalia
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-hotel"></i>
+                        <span>Hospedagem · Armani Hotel Milano</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Hotel</span>
+                            <span class="detail-value">Armani Hotel Milano *****</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Acomodação</span>
+                            <span class="detail-value">Armani Suite · Design Giorgio Armani</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Localização</span>
+                            <span class="detail-value">Via Manzoni · Quadrilatero della Moda</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">2.950 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.armanihotels.com/en/armani-hotel-milano/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-globe"></i> Website Oficial
+                        </a>
+                        <a href="https://locations.armani.com/en/armani-hotels/italy/armani-hotel-milano" target="_blank" class="luxury-link">
+                            <i class="fas fa-map-marker-alt"></i> Localização
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-utensils"></i>
+                        <span>Gastronomia · Jantar 2 Estrelas</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Restaurante</span>
+                            <span class="detail-value">Seta ★★ (Chef Antonio Guida)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Local</span>
+                            <span class="detail-value">Mandarin Oriental Milano</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">680 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.mandarinoriental.com/en/milan/la-scala/dine/seta" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-star"></i> Website Oficial
+                        </a>
+                        <a href="https://www.mandarinoriental.com/en/milan/la-scala/dine/seta/reservations" target="_blank" class="luxury-link">
+                            <i class="fas fa-calendar-check"></i> Reservar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="day-total">
+                <span>Total Dia 9</span>
+                <span>3.930 €</span>
+            </div>
+        </section>
+
+        <!-- DIA 10 -->
+        <section id="dia10" class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <i class="fas fa-shopping-bag"></i>
+                    Dia 10 · 10 Abril 2026
+                </div>
+                <div class="day-route">Milão · Quadrilatero della Moda</div>
+            </div>
+            
+            <div class="day-content">
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-utensils"></i>
+                        <span>Gastronomia · Almoço Estrelado</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Restaurante</span>
+                            <span class="detail-value">Cracco (Chef Carlo Cracco)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Local</span>
+                            <span class="detail-value">Galleria Vittorio Emanuele II</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">340 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.sevenrooms.com/reservations/ristorantecracco" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-calendar-check"></i> Reservar
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Shopping · Via Montenapoleone</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Boutiques</span>
+                            <span class="detail-value">Armani, Versace, Prada, Gucci, Dolce & Gabbana</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Jantar</span>
+                            <span class="detail-value">Restaurante elegante · 680 €</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Orçamento compras</span>
+                            <span class="price-tag">1.200 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="day-total">
+                <span>Total Dia 10</span>
+                <span>2.220 €</span>
+            </div>
+        </section>
+
+        <!-- DIA 11 -->
+        <section id="dia11" class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <i class="fas fa-helicopter"></i>
+                    Dia 11 · 11 Abril 2026
+                </div>
+                <div class="day-route">Lago di Como</div>
+            </div>
+            
+            <div class="day-content">
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-helicopter"></i>
+                        <span>Transporte · Helicóptero Privado</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Rota</span>
+                            <span class="detail-value">Milão → Bellagio → Como → Milão</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Duração</span>
+                            <span class="detail-value">45 min voo + tempo no destino</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">2.800 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.italianflight.com/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-helicopter"></i> Charter Helicóptero
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-utensils"></i>
+                        <span>Gastronomia · Almoço de Luxo</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Restaurante</span>
+                            <span class="detail-value">Villa d'Este · Veranda Restaurant</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Vista</span>
+                            <span class="detail-value">Lago di Como · Jardins históricos</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">1.200 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.villadeste.com/restaurants-and-bars/veranda" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-utensils"></i> Veranda Restaurant
+                        </a>
+                        <a href="https://www.villadeste.com/restaurants-and-bars" target="_blank" class="luxury-link">
+                            <i class="fas fa-info-circle"></i> Restaurantes
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="day-total">
+                <span>Total Dia 11</span>
+                <span>4.000 €</span>
+            </div>
+        </section>
+
+        <!-- DIA 12 -->
+        <section id="dia12" class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <i class="fas fa-mask"></i>
+                    Dia 12 · 12 Abril 2026
+                </div>
+                <div class="day-route">Milão · Cultura & Bem-estar</div>
+            </div>
+            
+            <div class="day-content">
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-spa"></i>
+                        <span>Bem-estar · Spa Armani</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Experiência</span>
+                            <span class="detail-value">Tratamento completo · Massagem · Piscina</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Duração</span>
+                            <span class="detail-value">3 horas</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">650 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.armanihotels.com/en/armani-hotel-milano/spa/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-spa"></i> Armani/SPA
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-music"></i>
+                        <span>Cultura · Teatro alla Scala</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Experiência</span>
+                            <span class="detail-value">Camarote Privado · Ópera/Ballet</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Inclui</span>
+                            <span class="detail-value">Champanhe · Serviço de mordomo</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">1.100 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.teatroallascala.org/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-ticket-alt"></i> La Scala
+                        </a>
+                        <a href="https://www.teatroallascala.org/en/boxoffice/subscriptions/2025-2026-season.html" target="_blank" class="luxury-link">
+                            <i class="fas fa-calendar"></i> Programação 2025-26
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-utensils"></i>
+                        <span>Gastronomia · Jantar</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Restaurante</span>
+                            <span class="detail-value">Gourmet Milanês</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">480 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="day-total">
+                <span>Total Dia 12</span>
+                <span>2.230 €</span>
+            </div>
+        </section>
+
+        <!-- DIA 13 -->
+        <section id="dia13" class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <i class="fas fa-water"></i>
+                    Dia 13 · 13 Abril 2026
+                </div>
+                <div class="day-route">Milão · Navigli · Despedida</div>
+            </div>
+            
+            <div class="day-content">
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-shopping-basket"></i>
+                        <span>Experiência · Mercado Navigli</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Atividade</span>
+                            <span class="detail-value">Compras gourmet · Caviar · Trufas · Queijos</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">240 €</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-glass-cheers"></i>
+                        <span>Gastronomia · Jantar de Despedida</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Restaurante</span>
+                            <span class="detail-value">Ristorante de luxo · Vista Navigli</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Menu</span>
+                            <span class="detail-value">Degustação especial de despedida</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">790 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="day-total">
+                <span>Total Dia 13</span>
+                <span>1.030 €</span>
+            </div>
+        </section>
+
+        <!-- DIA 14 -->
+        <section id="dia14" class="day-card">
+            <div class="day-header">
+                <div class="day-title">
+                    <i class="fas fa-plane-departure"></i>
+                    Dia 14 · 16 Abril 2026
+                </div>
+                <div class="day-route">Milão → Faro (Via Lisboa)</div>
+            </div>
+            
+            <div class="day-content">
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-plane"></i>
+                        <span>Voo · TAP Business Class</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">1º Voo</span>
+                            <span class="detail-value">TP 827 · 11:50 MXP → 13:20 LIS</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">2º Voo</span>
+                            <span class="detail-value">TP 1906 · 15:45 LIS → 17:20 FAO</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Classe</span>
+                            <span class="detail-value">Business · Lounge access</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Investimento</span>
+                            <span class="price-tag">1.980 €</span>
+                        </div>
+                    </div>
+                    <div class="links-group">
+                        <a href="https://www.flytap.com/" target="_blank" class="luxury-link primary">
+                            <i class="fas fa-plane"></i> Gerir Reserva
+                        </a>
+                        <a href="https://www.flytap.com/en-pt/manage-booking" target="_blank" class="luxury-link">
+                            <i class="fas fa-cog"></i> Check-in Online
+                        </a>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <i class="fas fa-car"></i>
+                        <span>Transferências</span>
+                    </div>
+                    <div class="activity-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Milão MXP</span>
+                            <span class="detail-value">Transfer privado · 240 €</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Faro FAO</span>
+                            <span class="detail-value">Transfer privado · 180 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="day-total">
+                <span>Total Dia 14</span>
+                <span>2.400 €</span>
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <div class="summary">
+            <h2><i class="fas fa-coins"></i> Resumo Financeiro <i class="fas fa-coins"></i></h2>
+            
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-label">✈️ Transportes</div>
+                    <div class="summary-value">8.215 €</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">🏛️ Atrações VIP</div>
+                    <div class="summary-value">10.980 €</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">🍽️ Restaurantes</div>
+                    <div class="summary-value">12.430 €</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">🏨 Hotéis 5*</div>
+                    <div class="summary-value">30.280 €</div>
+                </div>
+            </div>
+            
+            <div class="grand-total">
+                <div class="grand-total-label">Total Geral (2 Pax)</div>
+                <div class="grand-total-value">61.905 €</div>
+            </div>
+            
+            <div class="footer-note">
+                <i class="fas fa-info-circle"></i> Todos os valores são estimativas para 2 pessoas. 
+                Preços sujeitos a alteração conforme disponibilidade e cotação atual. 
+                Recomenda-se reserva antecipada para restaurantes Michelin e hotéis de luxo.
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px; padding: 40px; color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.5rem; border-top: 2px solid var(--gold);">
+            <i class="fas fa-crown"></i> 
+            La Dolce Vita Grand Tour 2026 
+            <i class="fas fa-crown"></i><br>
+            <span style="font-size: 1rem; opacity: 0.8; font-family: 'Inter', sans-serif;">
+                Faro · Lisboa · Roma · Sardenha · Firenze · Venezia · Milano
+            </span>
+        </div>
+
     </div>
-  </div>
 
-</main>
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-<footer class="footer">
-  Grand Tour VIP · Abril 2026 · Todos os links são externos e pertencem às respetivas marcas
-</footer>
+        // Add active state to nav on scroll
+        const sections = document.querySelectorAll('.day-card');
+        const navLinks = document.querySelectorAll('.nav-dias a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.background = 'rgba(212,175,55,0.1)';
+                link.style.color = '#f0e6d2';
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.style.background = '#d4af37';
+                    link.style.color = '#0a0b0e';
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
